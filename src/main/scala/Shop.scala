@@ -5,7 +5,7 @@ class Shop {
   def hey:Unit={
 
       //Test
-
+print("Hello")
     //
   }
 
