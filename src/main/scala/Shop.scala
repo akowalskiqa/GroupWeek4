@@ -6,15 +6,19 @@ class Shop {
 
       //Test
 print("Hello")
+print("main Branch")
+      //Test
+print("Hello")
     print("It works")
     //
   }
+//this is the Main
+//scotttest
 
-  //arkadiusz was here
-
-
-
-  //Dan's Test
 //asdasdsddsfsd
   ///KL;K
+
+
+  //Development
+
 }
