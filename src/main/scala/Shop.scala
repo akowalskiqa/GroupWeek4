@@ -3,11 +3,18 @@
   */
 class Shop {
   def hey:Unit={
+
+      //Test
+print("Hello")
+    print("It works")
     //
   }
 
-//scotttest
+  //arkadiusz was here
 
+
+
+  //Dan's Test
 //asdasdsddsfsd
   ///KL;K
 
