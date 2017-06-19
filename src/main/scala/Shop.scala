@@ -7,7 +7,6 @@ class Shop {
       //Test
 print("Hello")
 print("Development Branch is this one")
-    //
   }
 
 }
