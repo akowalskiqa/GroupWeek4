@@ -4,11 +4,6 @@
 class Shop {
   def hey:Unit={
     //Test
-print("Hello")
-print("main Branch")
-print("Hello")
-    print("It works")
-
-  }
+//this is the new branch now
 
 }
