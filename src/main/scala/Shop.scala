@@ -8,9 +8,5 @@ class Shop {
 print("Hello")
     //
   }
-
-
-
-//asdasdsddsfsd
-  ///KL;K
+print("scottisthebest")
 }
