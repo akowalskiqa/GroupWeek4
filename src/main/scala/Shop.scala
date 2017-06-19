@@ -6,19 +6,8 @@ class Shop {
 
       //Test
 print("Hello")
-print("main Branch")
-      //Test
-print("Hello")
-    print("It works")
+print("Development Branch is this one")
     //
   }
-//this is the Main
-//scotttest
-
-//asdasdsddsfsd
-  ///KL;K
-
-
-  //Development
 
 }
