@@ -5,8 +5,6 @@ class Shop {
   def hey:Unit= {
     //this is the master branch now
     print("scottisthebest")
-
-
   }
 //asdasdsddsfsd
   ///KL;K
