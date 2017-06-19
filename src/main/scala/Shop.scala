@@ -6,6 +6,7 @@ class Shop {
 
       //Test
 print("Hello")
+    print("It works")
     //
   }
 
