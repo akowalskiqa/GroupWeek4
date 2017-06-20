@@ -1,7 +1,8 @@
 /**
   * Created by Administrator on 19/06/2017.
   */
-class Manager(ID: Int, name: String) extends FloorStaff(ID, name){
+class Manager(override var name:String,override val employeeID: Int,override var authorityLevel:Int) extends FloorStaff(name,employeeID,authorityLevel){
 
 }
-//test 1234
+
+

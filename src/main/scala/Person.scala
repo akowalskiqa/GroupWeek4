@@ -1,7 +1,7 @@
 /**
   * Created by Administrator on 19/06/2017.
   */
-abstract class Person(name: String) {
-  //def Name:String
-
+abstract class Person(var name:String) {
+  def getName():String={name}
+  def setName(newName:String):Unit={name=newName}
 }

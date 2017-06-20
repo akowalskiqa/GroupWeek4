@@ -1,19 +1,23 @@
-import org.scalatest.FlatSpec
+import org.scalatest._
 
 /**
   * Created by Administrator on 20/06/2017.
   */
 class ShopTest extends FlatSpec {
 
-
-
-  "As A manager I want to update the item list with a new product" should "add product to the shop list" in {
+  " As an Employee *I wish to close the shop to tally a day's profit" should "Employee close the shop" in {
+    val employee = new FloorStaff
     val shop = new Shop
-    assert (shop.test == 5)
+
+    employee.closeShop()
+    assert(shop.openStatus == false)
+
   }
 
-  "test 2" should "add product to the shop list" in {
-    val shop = new Shop
-    assert (shop.test == 5)
-  }
+
+
+
+
+
+
 }

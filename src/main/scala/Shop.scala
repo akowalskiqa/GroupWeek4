@@ -25,12 +25,17 @@ class Shop {
   val staff5 = new FloorStaff(5, "Aaron")
   val staff6 = new Manager(6, "Elliot")
 
+  var openStatus:Boolean = false;
   var ListOfCustomers = ArrayBuffer[Customer]()
   var ListOfFLoorStaff = ArrayBuffer[FloorStaff]()
   var ListOfItems = ArrayBuffer[Item]()
   var ListOfSaleSummarys = ArrayBuffer[SummarySaleRecord]()
   var ListOfSales = ArrayBuffer[SaleRecord]()
   var ListOfStock = ArrayBuffer[Stock]()
+  var todaysIncomeTally:Int = 0
+  ListOfItems += (item1, item2, item3, item4, item5, item6, item7, item8, item9, item10)
+  ListOfFLoorStaff += (staff1, staff2, staff3, staff4, staff5, staff6)
+
 
   ListOfItems += (item1, item2, item3, item4, item5, item6, item7, item8, item9, item10)
   ListOfFLoorStaff += (staff1, staff2, staff3, staff4, staff5, staff6)
@@ -66,12 +71,12 @@ def deleteAnItem(ID: Int): Unit = {
 def createAnFloorStaff(newStaff: FloorStaff): Unit = {
   ListOfFLoorStaff += newStaff
 }
-/*
+
   def readAnFloorStaff(ID: Int): Item = {
     ListOfFLoorStaff.foreach(item => if (item.getEmpID() == ID) {
       item
     })
-  } */
+  }
 
 def updateAnFloorStaff(ID: Int, upEmp: FloorStaff): Unit = {
     ListOfFLoorStaff.foreach(item => if (item.getEmpID() == ID) {
@@ -92,4 +97,18 @@ def deleteAnFloorStaff(ID: Int): Unit = {
     ListOfStock.foreach(item => if (item.getStockID() == ID) {
       item == upStock })
   }
+
+  def openShop(whoInvokedTheCall:Person): Unit ={
+    if(whoInvokedTheCall.isInstanceOf[FloorStaff]){
+      openStatus=true
+      todaysIncomeTally = 0}
+    else{}
+  }
+
+  def closeShop(): Unit ={
+
+    openStatus = false
+
+  }
+
 }
