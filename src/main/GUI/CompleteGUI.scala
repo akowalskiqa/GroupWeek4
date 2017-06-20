@@ -11,9 +11,7 @@ import scalafx.scene.paint.{LinearGradient, Stops}
 import scalafx.scene.text.Text
 import scalafx.event.ActionEvent
 
-/**
-  * Created by abdimohammed on 20/06/2017.
-  */
+
 object CompleteGUI extends JFXApp {
 
   stage = new PrimaryStage {
@@ -41,21 +39,23 @@ object CompleteGUI extends JFXApp {
 
       content = List(label, textfield, passwordfield, label2, button)
 
-      button.onAction = (e:ActionEvent) => {
+      button.onAction = (e:ActionEvent) =>
 
-        var str : String = textfield.text.toString()
-        var stranswer : String = "Emp1"
+        //OnAction -- Button action goes in here
 
-
-
-        if(str.equals(stranswer)) {
-          println("Correct")
-          println("" + str)
-        }
-        else {
-          println("Incorrect")
-          println("" + textfield.text.toString())
-        }
+//        var str : String = textfield.text.toString()
+//        var stranswer : String = "Emp1"
+//
+//
+//
+//        if(str.equals(stranswer)) {
+//          println("Correct")
+//          println("" + str)
+//        }
+//        else {
+//          println("Incorrect")
+//          println("" + textfield.text.toString())
+//        }
 
 
       }
