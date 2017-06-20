@@ -3,4 +3,9 @@
   */
 abstract class Item {
 
+  def id:Int
+  def name:String
+  def price: Double
+  def pointValue:Int
+
 }
