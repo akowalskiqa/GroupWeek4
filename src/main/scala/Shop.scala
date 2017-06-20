@@ -79,5 +79,11 @@ class Shop {
         else{}
     }
 
+    def closeShop(): Unit ={
+
+        openStatus = false
+
+    }
+
 
 }

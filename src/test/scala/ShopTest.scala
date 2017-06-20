@@ -5,4 +5,19 @@ import org.scalatest._
   */
 class ShopTest extends FlatSpec {
 
+  " As an Employee *I wish to close the shop to tally a day's profit" should "Employee close the shop" in {
+    val employee = new FloorStaff
+    val shop = new Shop
+
+    employee.closeShop()
+    assert(shop.openStatus == false)
+
+  }
+
+
+
+
+
+
+
 }

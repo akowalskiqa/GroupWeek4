@@ -13,4 +13,8 @@ class FloorStaff(// var employeeID: Int
     shopToOpen.openShop(myself)
   }
 
+  def closeShop(shopToClose : Shop): {
+  shopToClos
+  }
+
 }
