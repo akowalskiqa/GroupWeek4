@@ -26,7 +26,7 @@ class ManagerAddDeleteTest extends FeatureSpec with GivenWhenThen {
   }
 } */
 
-class ManagerDeleteTest extends FlatSpec {
+class ManagerAddDeleteTest extends FlatSpec {
 
   "A Manager" should "be able to delete items from the items list" in {
     val shop = new Shop()
