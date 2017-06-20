@@ -1,3 +1,5 @@
+package GUI
+
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
@@ -39,7 +41,7 @@ object CompleteGUI extends JFXApp {
 
       content = List(label, textfield, passwordfield, label2, button)
 
-      button.onAction = (e:ActionEvent) =>
+//      button.onAction = (e:ActionEvent) =>
 
         //OnAction -- Button action goes in here
 
@@ -63,4 +65,3 @@ object CompleteGUI extends JFXApp {
 
 
   }
-}

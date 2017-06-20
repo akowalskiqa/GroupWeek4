@@ -3,26 +3,20 @@
   */
 class Stock() {
   var productPreOrderRequestAmount = collection.mutable.Map[Int, Int]()
-  var productQuantity = collection.mutable.Map[Int,Int]()
+  var productQuantity = collection.mutable.Map[Int, Int]()
 
-  //view Stock
-  def getAmountForThisID(checkAmountForThisID:Int):Option[Int]={
-    productQuantity.get(checkAmountForThisID)
-
+  def getAmountForThisID(checkAmountForThisID: Int): Int = {
+    if (productQuantity.contains(checkAmountForThisID)) productQuantity(checkAmountForThisID)
+    else
+      0
   }
 
-  def updateStockForID(iDToUpdate:Int, newQuantityToUpdateTo:Int):Unit={
-      //productQuantity.getAmountForThisID(iDToUpdate)
-   var store =  productQuantity.get(iDToUpdate)
-    store= store += newQuantityToUpdateTo
-
-
-
+  def updateStockForID(iDToUpdate: Int, newQuantityToUpdateTo: Int): Unit = {
+    productQuantity.update(iDToUpdate, newQuantityToUpdateTo)
   }
 
-  def getPreOrder(preOrderID:Int):Unit={
-    productPreOrderRequestAmount.get(productPreOrderRequestAmount)
+  def updatePreOrderForID(preOrderID: Int): Unit = {
+    productPreOrderRequestAmount.update(preOrderID, productPreOrderRequestAmount.apply(preOrderID) + 1)
   }
-  //add to PreOrderRequestAmount extra preorder request for according item Id(key)
-  //update amount in productQuantity
+
 }
