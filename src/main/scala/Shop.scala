@@ -5,12 +5,12 @@ import scala.collection.mutable.ArrayBuffer
   */
 class Shop {
     var openStatus:Boolean = false;
-//  var ListOfCustomers = ArrayBuffer[Customer]()
-//  var ListOfFLoorStaff = ArrayBuffer[FloorStaff]()
-//  var ListOfItems = ArrayBuffer[Item]()
-//  var ListOfSaleSummarys = ArrayBuffer[SummarySaleRecord]()
-//  var ListOfSales = ArrayBuffer[SaleRecord]()
-//  var ListOfStock = ArrayBuffer[Stock]()
+  var ListOfCustomers = ArrayBuffer[Customer]()
+  var ListOfFLoorStaff = ArrayBuffer[FloorStaff]()
+  var ListOfItems = ArrayBuffer[Item]()
+  var ListOfSaleSummarys = ArrayBuffer[SummarySaleRecord]()
+  var ListOfSales = ArrayBuffer[SaleRecord]()
+  var ListOfStock = ArrayBuffer[Stock]()
     var todaysIncomeTally:Int = 0
 //
 //
@@ -47,30 +47,30 @@ class Shop {
 //}
 //
 //  def readAnFloorStaff(ID: Int): Item = {
-//    ListOfFLoorStaff.foreach(item => if (item.getEmpID() == ID) {
-//      item
-//    })
-//  }
+//        ListOfFLoorStaff.foreach(item => if (item.getEmpID() == ID) {
+//            item
+//        })
+//    }
 //
-//def updateAnFloorStaff(ID: Int, upEmp: FloorStaff): Unit = {
-//    ListOfFLoorStaff.foreach(item => if (item.getEmpID() == ID) {
-//      item == upEmp
-//    })
+//    def updateAnFloorStaff(ID: Int, upEmp: FloorStaff): Unit = {
+//        ListOfFLoorStaff.foreach(item => if (item.getEmpID() == ID) {
+//            item == upEmp
+//        })
 //
-//}
+//    }
 //
-//def deleteAnFloorStaff(ID: Int): Unit = {
-//  ListOfFLoorStaff.foreach(item => if (item.getEmpID() == ID) {
-//    ListOfFLoorStaff -= item
-//  })
-//}
+//    def deleteAnFloorStaff(ID: Int): Unit = {
+//        ListOfFLoorStaff.foreach(item => if (item.getEmpID() == ID) {
+//            ListOfFLoorStaff -= item
+//        })
+//    }
 //
-//  //Stock
+//    //Stock
 //
-//  def updateStock(ID: Int, upStock: Stock): Unit = {
-//    ListOfStock.foreach(item => if (item.getStockID() == ID) {
-//      item == upStock })
-//  }
+//    def updateStock(ID: Int, upStock: Stock): Unit = {
+//        ListOfStock.foreach(item => if (item.getStockID() == ID) {
+//            item == upStock })
+//    }
 
     def openShop(whoInvokedTheCall:Person): Unit ={
         if(whoInvokedTheCall.isInstanceOf[FloorStaff]){

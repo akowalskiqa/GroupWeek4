@@ -9,7 +9,7 @@ object Main {
     var currentLoggedInEmployee = new FloorStaff
     currentLoggedInEmployee.openShop(shop,currentLoggedInEmployee)
 
-    currentLoggedInEmployee.createAnItem(a,b,c,d,e,currentLoggedInEmployee)
+
   }
 
 
