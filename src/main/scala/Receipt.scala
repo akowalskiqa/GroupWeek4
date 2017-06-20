@@ -1,6 +1,7 @@
 /**
   * Created by Administrator on 19/06/2017.
   */
-class Receipt extends SaleRecord {
+class Recipt extends SaleRecord {
+  //def reciptId:Int
 
 }
