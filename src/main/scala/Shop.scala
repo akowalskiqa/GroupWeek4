@@ -111,4 +111,16 @@ def deleteAnFloorStaff(ID: Int): Unit = {
 
   }
 
+  object idGenerator {
+    private val clockticker = new java.util.concurrent.atomic.AtomicInteger
+    private val clockticker2 = new java.util.concurrent.atomic.AtomicInteger
+    private val clockticker3 = new java.util.concurrent.atomic.AtomicInteger
+
+    def uniqueCustomerId: Int = clockticker.getAndIncrement + 1
+    def uniqueEmployeeId: Int = clockticker2.getAndIncrement + 1
+    def uniqueItemId: Int = clockticker3.getAndIncrement + 1
+  }
+
+
+
 }
