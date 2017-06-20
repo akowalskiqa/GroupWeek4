@@ -43,12 +43,12 @@ class Shop {
   def createAnItem(newItem: Item): Unit = {
     ListOfItems += newItem
   }
-/*
+
   def readAnItem(ID: Int): Item = {
     ListOfItems.foreach(item => if (item.getItemID() == ID) {
-      item
+      return item
     })
-} */
+}
 
 def updateAnItem(ID: Int, upItem: Item): Unit = {
     ListOfItems.foreach(item => if (item.getItemID() == ID) {
@@ -57,9 +57,8 @@ def updateAnItem(ID: Int, upItem: Item): Unit = {
   }
 
 def deleteAnItem(ID: Int): Unit = {
-  ListOfItems.foreach(item => if(item.getItemID() == ID) {
-    ListOfItems -= item
-  })
+  ListOfItems.remove(ID)
+  //ListOfItems.find(item => item.getItemID() == ID)
 }
 
 
@@ -70,11 +69,10 @@ def createAnFloorStaff(newStaff: FloorStaff): Unit = {
   ListOfFLoorStaff += newStaff
 }
 
-  def readAnFloorStaff(ID: Int): Item = {
+  def readAnFloorStaff(ID: Int): FloorStaff = {
     ListOfFLoorStaff.foreach(item => if (item.getEmployeeID() == ID) {
       item
     })
-  }
 
 def updateAnFloorStaff(ID: Int, upEmp: FloorStaff): Unit = {
     ListOfFLoorStaff.foreach(item => if (item.getEmployeeID() == ID) {

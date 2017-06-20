@@ -2,7 +2,7 @@
   * Created by Administrator on 19/06/2017.
   */
 abstract class Item(val itemID: Int,var name:String,var price:Double,var pointValue:Int){
-  def getItemID(): Int =
+  def getItemID(): Int = {itemID}
   def getItemName():String={name}
   def getItemPrice():Double = {price}
   def getItemPointValue():Int={pointValue}
