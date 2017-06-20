@@ -1,7 +1,7 @@
 /**
   * Created by Administrator on 19/06/2017.
   */
-class FloorStaff(val nameA:String,var employeeID: Int,var authorityLevel:Int) extends Person(nameA) {
+class FloorStaff(override val name:String,var employeeID: Int,var authorityLevel:Int) extends Person(name) {
 
  // def getEmpID(): Int = {employeeID}
  // def setEmpID(newEmpID: Int): Unit = {employeeID = newEmpID}
@@ -12,8 +12,8 @@ class FloorStaff(val nameA:String,var employeeID: Int,var authorityLevel:Int) ex
     shopToOpen.openShop(myself)
   }
 
-  def closeShop(shopToClose : Shop): {
-  shopToClos
+  def closeShop(shopToClose : Shop):Unit ={
+  shopToClose
   }
 
 }
