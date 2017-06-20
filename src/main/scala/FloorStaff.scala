@@ -1,8 +1,11 @@
 /**
   * Created by Administrator on 19/06/2017.
   */
-class FloorStaff extends Person {
-  def employeeId:Int
-  def authorityLevel:Int
+class FloorStaff(var employeeID: Int) extends Person {
+
+  def getEmpID(): Int = {employeeID}
+  def setEmpID(newEmpID: Int): Unit = {employeeID = newEmpID}
+  //def employeeId:Int
+  //def authorityLevel:Int
 
 }
