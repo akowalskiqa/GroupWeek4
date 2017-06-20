@@ -5,7 +5,7 @@ class FloorStaff(override var name:String,val employeeID: Int,var authorityLevel
   require(0<=authorityLevel&&authorityLevel<=2)
   def getEmployeeID():Int={employeeID}
   def getAuthorityLevel():Int={authorityLevel}
-  def setAuthoityLevel(newAuthlevel:Int):Unit={authorityLevel=newAuthlevel}
+  def setAuthorityLevel(newAuthlevel:Int):Unit={authorityLevel=newAuthlevel}
 
 
 

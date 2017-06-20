@@ -6,26 +6,27 @@ import scala.collection.mutable.ArrayBuffer
 class Shop {
 
   //Items
-  val item1 = new Game(1, "Bonestorm")
-  val item2 = new Game(2, "Hitman")
-  val item3 = new Game(3, "Call of Duty")
-  val item4 = new Game(4, "Mariocart")
-  val item5 = new Misc(5, "Poster")
-  val item6 = new Misc(6, "T-Shirt")
-  val item7 = new Game(7, "Fifa")
-  val item8 = new Game(8, "Minecraft")
-  val item9 = new Hardware(9, "Headset")
-  val item10 = new Hardware(10, "Playstation 2")
+  val item1 = new Game(idGenerator.uniqueItemId, "Bonestorm", 10.0, 10, false)
+  val item2 = new Game(idGenerator.uniqueItemId, "Hitman", 16.0, 10, false)
+  val item3 = new Game(idGenerator.uniqueItemId, "Call of Duty", 20.0, 10, false)
+  val item4 = new Game(idGenerator.uniqueItemId, "Mariocart", 15.0, 10, false)
+  val item5 = new Misc(idGenerator.uniqueItemId, "Poster", 5.0, 10)
+  val item6 = new Misc(idGenerator.uniqueItemId, "T-Shirt", 15.0, 10)
+  val item7 = new Game(idGenerator.uniqueItemId, "Fifa", 18.0, 10, false)
+  val item8 = new Game(idGenerator.uniqueItemId, "Minecraft", 12.0, 10, false)
+  val item9 = new Hardware(idGenerator.uniqueItemId, "Headset", 30.0, 10)
+  val item10 = new Hardware(idGenerator.uniqueItemId, "Playstation 2", 100.0, 10)
 
   //Floor staff
-  val staff1 = new FloorStaff(1, "Ryan")
-  val staff2 = new FloorStaff(2, "Mike")
-  val staff3 = new FloorStaff(3, "John")
-  val staff4 = new FloorStaff(4, "Mark")
-  val staff5 = new FloorStaff(5, "Aaron")
-  val staff6 = new Manager(6, "Elliot")
+  val staff1 = new FloorStaff("Ryan", idGenerator.uniqueCustomerId, 1)
+  val staff2 = new FloorStaff("Mike", idGenerator.uniqueCustomerId, 1)
+  val staff3 = new FloorStaff("John", idGenerator.uniqueCustomerId, 1)
+  val staff4 = new FloorStaff("Mark", idGenerator.uniqueCustomerId, 1)
+  val staff5 = new FloorStaff("Aaron", idGenerator.uniqueCustomerId, 1)
+  val staff6 = new Manager("Elliot", idGenerator.uniqueCustomerId, 2)
 
-  var openStatus:Boolean = false;
+  var openStatus:Boolean = false
+
   var ListOfCustomers = ArrayBuffer[Customer]()
   var ListOfFLoorStaff = ArrayBuffer[FloorStaff]()
   var ListOfItems = ArrayBuffer[Item]()
@@ -33,9 +34,6 @@ class Shop {
   var ListOfSales = ArrayBuffer[SaleRecord]()
   var ListOfStock = ArrayBuffer[Stock]()
   var todaysIncomeTally:Int = 0
-  ListOfItems += (item1, item2, item3, item4, item5, item6, item7, item8, item9, item10)
-  ListOfFLoorStaff += (staff1, staff2, staff3, staff4, staff5, staff6)
-
 
   ListOfItems += (item1, item2, item3, item4, item5, item6, item7, item8, item9, item10)
   ListOfFLoorStaff += (staff1, staff2, staff3, staff4, staff5, staff6)
@@ -47,19 +45,19 @@ class Shop {
   }
 /*
   def readAnItem(ID: Int): Item = {
-    ListOfItems.foreach(item => if (item.getID() == ID) {
+    ListOfItems.foreach(item => if (item.getItemID() == ID) {
       item
     })
 } */
 
 def updateAnItem(ID: Int, upItem: Item): Unit = {
-    ListOfItems.foreach(item => if (item.getID() == ID) {
+    ListOfItems.foreach(item => if (item.getItemID() == ID) {
       item == upItem
     })
   }
 
 def deleteAnItem(ID: Int): Unit = {
-  ListOfItems.foreach(item => if (item.getID() == ID) {
+  ListOfItems.foreach(item => if(item.getItemID() == ID) {
     ListOfItems -= item
   })
 }
@@ -73,20 +71,20 @@ def createAnFloorStaff(newStaff: FloorStaff): Unit = {
 }
 
   def readAnFloorStaff(ID: Int): Item = {
-    ListOfFLoorStaff.foreach(item => if (item.getEmpID() == ID) {
+    ListOfFLoorStaff.foreach(item => if (item.getEmployeeID() == ID) {
       item
     })
   }
 
 def updateAnFloorStaff(ID: Int, upEmp: FloorStaff): Unit = {
-    ListOfFLoorStaff.foreach(item => if (item.getEmpID() == ID) {
+    ListOfFLoorStaff.foreach(item => if (item.getEmployeeID() == ID) {
       item == upEmp
     })
 
 }
 
 def deleteAnFloorStaff(ID: Int): Unit = {
-  ListOfFLoorStaff.foreach(item => if (item.getEmpID() == ID) {
+  ListOfFLoorStaff.foreach(item => if (item.getEmployeeID() == ID) {
     ListOfFLoorStaff -= item
   })
 }

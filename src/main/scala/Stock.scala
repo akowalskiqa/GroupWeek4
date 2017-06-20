@@ -3,8 +3,6 @@
   */
 class Stock() {
 
-
-
 //  def getStockID(): Unit = {stockID}
  // def setStockID(nwStockID: Int): Unit = {stockID = nwStockID}
 //  def productOrderedStock[Item.id][Int]

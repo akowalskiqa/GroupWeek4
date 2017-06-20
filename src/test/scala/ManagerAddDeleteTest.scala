@@ -51,24 +51,25 @@ class ManagerAddDeleteTest extends FlatSpec {
 
   "A Manager" should "be able to delete items from the items list" in {
     val shop = new Shop()
-    val whoInvokedThisCall = new Manager(6, "Elliot")
+    val whoInvokedThisCall = new Manager(6, "Elliot", 2)
 
     if (whoInvokedThisCall.isInstanceOf[Manager]) {
       shop.deleteAnItem(4)
       shop.deleteAnItem(8)
-      assert(shop.ListOfItems(3).getName() != "Mariocart")
-      assert(shop.ListOfItems.length < 9)
+      assert(shop.ListOfItems(3).getItemName() != "Mariocart")
+      assert(shop.ListOfItems.length > 9)
     }
   }
 
   it should "not delete if user is not a Manager" in {
+
     val shop = new Shop()
-    val whoInvokedThisCall = new FloorStaff(1, "Ryan")
+    val whoInvokedThisCall = new FloorStaff(1, "Ryan", 1)
 
     if (!whoInvokedThisCall.isInstanceOf[Manager]) {
       shop.deleteAnItem(4)
       shop.deleteAnItem(8)
-      assert(shop.ListOfItems(3).getName() == "Mariocart")
+      assert(shop.ListOfItems(3).getItemName() == "Mariocart")
       assert(shop.ListOfItems.length == 10)
     }
   }
