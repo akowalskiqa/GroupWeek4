@@ -4,3 +4,4 @@
 class Manager(ID: Int, name: String) extends FloorStaff(ID, name){
 
 }
+//test 1234
