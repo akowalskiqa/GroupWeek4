@@ -4,14 +4,14 @@ import scala.collection.mutable.ArrayBuffer
   * Created by Administrator on 19/06/2017.
   */
 class Shop {
-    var openStatus:Boolean = false;
+  var openStatus:Boolean = false
   var ListOfCustomers = ArrayBuffer[Customer]()
-  var ListOfFLoorStaff = ArrayBuffer[FloorStaff]()
+  var ListOfFloorStaff = ArrayBuffer[FloorStaff]()
   var ListOfItems = ArrayBuffer[Item]()
-  var ListOfSaleSummarys = ArrayBuffer[SummarySaleRecord]()
+  var ListOfSaleSummary = ArrayBuffer[SummarySaleRecord]()
   var ListOfSales = ArrayBuffer[SaleRecord]()
   var ListOfStock = ArrayBuffer[Stock]()
-    var todaysIncomeTally:Int = 0
+  var todaysIncomeTally:Int = 0
 //
 //
 //  //Create item
@@ -73,16 +73,12 @@ class Shop {
 //    }
 
     def openShop(whoInvokedTheCall:Person): Unit ={
-        if(whoInvokedTheCall.isInstanceOf[FloorStaff]){
         openStatus=true
-        todaysIncomeTally = 0}
-        else{}
+        todaysIncomeTally = 0
     }
 
     def closeShop(): Unit ={
-
         openStatus = false
-
     }
 
 
