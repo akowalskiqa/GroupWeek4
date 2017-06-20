@@ -1,25 +1,34 @@
-import org.scalatest.FeatureSpec
-import org.scalatest.GivenWhenThen
-
-
+import org.scalatest.FlatSpec
 /**
   * Created by Profile on 20/06/2017.
   */
-class ManagerUpdateStockTest extends FeatureSpec with GivenWhenThen {
+class ManagerUpdateStockTest extends FlatSpec {
 
-  info("As a Manager")
-  info("I want to be able to update items stock")
-  info("So that I know how much stock the game shop has")
+  "As a Manager I" can "Update an items stock levels" in {
+    val employee = new Manager
+    val stock = new Stock
+    val shop = new Shop
 
-  feature ("Update stock")
-    scenario("Update stock figures")
+    assert(stock.test ==)
 
-  Given (" That the shop has stock")
-  val viewStockAndUpdate  = newStockUpdate
+  }
+  it should "adjust the stock levels"  in {
 
-  When (" The manager logs onto the system")
-
-
-  Then ("The manager can update the stock quantity ")
+  }
 }
+
+//  info("So that I know how much stock the game shop has")
+//
+//  feature ("Update stock")
+//    scenario("Update stock figures")
+//
+//  Given (" That the shop has stock")
+//  assert(true)
+//  //val viewStockAndUpdate  = newStockUpdate
+//
+//  When (" The manager logs onto the system")
+//
+//
+//  Then ("The manager can update the stock quantity ")
+//}
 

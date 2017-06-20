@@ -1,24 +1,21 @@
-import org.scalatest.FeatureSpec
-import org.scalatest.GivenWhenThen
+import org.scalatest.FlatSpec
 
 /**
   * Created by Profile on 20/06/2017.
   */
-class EmployeeProduceReceiptTest extends FeatureSpec with GivenWhenThen {
+class EmployeeProduceReceiptTest extends FlatSpec {
 
-  info("As an Employee")
-  info("I want to be able to produce a receipt for a customer ")
-  info("So that they have a record of their purchase ")
+ " As an Employee I" can " produce a receipt for a customer" in {
+   val receipt = new Receipt
+   assert (receipt.test == )
+    }
+  }
 
-  feature ("Produce receipt")
-    scenario("Employees can produce a receipt for customers")
-
-  Given ("That the employee has sold a product")
-  val makeSale = newSale
-
-  When ("The Employee makes a sale")
-
-
-  Then ("The system prints a receipt")
-}
-
+////info("So that they have a record of their purchase ")
+//info ("Produce receipt")
+//info ("Employees can produce a receipt for customers")
+//
+//Should ("The employee sell a product")  ("The Employee makes a sale")
+//
+//
+//Then ("The system prints a receipt")
