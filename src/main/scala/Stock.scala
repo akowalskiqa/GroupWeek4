@@ -3,10 +3,10 @@
   */
 class Stock(var stockID: Int) {
 
-  def getStockID(): Unit = {stockID}
-  def setStockID(nwStockID: Int): Unit = {stockID = nwStockID}
-  def productOrderedStock[Item.id][Int]
-  def productPreOrderedStock[Item.id][Int]
+//  def getStockID(): Unit = {stockID}
+ // def setStockID(nwStockID: Int): Unit = {stockID = nwStockID}
+//  def productOrderedStock[Item.id][Int]
+//  def productPreOrderedStock[Item.id][Int]
 
-/
+
 }

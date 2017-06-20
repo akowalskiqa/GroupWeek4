@@ -1,20 +1,19 @@
-import org.scalatest.FlatSpec
+import org.scalatest._
 
 /**
   * Created by Administrator on 20/06/2017.
   */
 class ShopTest extends FlatSpec {
 
-"This should happen first"{
-    var shop = new Shop()
-
-    assert(shop.hey() ==5)
-}
-    it should "put out 5 as output" in {
-        assertThrows[]
-    }
 
 
+  "As A manager I want to update the item list with a new product" should "add product to the shop list" in {
+    val shop = new Shop
+    assert (shop.test == 5)
+  }
 
-
+  "test 2" should "add product to the shop list" in {
+    val shop = new Shop
+    assert (shop.test == 5)
+  }
 }
