@@ -1,7 +1,8 @@
 /**
   * Created by Administrator on 19/06/2017.
   */
-class Game extends Item {
-  //var preOrder:Boolean
+class Game(override val itemID:Int,override val name:String,override val price:Double,override val pointValue:Int,var preOrder:Boolean) extends Item(itemID,name,price,pointValue) {
+  def getPreOrderAvailability():Boolean={preOrder}
+  def setPreOrderAvailability(status:Boolean):Unit={preOrder=status}
 
 }
