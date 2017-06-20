@@ -8,11 +8,5 @@ object Main {
     var shop = new Shop
     var currentLoggedInEmployee = new FloorStaff
     currentLoggedInEmployee.openShop(shop,currentLoggedInEmployee)
-
-
   }
-
-
-
-
 }

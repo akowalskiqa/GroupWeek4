@@ -5,19 +5,20 @@ import org.scalatest.FlatSpec
 class ManagerUpdateStockTest extends FlatSpec {
 
   "As a Manager I" can "Update an items stock levels" in {
-      val employee = new Manager
-      val shop = new Shop
-      val stock = new Stock
-      shop.updateStock(1, stock)
-      assert(stock.updateStock == )
-    }
-
+    val employee = new Manager
+    val shop = new Shop
+    val stock = new Stock
+    shop.updateStock(1, stock)
+    assert(stock.updateStock ==)
   }
+
+
   it should "adjust the stock levels" in {
     val employee = new Manager
     val shop = new Shop
     val stock = new Stock
     shop.updateStock(1, stock)
-    assert(stock.updateStock== )
+    assert(stock.updateStock ==)
   }
+}
 
