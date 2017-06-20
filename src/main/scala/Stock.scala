@@ -8,5 +8,5 @@ class Stock(var stockID: Int) {
   def productOrderedStock[Item.id][Int]
   def productPreOrderedStock[Item.id][Int]
 
-
+/
 }
