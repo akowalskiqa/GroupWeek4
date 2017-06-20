@@ -20,7 +20,7 @@ class Stock() {
 
   }
 
-  def getPreOrder(preOrderId:Int):Unit={
+  def getPreOrder(preOrderID:Int):Unit={
     productPreOrderRequestAmount.get(productPreOrderRequestAmount)
   }
   //add to PreOrderRequestAmount extra preorder request for according item Id(key)

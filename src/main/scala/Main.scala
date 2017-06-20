@@ -9,5 +9,6 @@ object Main {
     var shop = new Shop
     var currentLoggedInEmployee = new FloorStaff("Ryan", 1, 1)
     currentLoggedInEmployee.openShop(shop,currentLoggedInEmployee)
+
   }
 }
