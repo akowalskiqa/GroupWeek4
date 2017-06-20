@@ -23,6 +23,7 @@ class Shop {
   val staff3 = new FloorStaff(3, "John")
   val staff4 = new FloorStaff(4, "Mark")
   val staff5 = new FloorStaff(5, "Aaron")
+  val staff6 = new Manager(6, "Elliot")
 
   var ListOfCustomers = ArrayBuffer[Customer]()
   var ListOfFLoorStaff = ArrayBuffer[FloorStaff]()
@@ -32,19 +33,19 @@ class Shop {
   var ListOfStock = ArrayBuffer[Stock]()
 
   ListOfItems += (item1, item2, item3, item4, item5, item6, item7, item8, item9, item10)
-  ListOfFLoorStaff += (staff1, staff2, staff3, staff4, staff5)
+  ListOfFLoorStaff += (staff1, staff2, staff3, staff4, staff5, staff6)
 
   //Create item
 
   def createAnItem(newItem: Item): Unit = {
     ListOfItems += newItem
   }
-
+/*
   def readAnItem(ID: Int): Item = {
     ListOfItems.foreach(item => if (item.getID() == ID) {
       item
     })
-}
+} */
 
 def updateAnItem(ID: Int, upItem: Item): Unit = {
     ListOfItems.foreach(item => if (item.getID() == ID) {
@@ -65,12 +66,12 @@ def deleteAnItem(ID: Int): Unit = {
 def createAnFloorStaff(newStaff: FloorStaff): Unit = {
   ListOfFLoorStaff += newStaff
 }
-
+/*
   def readAnFloorStaff(ID: Int): Item = {
     ListOfFLoorStaff.foreach(item => if (item.getEmpID() == ID) {
       item
     })
-  }
+  } */
 
 def updateAnFloorStaff(ID: Int, upEmp: FloorStaff): Unit = {
     ListOfFLoorStaff.foreach(item => if (item.getEmpID() == ID) {

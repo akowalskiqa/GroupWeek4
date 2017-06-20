@@ -1,8 +1,9 @@
-import org.scalatest.FunSuite
+import org.scalatest.FlatSpec
 
 /**
   * Created by Administrator on 20/06/2017.
   */
+/*
 class ManagerAddDeleteTest extends FeatureSpec with GivenWhenThen {
 
   info("As a Manager")
@@ -21,6 +22,33 @@ class ManagerAddDeleteTest extends FeatureSpec with GivenWhenThen {
 
       Then("The new item is added onto the list")
       assert()//ItemList contains Item1
+    }
+  }
+} */
+
+class ManagerDeleteTest extends FlatSpec {
+
+  "A Manager" should "be able to delete items from the items list" in {
+    val shop = new Shop()
+    val whoInvokedThisCall = new Manager(6, "Elliot")
+
+    if(whoInvokedThisCall.isInstanceOf[Manager]) {
+      shop.deleteAnItem(4)
+      shop.deleteAnItem(8)
+      assert(shop.ListOfItems(3).getName() != "Mariocart")
+      assert(shop.ListOfItems.length < 9)
+    }
+  }
+
+  it should "not delete if user is not a Manager" in {
+    val shop = new Shop()
+    val whoInvokedThisCall = new FloorStaff(1, "Ryan")
+
+    if (!whoInvokedThisCall.isInstanceOf[Manager]) {
+      shop.deleteAnItem(4)
+      shop.deleteAnItem(8)
+      assert(shop.ListOfItems(3).getName() == "Mariocart")
+      assert(shop.ListOfItems.length == 10)
     }
   }
 }

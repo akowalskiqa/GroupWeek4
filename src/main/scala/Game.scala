@@ -3,6 +3,6 @@
   */
 class Game(itemID: Int, name: String) extends Item(itemID, name) {
 
-  var preOrder:Boolean
+  //var preOrder:Boolean
 
 }

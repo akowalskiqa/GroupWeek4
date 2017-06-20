@@ -1,6 +1,6 @@
 /**
   * Created by Administrator on 19/06/2017.
   */
-class Manager extends FloorStaff{
+class Manager(ID: Int, name: String) extends FloorStaff(ID, name){
 
 }
