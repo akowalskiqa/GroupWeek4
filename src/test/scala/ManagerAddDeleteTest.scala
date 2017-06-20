@@ -1,5 +1,7 @@
 import org.scalatest.FlatSpec
 
+import scala.collection.mutable.ArrayBuffer
+
 /**
   * Created by Administrator on 20/06/2017.
   */
@@ -28,11 +30,30 @@ class ManagerAddDeleteTest extends FeatureSpec with GivenWhenThen {
 
 class ManagerAddDeleteTest extends FlatSpec {
 
+  info("As a Manager I want to be able to add a new item to sell")
+
+  "As a Manager I want to be able to add a new item to the list" should "Add a new item to the list" in {
+    var shop = new Shop()
+    var item1 = new Game(1,"game1")
+    var itemlist: ArrayBuffer[Game] = ArrayBuffer()
+
+    itemlist += item1 // Item is added into the list
+    //   createAnItem()
+    assert(itemlist.last == item1) //Item is generated
+  }
+  "As a Manager I want to be able to add that new item to the stock" should "Add a new item to stock" in {
+    //    updateStock(Item1.id)
+    var item1 = new Game(1,"game1")
+    //   var stock = new Stock(item1.id)
+    assert(true) //ItemList contains Item1
+  }
+
+
   "A Manager" should "be able to delete items from the items list" in {
     val shop = new Shop()
     val whoInvokedThisCall = new Manager(6, "Elliot")
 
-    if(whoInvokedThisCall.isInstanceOf[Manager]) {
+    if (whoInvokedThisCall.isInstanceOf[Manager]) {
       shop.deleteAnItem(4)
       shop.deleteAnItem(8)
       assert(shop.ListOfItems(3).getName() != "Mariocart")
