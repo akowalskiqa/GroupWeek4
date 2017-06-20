@@ -96,18 +96,14 @@ def deleteAnFloorStaff(ID: Int): Unit = {
       item == upStock })
   }
 
-  def openShop(whoInvokedTheCall:Person): Unit ={
-    if(whoInvokedTheCall.isInstanceOf[FloorStaff]){
-      openStatus=true
-      todaysIncomeTally = 0}
-    else{}
-  }
+    def openShop(whoInvokedTheCall:Person): Unit ={
+        openStatus=true
+        todaysIncomeTally = 0
+    }
 
-  def closeShop(): Unit ={
-
-    openStatus = false
-
-  }
+    def closeShop(): Unit ={
+        openStatus = false
+    }
 
   object idGenerator {
     private val clockticker = new java.util.concurrent.atomic.AtomicInteger
