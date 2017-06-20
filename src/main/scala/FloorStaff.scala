@@ -1,8 +1,7 @@
 /**
   * Created by Administrator on 19/06/2017.
   */
-class FloorStaff(// var employeeID: Int
-                ) extends Person {
+class FloorStaff(val nameA:String,var employeeID: Int,var authorityLevel:Int) extends Person(nameA) {
 
  // def getEmpID(): Int = {employeeID}
  // def setEmpID(newEmpID: Int): Unit = {employeeID = newEmpID}

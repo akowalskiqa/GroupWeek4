@@ -16,4 +16,16 @@ class FloorStaffTest extends FlatSpec {
     employee.openShop(shop,employee)
     assert(shop.todaysIncomeTally == 0)
   }
+
+
+  "As an Employee I wish to view item's stock amount" should "return item's stock quantity" in{
+    val employee = new FloorStaff
+    val shop = new Shop
+    val stock = new Stock
+
+
+    //assert(employee.getItemStockQuanitity() == stock.)
+  }
+
+
 }
