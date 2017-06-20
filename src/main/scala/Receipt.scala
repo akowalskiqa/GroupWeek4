@@ -3,6 +3,4 @@
   */
 class Receipt extends SaleRecord {
   //def reciptId:Int
-  //---
-
 }
