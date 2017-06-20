@@ -1,15 +1,13 @@
 /**
   * Created by Administrator on 19/06/2017.
   */
-abstract class Item(
-                    // var itemID: Int
-                   ) {
+abstract class Item(val itemID: Int,var name:String,var price:Double,var pointValue:Int){
+  def getItemID(): Int = {itemID}
+  def getItemName():String={name}
+  def getItemPrice():Double = {price}
+  def getItemPointValue():Int={pointValue}
 
- // def getID(): Int = {itemID}
- // def setID(newID: Int): Unit = {itemID = newID}
-  //def id:Int
-//  def name:String
-//  def price: Double
-//  def pointValue:Int
-
+  def setItemName(newName:String):Unit={name=newName}
+  def setItemPrice(newPrice:Double):Unit={price=newPrice}
+  def setItemPointValue(newPointValue:Int):Unit={pointValue=newPointValue}
 }

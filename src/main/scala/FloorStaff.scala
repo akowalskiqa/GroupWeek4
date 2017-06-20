@@ -1,12 +1,13 @@
 /**
   * Created by Administrator on 19/06/2017.
   */
-class FloorStaff(override val name:String,var employeeID: Int,var authorityLevel:Int) extends Person(name) {
+class FloorStaff(override var name:String,val employeeID: Int,var authorityLevel:Int) extends Person(name) {
+  require(0<=authorityLevel&&authorityLevel<=2)
+  def getEmployeeID():Int={employeeID}
+  def getAuthorityLevel():Int={authorityLevel}
+  def setAuthoityLevel(newAuthlevel:Int):Unit={authorityLevel=newAuthlevel}
 
- // def getEmpID(): Int = {employeeID}
- // def setEmpID(newEmpID: Int): Unit = {employeeID = newEmpID}
-  //def employeeId:Int
-  //def authorityLevel:Int
+
 
   def openShop(shopToOpen: Shop,myself:Person): Unit ={
     shopToOpen.openShop(myself)
@@ -15,5 +16,4 @@ class FloorStaff(override val name:String,var employeeID: Int,var authorityLevel
   def closeShop(shopToClose : Shop):Unit ={
   shopToClose
   }
-
 }
