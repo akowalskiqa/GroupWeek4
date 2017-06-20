@@ -4,5 +4,3 @@
 class Misc extends Item {
 
 }
-
-//gg
