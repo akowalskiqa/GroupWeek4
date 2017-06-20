@@ -18,12 +18,12 @@ class Shop {
   val item10 = new Hardware(idGenerator.uniqueItemId, "Playstation 2", 100.0, 10)
 
   //Floor staff
-  val staff1 = new FloorStaff("Ryan", idGenerator.uniqueCustomerId, 1)
-  val staff2 = new FloorStaff("Mike", idGenerator.uniqueCustomerId, 1)
-  val staff3 = new FloorStaff("John", idGenerator.uniqueCustomerId, 1)
-  val staff4 = new FloorStaff("Mark", idGenerator.uniqueCustomerId, 1)
-  val staff5 = new FloorStaff("Aaron", idGenerator.uniqueCustomerId, 1)
-  val staff6 = new Manager("Elliot", idGenerator.uniqueCustomerId, 2)
+  val staff1 = new FloorStaff("Ryan", idGenerator.uniqueEmployeeId, 1)
+  val staff2 = new FloorStaff("Mike", idGenerator.uniqueEmployeeId, 1)
+  val staff3 = new FloorStaff("John", idGenerator.uniqueEmployeeId, 1)
+  val staff4 = new FloorStaff("Mark", idGenerator.uniqueEmployeeId, 1)
+  val staff5 = new FloorStaff("Aaron", idGenerator.uniqueEmployeeId, 1)
+  val staff6 = new Manager("Elliot", idGenerator.uniqueEmployeeId, 2)
 
   var openStatus:Boolean = false
 
