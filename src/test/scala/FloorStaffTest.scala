@@ -27,10 +27,11 @@ class FloorStaffTest extends FlatSpec {
     val dvd0 = new Misc(1234, "Monsters Inc",2.50, 5)
     val dvd1 = new Misc(1234, "Monsters Inc",2.50, 5)
     val dvd2 = new Misc(1234, "Monsters Inc",2.50, 5)
-    val itemList = new Array[Item](5)
-    itemList(0)= dvd0
-    itemList(1)= dvd1
-    itemList(2)= dvd2
+    val itemList = new ArrayBuffer[Item]()
+    itemList+= dvd0
+    itemList+= dvd1
+    itemList+= dvd2
+    val array = itemList.toArray
 
     var customer = new Customer("Fred", 3245, true, 10, ArrayBuffer[Item](),ArrayBuffer[Int]())
     var summarySale = new SummarySaleRecord ()
@@ -40,8 +41,8 @@ class FloorStaffTest extends FlatSpec {
 
 
 
-    employee.sellItem(itemList, customer, shop, stock, employee, summarySale)
-    assert(stock.getAmountOfProductsForThisID(1234)==49)
+    employee.sellItem(array, customer, shop, stock, employee, summarySale)
+    assert(stock.getAmountOfProductsForThisID(1234)==47)
 
     //assert(employee.getItemStockQuanitity() == stock.)
   }
