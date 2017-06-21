@@ -23,4 +23,6 @@ class FloorStaff(var name: String, val employeeID: Int, var authorityLevel: Int)
   def closeShop(shopToClose: Shop): Unit = {
     shopToClose
   }
+
+  //def sellItem()
 }
