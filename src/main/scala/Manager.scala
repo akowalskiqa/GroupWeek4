@@ -9,13 +9,13 @@ class Manager(name:String,employeeID: Int) extends FloorStaff(name, employeeID){
   override def getEmployeeID: Int = employeeID
 
 
-  override def openShop(shopToOpen: Shop, myself: Person): Unit = {
-    shopToOpen.openShop(myself)
+  override def openShop(shopToOpen: Shop): Unit = {
+    shopToOpen.openShop()
   }
 
-  override def closeShop(shopToClose: Shop): Unit = {
-    shopToClose
-  }
+//  override def closeShop(shopToClose: Shop): Unit = {
+//    shopToClose()
+//  }
 }
 
 
