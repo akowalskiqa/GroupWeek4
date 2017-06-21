@@ -5,8 +5,12 @@ import org.scalatest.FlatSpec
   */
 class ManagerUpdateDetailsStock extends FlatSpec  {
   "As a Manager I" can "Update an items details " in {
-    val employee = new Manager
     val shop = new Shop
+    val employee = new Manager("Mike", shop.idGenerator.uniqueEmployeeId)
+
+
+
+
     val stock = new Stock
     shop.updateStockDetails(1, stock)
     assert(stock.Stock == )
