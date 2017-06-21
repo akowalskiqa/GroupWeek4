@@ -8,23 +8,21 @@ class ManagerUpdateStockTest extends FlatSpec {
    var shop = new Shop()
     var stock = new Stock()
 
-    stock.updateStockForID(2, 5)
+    var currentStock = stock.getAmountOfProductsForThisID(0)
+    stock.updateStockForID(0, 5)
 
-
-    val employee = new Manager
-    val shop = new Shop
-    //val stock = new Stock
-    //shop.updateStock(1, stock)
-    assert(stock.updateStock ==)
+    assert(stock.getAmountOfProductsForThisID(0) > currentStock)
   }
 
 
   it should "adjust the stock levels" in {
-    val employee = new Manager
-    val shop = new Shop
-    val stock = new Stock
-    shop.updateStock(1, stock)
-    assert(stock.updateStock ==)
+    var shop = new Shop()
+    var stock = new Stock()
+
+    var currentStock = stock.getAmountOfProductsForThisID(1)
+    stock.updateStockForID(1, 5)
+
+    assert(stock.getAmountOfProductsForThisID(1) > currentStock)
   }
 }
 
