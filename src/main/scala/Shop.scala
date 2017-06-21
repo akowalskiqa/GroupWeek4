@@ -5,12 +5,9 @@ import scala.collection.mutable.ArrayBuffer
   */
 class Shop {
   var openStatus:Boolean = false
-  var ListOfCustomers = ArrayBuffer[Customer]()
-  var ListOfFloorStaff = ArrayBuffer[FloorStaff]()
-  var ListOfItems = ArrayBuffer[Item]()
-  var ListOfSaleSummary = ArrayBuffer[SummarySaleRecord]()
-  var ListOfSales = ArrayBuffer[SaleRecord]()
-  var ListOfStock = ArrayBuffer[Stock]()
+  var listOfCustomers = ArrayBuffer[Customer]()
+  var listOfFloorStaff = ArrayBuffer[FloorStaff]()
+  var listOfItems = ArrayBuffer[Item]()
   var todaysIncomeTally:Double = 0
   var listOfReceipts = new ArrayBuffer[Int]()
 
@@ -51,7 +48,6 @@ def sellThis(listOfItemsToSell:Array[Item],customerBuyingTheProducts:Customer,st
 def generateRandomNumber(): Int ={
   val r = scala.util.Random
   r.nextInt(99999999).abs
-
 }
 //
 //

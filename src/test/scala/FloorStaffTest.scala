@@ -20,7 +20,7 @@ class FloorStaffTest extends FlatSpec {
   }
 
 
-  "As an Employee I want to sell Product/Products to customer" should "sell item(-1 from stock amount)" in{
+  "As an Employee I want to sell Product/Products to customer" should "sell item(-1 from stock amount) and allocate receipt corresponding to SaleRecord for the customer" in{
     //listOfItemsToSell:Array[Item],customerBuyingTheProducts:Customer,shop:Shop,stock:Stock,whoAmI:FloorStaff,summary:SummarySaleRecord
     val employee = new FloorStaff("john",1,1)
     var shop = new Shop
@@ -36,13 +36,10 @@ class FloorStaffTest extends FlatSpec {
     var customer = new Customer("Fred", 3245, true, 10, ArrayBuffer[Item](),ArrayBuffer[Int]())
     var summarySale = new SummarySaleRecord ()
     var stock = new Stock
-
     stock.updateStockForID(1234,50)
-
-
-
     employee.sellItem(array, customer, shop, stock, employee, summarySale)
     assert(stock.getAmountOfProductsForThisID(1234)==47)
+    assert(customer.receivedReceiptsIDs(0) == summarySale.getSaleRecord(0).getReciptId())
 
     //assert(employee.getItemStockQuanitity() == stock.)
   }
