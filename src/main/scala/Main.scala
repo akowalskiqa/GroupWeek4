@@ -1,10 +1,10 @@
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
-import FirstPage.stage
+
 
 import scalafx.Includes._
-import MenuPage.stage
-import com.sun.java.swing.plaf.gtk.GTKConstants.Orientation
+
+
 
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
