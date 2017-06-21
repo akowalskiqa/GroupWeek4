@@ -9,8 +9,8 @@ class FloorStaff(name:String,val employeeID: Int,var authorityLevel:Int) extends
 
 
 
-  def openShop(shopToOpen: Shop,myself:Person): Unit ={
-    shopToOpen.openShop(myself)
+  def openShop(shopToOpen: Shop): Unit ={
+    shopToOpen.openShop()
   }
   def closeShop(shopToClose : Shop,whereToUpdateTheTally:SummarySaleRecord):Unit ={
   shopToClose.closeShop(whereToUpdateTheTally)

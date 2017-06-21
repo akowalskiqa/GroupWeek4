@@ -9,13 +9,13 @@ class FloorStaffTest extends FlatSpec {
   " As an Employee I wish to open the shop to tally a day's profit" should "Employee open the shop" in {
     val employee = new FloorStaff("john",1,1)
     val shop = new Shop
-    employee.openShop(shop,employee)
+    employee.openShop(shop)
     assert(shop.openStatus == true)
   }
   it should "open the days tally counter at start of 0" in{
     val employee = new FloorStaff("john",1,1)
     val shop = new Shop
-    employee.openShop(shop,employee)
+    employee.openShop(shop)
     assert(shop.todaysIncomeTally == 0)
   }
 
@@ -24,6 +24,7 @@ class FloorStaffTest extends FlatSpec {
     //listOfItemsToSell:Array[Item],customerBuyingTheProducts:Customer,shop:Shop,stock:Stock,whoAmI:FloorStaff,summary:SummarySaleRecord
     val employee = new FloorStaff("john",1,1)
     var shop = new Shop
+    employee.openShop(shop)
     val dvd0 = new Misc(1234, "Monsters Inc",2.50, 5)
     val dvd1 = new Misc(1234, "Monsters Inc",2.50, 5)
     val dvd2 = new Misc(1234, "Monsters Inc",2.50, 5)
