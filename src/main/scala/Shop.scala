@@ -37,6 +37,7 @@ class Shop {
   var listOfSales: ArrayBuffer[SaleRecord] = ArrayBuffer[SaleRecord]()
   var listOfStock: Stock = null
   var listOfReceipts = new ArrayBuffer[Int]()
+  var listOfItemsToSell: ArrayBuffer[Item] = ArrayBuffer[Item]()
   var todaysIncomeTally: Double = 0
 
   listOfItems += (item1, item2, item3, item4, item5, item6, item7, item8, item9, item10)
@@ -66,6 +67,17 @@ class Shop {
 
   }
 
+  def addItemToShoppingBasket(itemId: Int):ArrayBuffer[Item]={
+    listOfItemsToSell += listOfItems(listOfItems.indexWhere(item => item.getItemID() == itemId))
+  }
+
+  def clearShoppingBasket():Unit= {
+      listOfItemsToSell.clear
+  }
+
+  def removeItemById(itemId: Int): Unit = {
+    listOfItemsToSell.remove(listOfItemsToSell.indexWhere(item => item.getItemID()== itemId))
+  }
 
   def sellThis(listOfItemsToSell:Array[Item],customerBuyingTheProducts:PersonType,stock:Stock,whoAmI:PersonType,summary:SummarySaleRecord): Unit ={
     var totalPrice:Double = 0
