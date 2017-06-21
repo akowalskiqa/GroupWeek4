@@ -5,7 +5,7 @@ import org.scalatest.FlatSpec
   */
 class ManagerUpdateDetailsStock extends FlatSpec {
   "As a Manager I" can "Update an items details " in {
-    val employee = new Manager
+
     val shop = new Shop
     var item1 = shop.defineAnItem(ItemTypes.Game, "Mass Effect", 15.0, 10)
     val whoInvokedThisCall = new Manager("Elliot", shop.idGenerator.uniqueEmployeeId)
@@ -14,7 +14,6 @@ class ManagerUpdateDetailsStock extends FlatSpec {
       shop.updateAnItem(1, item1)
       assert(shop.listOfItems(1).getItemName() == "Mass Effect")
     }
-
 
     //
     //
