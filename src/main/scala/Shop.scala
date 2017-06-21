@@ -69,20 +69,20 @@ class Shop {
   }
 
   def readAnItem(ID: Int): Item = {
-    listOfItems(listOfItems.indexWhere(item => item.itemID == ID))
+    listOfItems(listOfItems.indexWhere(item => item.getItemID() == ID))
     //    ListOfItems.foreach(item => if (item.getItemID() == ID) return item)
   }
 
   def updateAnItem(ID: Int, upItem: Item): Unit = {
     listOfItems.foreach(item => if (item.getItemID() == ID) {
-      item.name=upItem.name
-      item.price=upItem.price
-      item.pointValue=upItem.pointValue
+      item.setItemName(upItem.getItemName())//item.name=upItem.name
+      item.setItemPrice(upItem.getItemPrice())//item.price=upItem.price
+      item.setItemPointValue(upItem.getItemPointValue())//item.pointValue=upItem.pointValue
     })
   }
 
   def deleteAnItem(ID: Int): Unit = {
-    listOfItems.remove(listOfItems.indexWhere(item => item.itemID == ID))
+    listOfItems.remove(listOfItems.indexWhere(item => item.getItemID() == ID))
   }
 
 
