@@ -13,9 +13,9 @@ class Manager(name:String,employeeID: Int) extends FloorStaff(name, employeeID){
     shopToOpen.openShop()
   }
 
-  override def closeShop(shopToClose: Shop): Unit = {
-    shopToClose
-  }
+//  override def closeShop(shopToClose: Shop): Unit = {
+//    shopToClose()
+//  }
 }
 
 
