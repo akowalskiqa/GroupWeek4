@@ -74,36 +74,30 @@ class Shop {
     var needRandomID = true
     var randomGeneratedNumber = generateRandomNumber()
 
-    println("#")
-    for( i <- 0 to listOfItemsToSell.length-1){
-      println("##")
-      if(stock.getAmountOfProductsForThisID(listOfItemsToSell(i).getItemID())>0){
-        println("###")
-        totalPrice+= listOfItemsToSell(i).getItemPrice()
-        pointPrice += listOfItemsToSell(i).getItemPointValue()
-        stock.updateStockForID(listOfItemsToSell(i).getItemID(),-1)
-        itemsPurchased+=listOfItemsToSell(i)
-        accumulateAwardedPoints += listOfItemsToSell(i).getItemPointValue()
-      }else{println("Product " +listOfItemsToSell(i).getItemID()+ "Is not in stock you did not buy this one")}
-    }
-    println("#####")
-    if(customerBuyingTheProducts.registered){
-      customerBuyingTheProducts.updatePointAmount(accumulateAwardedPoints)
-    }else{
-      accumulateAwardedPoints =0
-    }
-    while(needRandomID){
-      println("######")
-      if(!listOfReceipts.contains(randomGeneratedNumber)){
-        needRandomID=false
-      }else{randomGeneratedNumber = generateRandomNumber()}
-    }
-    println("#######")
-    var saleRecord = new SaleRecord(itemsPurchased.toArray,totalPrice,new java.util.Date(),whoAmI,customerBuyingTheProducts,accumulateAwardedPoints,randomGeneratedNumber)
-    customerBuyingTheProducts.allocateAReceipt(randomGeneratedNumber)
-    summary.addSaleRecord(saleRecord)
-    todaysIncomeTally += totalPrice
+  for( i <- 0 to listOfItemsToSell.length-1){
+    if(stock.getAmountOfProductsForThisID(listOfItemsToSell(i).getItemID())>0){
+      totalPrice+= listOfItemsToSell(i).getItemPrice()
+      pointPrice += listOfItemsToSell(i).getItemPointValue()
+      stock.updateStockForID(listOfItemsToSell(i).getItemID(),-1)
+      itemsPurchased+=listOfItemsToSell(i)
+      accumulateAwardedPoints += listOfItemsToSell(i).getItemPointValue()
+    }else{println("Product " +listOfItemsToSell(i).getItemID()+ "Is not in stock you did not buy this one")}
   }
+  if(customerBuyingTheProducts.registered){
+    customerBuyingTheProducts.updatePointAmount(accumulateAwardedPoints)
+  }else{
+    accumulateAwardedPoints =0
+  }
+  while(needRandomID){
+    if(!listOfReceipts.contains(randomGeneratedNumber)){
+      needRandomID=false
+    }else{randomGeneratedNumber = generateRandomNumber()}
+  }
+  var saleRecord = new SaleRecord(itemsPurchased.toArray,totalPrice,new java.util.Date(),whoAmI,customerBuyingTheProducts,accumulateAwardedPoints,randomGeneratedNumber)
+  customerBuyingTheProducts.allocateAReceipt(randomGeneratedNumber)
+  summary.addSaleRecord(saleRecord)
+  todaysIncomeTally += totalPrice
+}
 
   def generateRandomNumber(): Int ={
     val r = scala.util.Random
