@@ -1,19 +1,19 @@
 /**
   * Created by Administrator on 19/06/2017.
   */
-abstract class Item(val itemID: Int, var name: String, var price: Double, var pointValue: Int) {
+abstract class Item() {
 
-  def getItemID(): Int = itemID
+  def getItemID(): Int
 
-  def getItemName(): String = name
+  def getItemName(): String
 
-  def getItemPrice(): Double = price
+  def getItemPrice(): Double
 
-  def getItemPointValue(): Int = pointValue
+  def getItemPointValue(): Int
 
-  def setItemName(newName: String): Unit = name = newName
+  def setItemName(newName: String): Unit = newName
 
-  def setItemPrice(newPrice: Double): Unit = price = newPrice
+  def setItemPrice(newPrice: Double): Unit = newPrice
 
-  def setItemPointValue(newPointValue: Int): Unit = pointValue = newPointValue
+  def setItemPointValue(newPointValue: Int): Unit = newPointValue
 }
