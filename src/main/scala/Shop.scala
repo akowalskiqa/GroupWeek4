@@ -99,14 +99,14 @@ class Shop {
   }
 
   def updateAnFloorStaff(ID: Int, upEmp: FloorStaff): Unit = {
-    listOfFLoorStaff.foreach(item => if (item.getEmployeeID() == ID) {
+    listOfFLoorStaff.foreach(item => if (item.employeeID == ID) {
       item.name = upEmp.name
       item.authorityLevel = upEmp.authorityLevel
     })
   }
 
   def deleteAnFloorStaff(ID: Int): Unit = {
-    listOfFLoorStaff.foreach(item => if (item.getEmployeeID() == ID) {
+    listOfFLoorStaff.foreach(item => if (item.employeeID == ID) {
       listOfFLoorStaff -= item
     })
   }
