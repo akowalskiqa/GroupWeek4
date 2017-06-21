@@ -79,38 +79,60 @@ class Shop {
     listOfItemsToSell.remove(listOfItemsToSell.indexWhere(item => item.getItemID()== itemId))
   }
 
-  def sellThis(listOfItemsToSell:Array[Item],customerBuyingTheProducts:Customer,stock:Stock,whoAmI:FloorStaff,summary:SummarySaleRecord): Unit ={
-    var totalPrice:Double = 0
-    var pointPrice = 0
-    var accumulateAwardedPoints = 0
-    var itemsPurchased = ArrayBuffer[Item]()
+  def sellThis(listOfItemsToSell: Array[Item], stock: Stock): Some[(Array[Item], Double, Int)] = {
+    if (openStatus) {
+      var totalPrice: Double = 0
+      var pointPrice = 0
+      var itemsToBePurchased = ArrayBuffer[Item]()
+
+      for (i <- 0 to listOfItemsToSell.length - 1) {
+        if (stock.getAmountOfProductsForThisID(listOfItemsToSell(i).getItemID()) > 0) {
+          totalPrice += listOfItemsToSell(i).getItemPrice()
+          pointPrice += listOfItemsToSell(i).getItemPointValue()
+          itemsToBePurchased += listOfItemsToSell(i)
+        } else {
+          println("Product " + listOfItemsToSell(i).getItemID() + "Is not in stock you did not buy this one")
+        }
+      }
+      Some(itemsToBePurchased.toArray, totalPrice, pointPrice) //
+
+    } else {
+      println("Show needs to be open before anything can be sold!")
+    }
+    null
+  }
+
+  def acceptPayment(listForPurchaseFinalisation: Array[Item], cost: Double,customerBuyingTheProducts: Customer, whoAmI: FloorStaff, stock: Stock, summary: SummarySaleRecord, paymentWithPoints: Option[Int] = None): Unit = {
+    val points = paymentWithPoints getOrElse 0
     var needRandomID = true
     var randomGeneratedNumber = generateRandomNumber()
+    var pointsToBeAwardedForPurchase = (cost / 10).toInt
+    if (points > 0) {
+      listOfCustomers(listOfCustomers.indexOf(customerBuyingTheProducts)).updatePointAmount(-points)
+      pointsToBeAwardedForPurchase = 0
+    } else {
+      todaysIncomeTally += cost
+      if (customerBuyingTheProducts.registered) {
 
-  for( i <- 0 to listOfItemsToSell.length-1){
-    if(stock.getAmountOfProductsForThisID(listOfItemsToSell(i).getItemID())>0){
-      totalPrice+= listOfItemsToSell(i).getItemPrice()
-      pointPrice += listOfItemsToSell(i).getItemPointValue()
-      stock.updateStockForID(listOfItemsToSell(i).getItemID(),-1)
-      itemsPurchased+=listOfItemsToSell(i)
-      accumulateAwardedPoints += listOfItemsToSell(i).getItemPointValue()
-    }else{println("Product " +listOfItemsToSell(i).getItemID()+ "Is not in stock you did not buy this one")}
+        if (listOfCustomers.contains(customerBuyingTheProducts)) {
+          listOfCustomers(listOfCustomers.indexOf(customerBuyingTheProducts)).updatePointAmount(pointsToBeAwardedForPurchase)
+        }
+      }
+    }
+    listForPurchaseFinalisation.foreach(item => stock.updateStockForID(item.getItemID(), -1))
+
+    while (needRandomID) {
+      if (!listOfReceipts.contains(randomGeneratedNumber)) {
+        needRandomID = false
+      } else {
+        randomGeneratedNumber = generateRandomNumber()
+      }
+    }
+    var saleRecord = new SaleRecord(listForPurchaseFinalisation, cost, new java.util.Date(), whoAmI, customerBuyingTheProducts, pointsToBeAwardedForPurchase, randomGeneratedNumber)
+    customerBuyingTheProducts.allocateAReceipt(randomGeneratedNumber)
+    summary.addSaleRecord(saleRecord)
+    todaysIncomeTally += cost
   }
-  if(customerBuyingTheProducts.registered){
-    customerBuyingTheProducts.updatePointAmount(accumulateAwardedPoints)
-  }else{
-    accumulateAwardedPoints =0
-  }
-  while(needRandomID){
-    if(!listOfReceipts.contains(randomGeneratedNumber)){
-      needRandomID=false
-    }else{randomGeneratedNumber = generateRandomNumber()}
-  }
-  var saleRecord = new SaleRecord(itemsPurchased.toArray,totalPrice,new java.util.Date(),whoAmI,customerBuyingTheProducts,accumulateAwardedPoints,randomGeneratedNumber)
-  customerBuyingTheProducts.allocateAReceipt(randomGeneratedNumber)
-  summary.addSaleRecord(saleRecord)
-  todaysIncomeTally += totalPrice
-}
 
   def generateRandomNumber(): Int ={
     val r = scala.util.Random
@@ -202,16 +224,16 @@ class Shop {
     listOfStock.addPreOrderToThisItem(preOrderID)
   }
 
-  def openShop(whoInvokedTheCall: Person): Unit = {
+  def openShop(): Unit = {
     openStatus = true
     todaysIncomeTally = 0
   }
 
-  def closeShop(): Unit = {
+  def closeShop(whereToKeepTheRecord: SummarySaleRecord): Unit = {
+    whereToKeepTheRecord.updateDatesIncome(new java.util.Date(), todaysIncomeTally)
     openStatus = false
   }
 
-  //Receipt
 
 
   object idGenerator {
