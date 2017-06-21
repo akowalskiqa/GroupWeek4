@@ -101,7 +101,6 @@ class Shop {
     }
     null
   }
-
   def acceptPayment(listForPurchaseFinalisation: Array[Item], cost: Double,customerBuyingTheProducts: Customer, whoAmI: FloorStaff, stock: Stock, summary: SummarySaleRecord, paymentWithPoints: Option[Int] = None): Unit = {
     val points = paymentWithPoints getOrElse 0
     var needRandomID = true
