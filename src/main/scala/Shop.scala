@@ -67,7 +67,7 @@ class Shop {
   }
 
 
-  def sellThis(listOfItemsToSell:Array[Item],customerBuyingTheProducts:Customer,stock:Stock,whoAmI:FloorStaff,summary:SummarySaleRecord): Unit ={
+  def sellThis(listOfItemsToSell:Array[Item],customerBuyingTheProducts:PersonType,stock:Stock,whoAmI:PersonType,summary:SummarySaleRecord): Unit ={
     var totalPrice:Double = 0
     var pointPrice = 0
     var accumulateAwardedPoints = 0
