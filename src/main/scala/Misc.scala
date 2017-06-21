@@ -10,4 +10,10 @@ class Misc(var itemID: Int, var name: String, var price: Double, var pointValue:
   override def getItemPrice(): Double = price
 
   override def getItemPointValue(): Int = pointValue
+
+  override def setItemName(newName: String): Unit = name = newName
+
+  override def setItemPrice(newPrice: Double): Unit = price=  newPrice
+
+  override def setItemPointValue(newPointValue: Int): Unit = pointValue =newPointValue
 }
