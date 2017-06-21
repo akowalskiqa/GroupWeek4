@@ -29,16 +29,16 @@ class Shop {
 
   var openStatus: Boolean = false
 
-  var ListOfCustomers: ArrayBuffer[Customer] = ArrayBuffer[Customer]()
-  var ListOfFLoorStaff: ArrayBuffer[FloorStaff] = ArrayBuffer[FloorStaff]()
-  var ListOfItems: ArrayBuffer[Item] = ArrayBuffer[Item]()
-  var ListOfSaleSummarys: ArrayBuffer[SummarySaleRecord] = ArrayBuffer[SummarySaleRecord]()
-  var ListOfSales: ArrayBuffer[SaleRecord] = ArrayBuffer[SaleRecord]()
-  var ListOfStock: Stock
+  var listOfCustomers: ArrayBuffer[Customer] = ArrayBuffer[Customer]()
+  var listOfFLoorStaff: ArrayBuffer[FloorStaff] = ArrayBuffer[FloorStaff]()
+  var listOfItems: ArrayBuffer[Item] = ArrayBuffer[Item]()
+  var listOfSaleSummarys: ArrayBuffer[SummarySaleRecord] = ArrayBuffer[SummarySaleRecord]()
+  var listOfSales: ArrayBuffer[SaleRecord] = ArrayBuffer[SaleRecord]()
+  var listOfStock: Stock
   var todaysIncomeTally: Int = 0
 
-  ListOfItems += (item1, item2, item3, item4, item5, item6, item7, item8, item9, item10)
-  ListOfFLoorStaff += (staff1, staff2, staff3, staff4, staff5, staff6)
+  listOfItems += (item1, item2, item3, item4, item5, item6, item7, item8, item9, item10)
+  listOfFLoorStaff += (staff1, staff2, staff3, staff4, staff5, staff6)
 
   //Create item
   def defineAnItem(itemType: ItemTypes, nameOfItem: String, priceOfItem: Double, pointsOfItem: Int, preOrder: Boolean = false): Item = {
@@ -65,16 +65,16 @@ class Shop {
   }
 
   def createAnItem(newItem: Item): Unit = {
-    ListOfItems += newItem
+    listOfItems += newItem
   }
 
   def readAnItem(ID: Int): Item = {
-    ListOfItems(ListOfItems.indexWhere(item => item.itemID == ID))
+    listOfItems(listOfItems.indexWhere(item => item.itemID == ID))
     //    ListOfItems.foreach(item => if (item.getItemID() == ID) return item)
   }
 
   def updateAnItem(ID: Int, upItem: Item): Unit = {
-    ListOfItems.foreach(item => if (item.getItemID() == ID) {
+    listOfItems.foreach(item => if (item.getItemID() == ID) {
       item.name=upItem.name
       item.price=upItem.price
       item.pointValue=upItem.pointValue
@@ -82,7 +82,7 @@ class Shop {
   }
 
   def deleteAnItem(ID: Int): Unit = {
-    ListOfItems.remove(ListOfItems.indexWhere(item => item.itemID == ID))
+    listOfItems.remove(listOfItems.indexWhere(item => item.itemID == ID))
   }
 
 
@@ -90,39 +90,39 @@ class Shop {
   def defineAnFloorStaff
 
   def createAnFloorStaff(newStaff: FloorStaff): Unit = {
-    ListOfFLoorStaff += newStaff
+    listOfFLoorStaff += newStaff
   }
 
   def readAnFloorStaff(ID: Int): FloorStaff = {
-    ListOfFLoorStaff(ListOfFLoorStaff.indexWhere(floorStaff => floorStaff.employeeID == ID))
+    listOfFLoorStaff(listOfFLoorStaff.indexWhere(floorStaff => floorStaff.employeeID == ID))
     //   ListOfFLoorStaff.foreach(item => if (item.getEmployeeID() == ID) {item})
   }
 
   def updateAnFloorStaff(ID: Int, upEmp: FloorStaff): Unit = {
-    ListOfFLoorStaff.foreach(item => if (item.getEmployeeID() == ID) {
+    listOfFLoorStaff.foreach(item => if (item.getEmployeeID() == ID) {
       item.name = upEmp.name
       item.authorityLevel = upEmp.authorityLevel
     })
   }
 
   def deleteAnFloorStaff(ID: Int): Unit = {
-    ListOfFLoorStaff.foreach(item => if (item.getEmployeeID() == ID) {
-      ListOfFLoorStaff -= item
+    listOfFLoorStaff.foreach(item => if (item.getEmployeeID() == ID) {
+      listOfFLoorStaff -= item
     })
   }
 
   //Stock
 
-  def getAmountForThisID(chcekAmountForThisID: Int): Int = {
-    ListOfStock.productQuantity(checkAmountForThisID)
+  def getAmountForThisID(checkAmountForThisID: Int): Int = {
+    listOfStock.productQuantity(checkAmountForThisID)
   }
 
   def updateStockForID(iDToUpdate: Int, newQuantityToUpdateTo: Int): Unit = {
-    ListOfStock.updateStockForID(iDToUpdate, newQuantityToUpdateTo)
+    listOfStock.updateStockForID(iDToUpdate, newQuantityToUpdateTo)
   }
 
   def updatePreOrderForID(preOrderID: Int): Unit = {
-    ListOfStock.updatePreOrderForID(preOrderID)
+    listOfStock.updatePreOrderForID(preOrderID)
   }
 
   def openShop(whoInvokedTheCall: Person): Unit = {

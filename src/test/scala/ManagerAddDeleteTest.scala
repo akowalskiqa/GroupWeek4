@@ -34,8 +34,8 @@ class ManagerAddDeleteTest extends FlatSpec {
     if (whoInvokedThisCall.isInstanceOf[Manager]) {
       shop.deleteAnItem(4)
       shop.deleteAnItem(8)
-      assert(shop.ListOfItems(3).getItemName() != "Mariocart")
-      assert(shop.ListOfItems.length > 9)
+      assert(shop.listOfItems(3).getItemName() != "Mariocart")
+      assert(shop.listOfItems.length > 9)
     }
   }
 
@@ -47,8 +47,8 @@ class ManagerAddDeleteTest extends FlatSpec {
     if (!whoInvokedThisCall.isInstanceOf[Manager]) {
       shop.deleteAnItem(4)
       shop.deleteAnItem(8)
-      assert(shop.ListOfItems(3).getItemName() == "Mariocart")
-      assert(shop.ListOfItems.length == 10)
+      assert(shop.listOfItems(3).getItemName() == "Mariocart")
+      assert(shop.listOfItems.length == 10)
     }
   }
 }
