@@ -7,5 +7,5 @@ object PersonType extends Enumeration {
 
   val Manager = Value("Manager")
   val FloorStaff = Value("FloorStaff")
-  val Customer = Value("Misc")
+  val Customer = Value("Customer")
 }
