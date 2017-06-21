@@ -16,4 +16,6 @@ class FloorStaff(override var name:String,val employeeID: Int,var authorityLevel
   def closeShop(shopToClose : Shop):Unit ={
   shopToClose
   }
+
+  //def sellItem()
 }
