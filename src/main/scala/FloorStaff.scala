@@ -20,7 +20,7 @@ class FloorStaff(var name: String, val employeeID: Int) extends Person() {
     shopToClose
   }
 
-  def sellItem(listOfItemsToSell: Array[Item], customerBuyingTheProducts: Customer, shop: Shop, stock: Stock, whoAmI: PersonType, summary: SummarySaleRecord): Unit = {
+  def sellItem(listOfItemsToSell: Array[Item], customerBuyingTheProducts: Customer, shop: Shop, stock: Stock, whoAmI: FloorStaff, summary: SummarySaleRecord): Unit = {
     shop.sellThis(listOfItemsToSell, customerBuyingTheProducts, stock, whoAmI, summary: SummarySaleRecord)
   }
 }

@@ -6,6 +6,9 @@ import org.scalatest.FlatSpec
 class EmployeeProduceReceiptTest extends FlatSpec {
 
  " As an Employee I" can " produce a receipt for a customer" in {
+   var shop = new Shop()
+   shop.sellThis()
+
    val receipt = new Receipt
   // assert (receipt.test == )
    assert(true)
