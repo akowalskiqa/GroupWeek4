@@ -21,12 +21,12 @@ class Shop {
   var item10 = defineAnItem(ItemTypes.Hardware, "Playstation 2", 100.0, 10)
 
   //Floor staff
-  val staff1 = new FloorStaff("Ryan", idGenerator.uniqueEmployeeId, 1)
-  val staff2 = new FloorStaff("Mike", idGenerator.uniqueEmployeeId, 1)
-  val staff3 = new FloorStaff("John", idGenerator.uniqueEmployeeId, 1)
-  val staff4 = new FloorStaff("Mark", idGenerator.uniqueEmployeeId, 1)
-  val staff5 = new FloorStaff("Aaron", idGenerator.uniqueEmployeeId, 1)
-  val staff6 = new Manager("Elliot", idGenerator.uniqueEmployeeId, 2)
+  val staff1 = new FloorStaff("Ryan", idGenerator.uniqueEmployeeId)
+  val staff2 = new FloorStaff("Mike", idGenerator.uniqueEmployeeId)
+  val staff3 = new FloorStaff("John", idGenerator.uniqueEmployeeId)
+  val staff4 = new FloorStaff("Mark", idGenerator.uniqueEmployeeId)
+  val staff5 = new FloorStaff("Aaron", idGenerator.uniqueEmployeeId)
+  val staff6 = new Manager("Elliot", idGenerator.uniqueEmployeeId)
 
   var openStatus: Boolean = false
 
@@ -88,15 +88,15 @@ class Shop {
 
 
   //Add FloorStaff
-  def defineAnPersonType(personType: PersonType, name: String, employeeID: Int, authorityLevel: Int = 0): Person = {
+  def defineAnPersonType(personType: PersonType, name: String, employeeID: Int): Person = {
 
     personType match {
       case PersonType.Manager => {
-        var newPerson = new Manager(name, idGenerator.uniqueEmployeeId, authorityLevel)
+        var newPerson = new Manager(name, idGenerator.uniqueEmployeeId)
         newPerson
       }
       case PersonType.FloorStaff => {
-        var newPerson = new FloorStaff(name, idGenerator.uniqueEmployeeId, authorityLevel)
+        var newPerson = new FloorStaff(name, idGenerator.uniqueEmployeeId)
         newPerson
       }
       case _ => {
@@ -116,11 +116,17 @@ class Shop {
     //   ListOfFLoorStaff.foreach(item => if (item.getEmployeeID() == ID) {item})
   }
 
-  def updateAnFloorStaff(ID: Int, upEmp: FloorStaff): Unit = {
-    listOfFLoorStaff.foreach(item => if (item.employeeID == ID) {
-      item.name = upEmp.name
-      item.authorityLevel = upEmp.authorityLevel
-    })
+  def updateAnFloorStaff(ID: Int, personType:PersonType , newName:String): Unit = {
+    personType match {
+      case PersonType.Manager => {
+        var newPerson = new Manager(newName,ID)
+        listOfFLoorStaff.insert(listOfFLoorStaff.indexWhere(floorStaff => floorStaff.employeeID == ID),newPerson)
+      }
+      case _ => {
+        var newPerson = new FloorStaff(newName, ID)
+        listOfFLoorStaff.insert(listOfFLoorStaff.indexWhere(floorStaff => floorStaff.employeeID == ID),newPerson)
+      }
+    }
   }
 
   def deleteAnFloorStaff(ID: Int): Unit = {
@@ -139,8 +145,8 @@ class Shop {
     listOfStock.updateStockForID(iDToUpdate, newQuantityToUpdateTo)
   }
 
-  def updatePreOrderForID(preOrderID: Int): Unit = {
-    listOfStock.updatePreOrderForID(preOrderID)
+  def addPreOrderToThisItem(preOrderID: Int): Unit = {
+    listOfStock.addPreOrderToThisItem(preOrderID)
   }
 
   def openShop(whoInvokedTheCall: Person): Unit = {

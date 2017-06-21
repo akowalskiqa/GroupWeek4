@@ -8,8 +8,7 @@ class SummarySaleRecord {
 
   //should work, test when you get here
   def getSaleRecord(receiptID:Int): SaleRecord ={
-    collectionOfSaleRecords.filter(record => record.reciptId==receiptID)
-    collectionOfSaleRecords(0)
+    collectionOfSaleRecords(collectionOfSaleRecords.indexWhere(salerecord => salerecord.receiptID == receiptID ))
   }
 
   def addSaleRecord(saleRecordToBeAdded:SaleRecord): Unit ={

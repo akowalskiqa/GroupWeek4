@@ -7,7 +7,7 @@ object Main {
 
   def main(args: Array[String]) = {
     var shop = new Shop
-    var currentLoggedInEmployee = new FloorStaff("Ryan", 1, 1)
+    var currentLoggedInEmployee = new FloorStaff("Ryan", 1)
     currentLoggedInEmployee.openShop(shop,currentLoggedInEmployee)
 
   }
