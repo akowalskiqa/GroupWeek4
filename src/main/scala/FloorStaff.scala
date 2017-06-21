@@ -1,7 +1,7 @@
 /**
   * Created by Administrator on 19/06/2017.
   */
-class FloorStaff(override var name:String,val employeeID: Int,var authorityLevel:Int) extends Person(name) {
+class FloorStaff(name:String,val employeeID: Int,var authorityLevel:Int) extends Person(name) {
   require(0<=authorityLevel&&authorityLevel<=2)
   def getEmployeeID():Int={employeeID}
   def getAuthorityLevel():Int={authorityLevel}
@@ -14,8 +14,10 @@ class FloorStaff(override var name:String,val employeeID: Int,var authorityLevel
   }
 
   def closeShop(shopToClose : Shop):Unit ={
-  shopToClose
+  //shopToClose
   }
 
-  //def sellItem()
+  def sellItem(listOfItemsToSell:Array[Item],customerBuyingTheProducts:Customer,shop:Shop,stock:Stock,whoAmI:FloorStaff,summary:SummarySaleRecord): Unit ={
+    shop.sellThis(listOfItemsToSell,customerBuyingTheProducts,stock,whoAmI,summary:SummarySaleRecord)
+  }
 }

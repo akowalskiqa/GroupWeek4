@@ -8,7 +8,7 @@ class SummarySaleRecord {
 
   //should work, test when you get here
   def getSaleRecord(receiptID:Int): SaleRecord ={
-    collectionOfSaleRecords.filter(record => record.reciptId==receiptID)
+    collectionOfSaleRecords.filter(record => record.receiptID==receiptID)
     collectionOfSaleRecords(0)
   }
 
