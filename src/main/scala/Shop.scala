@@ -1,4 +1,5 @@
 import ItemTypes.ItemTypes
+import PersonType.PersonType
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -34,7 +35,7 @@ class Shop {
   var listOfItems: ArrayBuffer[Item] = ArrayBuffer[Item]()
   var listOfSaleSummarys: ArrayBuffer[SummarySaleRecord] = ArrayBuffer[SummarySaleRecord]()
   var listOfSales: ArrayBuffer[SaleRecord] = ArrayBuffer[SaleRecord]()
-  var listOfStock: Stock
+  var listOfStock: Stock = null
   var todaysIncomeTally: Int = 0
 
   listOfItems += (item1, item2, item3, item4, item5, item6, item7, item8, item9, item10)
@@ -75,9 +76,9 @@ class Shop {
 
   def updateAnItem(ID: Int, upItem: Item): Unit = {
     listOfItems.foreach(item => if (item.getItemID() == ID) {
-      item.setItemName(upItem.getItemName())//item.name=upItem.name
-      item.setItemPrice(upItem.getItemPrice())//item.price=upItem.price
-      item.setItemPointValue(upItem.getItemPointValue())//item.pointValue=upItem.pointValue
+      item.setItemName(upItem.getItemName()) //item.name=upItem.name
+      item.setItemPrice(upItem.getItemPrice()) //item.price=upItem.price
+      item.setItemPointValue(upItem.getItemPointValue()) //item.pointValue=upItem.pointValue
     })
   }
 
@@ -87,7 +88,24 @@ class Shop {
 
 
   //Add FloorStaff
-  def defineAnFloorStaff
+  def defineAnPersonType(personType: PersonType, name: String, employeeID: Int, authorityLevel: Int = 0): Person = {
+
+    personType match {
+      case PersonType.Manager => {
+        var newPerson = new Manager(name, idGenerator.uniqueEmployeeId, authorityLevel)
+        newPerson
+      }
+      case PersonType.FloorStaff => {
+        var newPerson = new FloorStaff(name, idGenerator.uniqueEmployeeId, authorityLevel)
+        newPerson
+      }
+      case _ => {
+        var newPerson = new Customer(name, idGenerator.uniqueCustomerId, false, 0)
+        newPerson
+      }
+    }
+
+  }
 
   def createAnFloorStaff(newStaff: FloorStaff): Unit = {
     listOfFLoorStaff += newStaff
@@ -135,7 +153,6 @@ class Shop {
   }
 
   //Receipt
-
 
 
   object idGenerator {
