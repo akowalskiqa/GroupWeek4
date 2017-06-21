@@ -1,17 +1,25 @@
 import org.scalatest.FlatSpec
 
+import scala.collection.mutable.ArrayBuffer
+
 /**
   * Created by Profile on 20/06/2017.
   */
 class EmployeeProduceReceiptTest extends FlatSpec {
 
- " As an Employee I" can " produce a receipt for a customer" in {
+ " As an Employee I" should " produce a receipt for a customer" in {
    var shop = new Shop()
-   shop.sellThis()
 
-   val receipt = new Receipt
+   var listOfItemsToBuy :Array[Item] =  Array(shop.item1,shop.item2,shop.item3)
+
+   var itemStock: Stock = new Stock()
+   itemStock.productQuantity+=(1->5),(2->5),(3->5)
+
+   shop.sellThis(listOfItemsToBuy,itemStock)
+
+   val salesRecord = new SaleRecord(listOfItemsToBuy,_,_,_,_,_,_)
   // assert (receipt.test == )
-   assert(true)
+   assert(salesRecord.getPurchaseList == listOfItemsToBuy)
     }
   }
 
