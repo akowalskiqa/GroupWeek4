@@ -5,27 +5,33 @@
 import java.util.Date
 
 import PersonType.PersonType
-class SaleRecord(val purchaseList:Array[Item],val totalCost:Double,val dateSold:Date,val soldBy:FloorStaff, val  soldToCustomer:Customer,val pointsAwarded:Int,val receiptID:Int) {
 
-  def getPurchaseList():Array[Item]={
-    purchaseList
-  }
-  def getTotalCost():Double={
+class SaleRecord(val purchaseList: Array[Item], val totalCost: Double, val dateSold: Date, val soldBy: FloorStaff, val soldToCustomer: Customer, val pointsAwarded: Int, val receiptID: Int) {
+
+  def getPurchaseList: Array[Item] = purchaseList
+
+
+  def getTotalCost: Double = {
     totalCost
   }
-  def getDateSold():Date={
+
+  def getDateSold: Date = {
     dateSold
   }
-  def getSoldBy():FloorStaff={
+
+  def getSoldBy: FloorStaff = {
     soldBy
   }
-  def getCustomerID():Customer={
+
+  def getCustomerID: Customer = {
     soldToCustomer
   }
-  def getPointsAwarded():Int={
+
+  def getPointsAwarded: Int = {
     pointsAwarded
   }
-  def getReciptId():Int={
+
+  def getReciptId: Int = {
     receiptID
   }
 }

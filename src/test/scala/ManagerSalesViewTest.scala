@@ -21,9 +21,10 @@ class ManagerSalesViewTest extends FlatSpec {
     itemList+= item2
     itemList+= item3
     val array = itemList.toArray
+    val today:Date = new java.util.Date
 
 
-    var sales = new SaleRecord(array, 15.75, Date, employee1, customer, 10, 1234 )
+    var sales = new SaleRecord(array, 15.75, today, employee1, customer, 10, 1234 )
 
     shop.listOfSales += sales
     //val employee = new Manager
@@ -43,14 +44,15 @@ class ManagerSalesViewTest extends FlatSpec {
     val employee1 = new FloorStaff("John", shop.idGenerator.uniqueEmployeeId)
     val customer = new Customer("Jack", 1234, true, 105)
     val itemList = new ArrayBuffer[Item]()
+    val today:Date = new java.util.Date
 
     itemList+= item1
     itemList+= item2
     itemList+= item3
     val array = itemList.toArray
 
-    var sales = new SaleRecord(array, 15.75, Date , employee1, customer, 10, 1234 )
-    var sales2 = new SaleRecord(array, 12.25, Date , employee1, customer, 15, 1330 )
+    var sales = new SaleRecord(array, 15.75, today , employee1, customer, 10, 1234 )
+    var sales2 = new SaleRecord(array, 12.25, today , employee1, customer, 15, 1330 )
     shop.listOfSales += (sales, sales2)
 
     assert(shop.listOfSales.nonEmpty)

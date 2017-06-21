@@ -21,6 +21,7 @@ class EmployeeSellProductsTest extends FlatSpec {
     if (whoInvokedThisCall.isInstanceOf[FloorStaff]) {
 
       shop.sellThis  (shoppingList, stockList)
+      //  assert(shoppingList.exists(item => item.getItemName()=="Bonestorm"))
       assert(shoppingList.contains(("Bonestorm")))
     }
 

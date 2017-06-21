@@ -19,12 +19,11 @@ class ManagerAddItem extends FlatSpec {
     assert(itemlist.last == item1) //Item is generated
   }
   "As a Manager I want to be able to add that new item to the stock" should "Add a new item to stock" in {
-    //    updateStock(Item1.id)
+    //
     var shop = new Shop()
-    var stock = new Stock()
-
     var item1 = shop.defineAnItem(ItemTypes.Game, "Mass Effect", 15.0, 10)
-    shop.listOfStock += stock
+    var stock = new Stock()
+    shop.updateAnItem(10,item1)
     //   var stock = new Stock(item1.id)
     assert(shop.listOfStock != null) //ItemList contains something
   }
