@@ -5,24 +5,31 @@ class Stock() {
   var productPreOrderRequestAmount = collection.mutable.Map[Int, Int]()
   var productQuantity = collection.mutable.Map[Int,Int]()
 
-  //view Stock
-  def getAmountForThisID(checkAmountForThisID:Int):Option[Int]={
+  def getAmountOfProductsForThisID(checkAmountForThisID:Int):Option[Int]={
     productQuantity.get(checkAmountForThisID)
-
   }
 
   def updateStockForID(iDToUpdate:Int, newQuantityToUpdateTo:Int):Unit={
-      //productQuantity.getAmountForThisID(iDToUpdate)
-   var store =  productQuantity.get(iDToUpdate)
-    store= store += newQuantityToUpdateTo
-
-
-
+    if(productQuantity.contains(iDToUpdate)) {
+      val store = productQuantity(iDToUpdate)
+      productQuantity.put(iDToUpdate, store + newQuantityToUpdateTo)
+    }else{
+      productQuantity.put(iDToUpdate,newQuantityToUpdateTo)
+    }
   }
 
-  def getPreOrder(preOrderId:Int):Unit={
-    productPreOrderRequestAmount.get(productPreOrderRequestAmount)
+  def addPreOrderToThisItem(preOrderId:Int):Unit={
+    if(productPreOrderRequestAmount.contains(preOrderId)){
+      val current = productPreOrderRequestAmount(preOrderId)
+      productPreOrderRequestAmount.put(preOrderId,current+1)
+    }else{
+      productPreOrderRequestAmount.put(preOrderId,1)
+    }
   }
-  //add to PreOrderRequestAmount extra preorder request for according item Id(key)
-  //update amount in productQuantity
+
+  def getPreOrderAmountForThisItem(preOrderId:Int): Unit ={
+    if(productPreOrderRequestAmount.contains(preOrderId)) {
+      productPreOrderRequestAmount(preOrderId)
+    }
+  }
 }
