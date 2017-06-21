@@ -32,7 +32,7 @@ def sellThis(listOfItemsToSell:Array[Item],customerBuyingTheProducts:Customer,st
   if(customerBuyingTheProducts.registered){
     customerBuyingTheProducts.updatePointAmount(accumulateAwardedPoints)
   }else{
-    accumulateAwardedPoints =0
+    accumulateAwardedPoints = 0
   }
   while(needRandomID){
     if(!listOfReceipts.contains(randomGeneratedNumber)){
@@ -49,74 +49,13 @@ def generateRandomNumber(): Int ={
   val r = scala.util.Random
   r.nextInt(99999999).abs
 }
-//
-//
-//  //Create item
-//
-//  def createAnItem(newItem: Item): Unit = {
-//    ListOfItems += newItem
-//  }
-//
-//  def readAnItem(ID: Int): Item = {
-//    ListOfItems.foreach(item => if (item.getID() == ID) {
-//      item
-//    })
-//}
-//
-//def updateAnItem(ID: Int, upItem: Item): Unit = {
-//    ListOfItems.foreach(item => if (item.getID() == ID) {
-//      item == upItem
-//    })
-//  }
-//
-//def deleteAnItem(ID: Int): Unit = {
-//  ListOfItems.foreach(item => if (item.getID() == ID) {
-//    ListOfItems -= item
-//  })
-//}
-//
-//
-//
-////Add FloorStaff
-//
-//def createAnFloorStaff(newStaff: FloorStaff): Unit = {
-//  ListOfFLoorStaff += newStaff
-//}
-//
-//  def readAnFloorStaff(ID: Int): Item = {
-//        ListOfFLoorStaff.foreach(item => if (item.getEmpID() == ID) {
-//            item
-//        })
-//    }
-//
-//    def updateAnFloorStaff(ID: Int, upEmp: FloorStaff): Unit = {
-//        ListOfFLoorStaff.foreach(item => if (item.getEmpID() == ID) {
-//            item == upEmp
-//        })
-//
-//    }
-//
-//    def deleteAnFloorStaff(ID: Int): Unit = {
-//        ListOfFLoorStaff.foreach(item => if (item.getEmpID() == ID) {
-//            ListOfFLoorStaff -= item
-//        })
-//    }
-//
-//    //Stock
-//
-//    def updateStock(ID: Int, upStock: Stock): Unit = {
-//        ListOfStock.foreach(item => if (item.getStockID() == ID) {
-//            item == upStock })
-//    }
 
     def openShop(whoInvokedTheCall:Person): Unit ={
         openStatus=true
         todaysIncomeTally = 0
     }
-
-    def closeShop(): Unit ={
+    def closeShop(whereToKeepTheRecord:SummarySaleRecord): Unit ={
+        whereToKeepTheRecord.updateDatesIncome(new java.util.Date(),todaysIncomeTally)
         openStatus = false
     }
-
-
 }
