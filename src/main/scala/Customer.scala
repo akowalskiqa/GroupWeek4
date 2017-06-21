@@ -14,8 +14,13 @@ class Customer(var name: String, val customerId: Int, var registered: Boolean, v
 def preOrders(item:Item): Unit = {
   preOrdersMade += item
 }
-  def receivedRecipts(rec:Int): Unit = {
-    receivedReciptsIDs += rec
+
+  def updatePointAmount(number:Int): Unit ={
+    points = points+number
+  }
+
+  def allocateAReceipt(receipt:Int): Unit = {
+    receivedReciptsIDs += receipt
   }
 
 }

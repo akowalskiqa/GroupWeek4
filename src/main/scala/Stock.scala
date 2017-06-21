@@ -5,8 +5,8 @@ class Stock() {
   var productPreOrderRequestAmount = collection.mutable.Map[Int, Int]()
   var productQuantity = collection.mutable.Map[Int,Int]()
 
-  def getAmountOfProductsForThisID(checkAmountForThisID:Int):Option[Int]={
-    productQuantity.get(checkAmountForThisID)
+  def getAmountOfProductsForThisID(checkAmountForThisID:Int):Int={
+    productQuantity(checkAmountForThisID)
   }
 
   def updateStockForID(iDToUpdate:Int, newQuantityToUpdateTo:Int):Unit={

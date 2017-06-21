@@ -10,5 +10,10 @@ object Main {
     var currentLoggedInEmployee = new FloorStaff("Ryan", 1)
     currentLoggedInEmployee.openShop(shop,currentLoggedInEmployee)
 
+
   }
+
+
+
+
 }

@@ -8,6 +8,10 @@ class SummarySaleRecord {
 
   //should work, test when you get here
   def getSaleRecord(receiptID:Int): SaleRecord ={
+    collectionOfSaleRecords.filter(record => record.receiptID==receiptID)
+    collectionOfSaleRecords(0)
+  }
+  def getSaleRecord2(receiptID:Int): SaleRecord ={
     collectionOfSaleRecords(collectionOfSaleRecords.indexWhere(salerecord => salerecord.receiptID == receiptID ))
   }
 
