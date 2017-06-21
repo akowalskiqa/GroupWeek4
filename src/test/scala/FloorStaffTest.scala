@@ -25,7 +25,8 @@ class FloorStaffTest extends FlatSpec {
     //listOfItemsToSell:Array[Item],customerBuyingTheProducts:Customer,shop:Shop,stock:Stock,whoAmI:FloorStaff,summary:SummarySaleRecord
     val shop = new Shop
     val money = shop.todaysIncomeTally
-    val employee = shop.defineAnPersonType(PersonType.FloorStaff, "John", shop.idGenerator.uniqueEmployeeId)
+    val employee = new FloorStaff("John", shop.idGenerator.uniqueEmployeeId)
+    val customer = new Customer("Jack", 1234, true, 105)
 
     var item1 = shop.defineAnItem(ItemTypes.Misc, "Monsters Inc",2.50, 5)
     var item2 = shop.defineAnItem(ItemTypes.Misc, "Terminator",2.50, 5)
@@ -38,13 +39,10 @@ class FloorStaffTest extends FlatSpec {
     itemList+= item3
     val array = itemList.toArray
 
-    var customer = shop.defineAnPersonType(PersonType.Customer, "Fred", shop.idGenerator.uniqueCustomerId)
-    //var customer = new Customer("Fred", 3245, true, 10, ArrayBuffer[Item](),ArrayBuffer[Int]())
     var summarySale = new SummarySaleRecord ()
     var stock = new Stock
 
     stock.updateStockForID(1234,50)
-
 
     shop.sellThis(array, customer, stock, employee, summarySale)
     //employee.sellItem(array, customer, shop, stock, employee, summarySale)
