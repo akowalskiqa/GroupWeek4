@@ -113,7 +113,7 @@ class Shop {
 
   //Stock
 
-  def getAmountForThisID(checkAmountForThisID: Int): Int = {
+  def getAmountForThisID(chcekAmountForThisID: Int): Int = {
     ListOfStock.productQuantity(checkAmountForThisID)
   }
 

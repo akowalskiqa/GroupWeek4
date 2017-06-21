@@ -1,5 +1,5 @@
 package GUI
-
+/*
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
@@ -65,3 +65,4 @@ object CompleteGUI extends JFXApp {
 
 
   }
+*/
