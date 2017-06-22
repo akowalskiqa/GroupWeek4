@@ -147,8 +147,11 @@ object Main {
             var itemType2 = scala.io.StdIn.readLine();
             itemType2 match {
               case "1" => itemType = ItemTypes.Game
+              case "game" => itemType = ItemTypes.Game
               case "2" => itemType = ItemTypes.Hardware
+              case "hardware" => itemType = ItemTypes.Hardware
               case "3" => itemType = ItemTypes.Misc
+              case "misc" => itemType = ItemTypes.Misc
               case _ => println("Error"); stockManager()
             }
             println("Enter Item Name:1 ");
