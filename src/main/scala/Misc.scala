@@ -16,4 +16,6 @@ class Misc(var itemID: Int, var name: String, var price: Double, var pointValue:
   override def setItemPrice(newPrice: Double): Unit = price=  newPrice
 
   override def setItemPointValue(newPointValue: Int): Unit = pointValue =newPointValue
+
+  override def toString: String = itemID + "\t" + name +"\t"+ f"£$price%2.2f"+s"\t$pointValue Point(s)"
 }
