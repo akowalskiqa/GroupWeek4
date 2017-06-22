@@ -5,7 +5,7 @@ import scala.collection.mutable.ArrayBuffer
   * Created by Profile on 20/06/2017.
   */
 //Working
-class ManagerAddItem extends FlatSpec {
+class ManagerAddItemTest extends FlatSpec {
 
   info("As a Manager I want to be able to add a new item to sell")
 
@@ -28,6 +28,6 @@ class ManagerAddItem extends FlatSpec {
     stock.updateStockForID(1, 7)
     stock.updateStockForID(item1.getItemID(), 16)
 
-    assert(stock.getAmountOfProductsForThisID(item1.getItemID()) == 16) //ItemList contains something
+    assert(stock.getAmountOfProductsForThisID(item1.getItemID()) === 16) //ItemList contains something
   }
 }

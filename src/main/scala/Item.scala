@@ -16,4 +16,6 @@ abstract class Item() {
   def setItemPrice(newPrice: Double): Unit = newPrice
 
   def setItemPointValue(newPointValue: Int): Unit = newPointValue
+
+  override def toString: String = ""
 }
