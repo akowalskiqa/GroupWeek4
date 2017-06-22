@@ -12,7 +12,7 @@ object Main {
     currentLoggedInEmployee.openShop(shop)
 
     login()
-  }
+
 
   def login(): Unit = {
     println("Press 1: Manager\nPress 2: Floor Staff\nPress 0: Exit System")
@@ -125,6 +125,6 @@ object Main {
     }
   }
 
-
+  }
 
 }

@@ -3,6 +3,7 @@ import scala.collection.mutable.ArrayBuffer
 /**
   * Created by Administrator on 20/06/2017.
   */
+//Working
 class ShopTest extends FlatSpec {
 
  " As an Employee *I wish to close the shop and tally a day's profit" should "Employee close the shop" in {

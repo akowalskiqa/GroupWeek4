@@ -100,7 +100,7 @@ class Shop {
       Some(itemsToBePurchased.toArray, totalPrice, pointPrice) //
 
     } else {
-      println("Show needs to be open before anything can be sold!")
+      println("Shop needs to be open before anything can be sold!")
     }
     null
   }
