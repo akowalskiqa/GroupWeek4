@@ -4,25 +4,34 @@ import org.scalatest.FlatSpec
   */
 class ManagerUpdateStockTest extends FlatSpec {
 
-  "As a Manager I" can "Update an items stock levels" in {
+  "As a Manager I" can "add new items to stock" in {
    var shop = new Shop()
     var stock = new Stock()
 
-    var currentStock = stock.getAmountOfProductsForThisID(0)
     stock.updateStockForID(0, 5)
+    stock.updateStockForID(2, 7)
+    stock.updateStockForID(3, 3)
+    stock.updateStockForID(4, 4)
+    stock.updateStockForID(123,11)
 
-    assert(stock.getAmountOfProductsForThisID(0) > currentStock)
+    assert((stock.getAmountOfProductsForThisID(123) == 11) && stock.getAmountOfProductsForThisID(4) == 4)
   }
 
 
-  it should "adjust the stock levels" in {
+  it should "allow adjustment of the stock levels" in {
     var shop = new Shop()
     var stock = new Stock()
 
-    var currentStock = stock.getAmountOfProductsForThisID(1)
-    stock.updateStockForID(1, 5)
+    stock.updateStockForID(0, 5)
+    stock.updateStockForID(2, 7)
+    stock.updateStockForID(3, 3)
+    stock.updateStockForID(4, 4)
 
-    assert(stock.getAmountOfProductsForThisID(1) > currentStock)
+    var currentStock = stock.getAmountOfProductsForThisID(2)
+
+    stock.updateStockForID(2, 9)
+
+    assert(stock.getAmountOfProductsForThisID(2) > currentStock)
   }
 }
 
