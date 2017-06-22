@@ -1,5 +1,6 @@
 import org.scalatest.FlatSpec
 
+//completed
 class EmployeePreOrderTest extends FlatSpec{
 
   "As an employee I" should " be able to pre order an item for a customer"
