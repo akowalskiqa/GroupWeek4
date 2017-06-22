@@ -2,6 +2,7 @@ import org.scalatest.FlatSpec
 /**
   * Created by Profile on 20/06/2017.
   */
+//Working
 class ManagerUpdateStockTest extends FlatSpec {
 
   "As a Manager I" can "add new items to stock" in {
