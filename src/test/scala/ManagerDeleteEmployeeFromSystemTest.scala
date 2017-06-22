@@ -5,22 +5,24 @@ import scala.collection.mutable.ArrayBuffer
 /**
   * Created by Profile on 22/06/2017.
   */
-class ManagerDeleteEmployeeFromSystemTest extends FlatSpec{
+class ManagerDeleteEmployeeFromSystemTest extends FlatSpec {
 
-  "As a Manager I want to be able to add a new employee to the system" should "Add a new employee" in {
+  "As a Manager I want to be able to add employee to the system" should "add a new employee from the system" in {
     var shop = new Shop()
-    var employee1 = shop.listOfFLoorStaff(Emp)
+    var employee1 = new FloorStaff("Elliot", shop.idGenerator.uniqueEmployeeId)
+    var employee2 = new FloorStaff("Dave", shop.idGenerator.uniqueEmployeeId)
+    var employeeList = ArrayBuffer(employee1, employee2) // existing list is populated
+
+    var newEmployee = new FloorStaff("NewDude", shop.idGenerator.uniqueEmployeeId)
 
 
-    var item1 = shop.defineAnItem(ItemTypes.Game, "Mass Effect", 15.0, 10)
+    employeeList += newEmployee
 
-    var itemlist: ArrayBuffer[Item] = ArrayBuffer()
-
-    itemlist += item1
-
-    assert(itemlist.last == item1)
+    assert(employeeList.last == newEmployee)
   }
 
+  "As a Manager I want to be able to Delete employee to the system" should "Delete an employee from the system" in {
+  }
 
 
 }
