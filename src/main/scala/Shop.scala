@@ -1,6 +1,3 @@
-import java.text.SimpleDateFormat
-import java.util.Date
-
 import ItemTypes.ItemTypes
 import PersonType.PersonType
 
@@ -130,7 +127,7 @@ class Shop {
         randomGeneratedNumber = generateRandomNumber()
       }
     }
-    var saleRecord = new SaleRecord(listForPurchaseFinalisation, cost,new SimpleDateFormat("dd-MM-yyyy").format(new java.util.Date()), whoAmI, customerBuyingTheProducts, pointsToBeAwardedForPurchase, randomGeneratedNumber)
+    var saleRecord = new SaleRecord(listForPurchaseFinalisation, cost,new java.util.Date(), whoAmI, customerBuyingTheProducts, pointsToBeAwardedForPurchase, randomGeneratedNumber)
     customerBuyingTheProducts.allocateAReceipt(randomGeneratedNumber)
     summary.addSaleRecord(saleRecord)
     todaysIncomeTally += cost
