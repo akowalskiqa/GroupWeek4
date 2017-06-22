@@ -11,6 +11,7 @@ object Main {
   def main(args: Array[String]) = {
     var shop = new Shop // should have been "new Shop(stock,summarySaleRecord)" something like that, but discovered it too late
     var saleSum = new SummarySaleRecord
+    var personLoggedIn:FloorStaff = null
 
     var currentLoggedInEmployee = new FloorStaff("john", 1)
     currentLoggedInEmployee.openShop(shop)
@@ -24,8 +25,9 @@ object Main {
 
     def login(): Unit = {
       elliot()
-      println("Press 1: Manager\nPress 2: Floor Staff\nPress 0: Exit System")
+      println("Enter User ID: ")
       var scanner = scala.io.StdIn.readLine()
+
       try {
         scanner match {
           case "0" => sys.exit()
@@ -79,7 +81,7 @@ object Main {
           case "2" => println(shop.listOfItemsToSell.mkString("\n")); floorStaffTransaction()
           case "3" =>
             var saleDetails = shop.sellThis(shop.listOfItemsToSell.toArray, shop.listOfStock)
-            println(saleDetails._1.mkString + saleDetails._2 + saleDetails._3);floorStaffCheckout()
+            println(saleDetails._1.mkString + saleDetails._2 + saleDetails._3); shop.totalCostOfSale= saleDetails._2; shop.listOfItemsToSell2 = saleDetails._1 ;shop.totalPointsCostOfSale = saleDetails._3;floorStaffCheckout()
           case "4" => println(shop.listOfItems.mkString("\n")); floorStaffTransaction()
           case "5" => println("Clearing basket..."); shop.clearShoppingBasket(); floorStaffTransaction()
           case "6" => println("Enter ID for item you're removing from basket: "); var scanner = scala.io.StdIn.readLine(); shop.removeItemById(scanner.toInt); floorStaffTransaction()
@@ -94,13 +96,15 @@ object Main {
     }
 
     def floorStaffCheckout(): Unit = {
+      println("Enter Customer ID: \nPress 0 if customer not registered: ")
+      var customerIDInput = scala.io.StdIn.readLine().toInt
       println("Press 1: Pay with cash\nPress 2: Pay with points\nPress 0: Go back to menu")
       var scanner = scala.io.StdIn.readLine()
       try {
         scanner match {
           case "0" => floorStaffMenu()
-          case "1" => println("Pay with cash")
-          case "2" => println("Pay with points")
+          case "1" => println("Enter amount paid with cash: ");  var scanner = scala.io.StdIn.readLine(); println(scanner.toDouble); shop.acceptPayment(shop.listOfItemsToSell2, shop.totalCostOfSale, shop.listOfCustomers(shop.listOfCustomers.indexWhere(customer => customer.getId() == customerIDInput)),personLoggedIn, shop.listOfStock,shop.sale); saleSum.collectionOfSaleRecords(saleSum.collectionOfSaleRecords.length-2)
+          case "2" => println("Enter amount paid with points: "); var scanner = scala.io.StdIn.readLine(); println(scanner.toInt); shop.acceptPayment(shop.listOfItemsToSell2, shop.totalCostOfSale, shop.listOfCustomers(shop.listOfCustomers.indexWhere(customer => customer.getId() == customerIDInput)),personLoggedIn, shop.listOfStock,shop.sale, Some(shop.totalPointsCostOfSale))
           case _ => println("Error - Incorrect key pressed\nReturned to current page"); floorStaffCheckout()
         }
       }
@@ -241,14 +245,14 @@ object Main {
     }
 
     def managerSales(): Unit = {
-      println("Press 1: Previous figures\nPress 2: Current figures\nPress 3: Future figures\nPress 0: Back to menu")
+      println("Press 1: Current figures\nPress 2: Future figures\nPress 0: Back to menu")
       var scanner = scala.io.StdIn.readLine()
       try {
         scanner match {
           case "0" => managerMenu()
-          case "1" => println("Enter the date you want to view figure for: "); var date = scala.io.StdIn.readLine(); //saleSum.getDatesIncome()
-          case "2" => println("Current figure: " + shop.todaysIncomeTally); managerSales()
-          case "3" => println("Predicted income for tomorrow: " + saleSum.getPredictedIncomeForTomorrowBasedOnHistoryProvided()); managerSales()
+//          case "1" => println("Enter the date you want to view figure for: format[Fri Oct 31 15:07:24 2014] "); var date = scala.io.StdIn.readLine(); saleSum.getDatesIncome(date.to)
+          case "1" => println("Current figure: " + shop.todaysIncomeTally); managerSales()
+          case "2" => println("Predicted income for tomorrow: " + saleSum.getPredictedIncomeForTomorrowBasedOnHistoryProvided()); managerSales()
           case _ => println("Error - Incorrect key pressed\nReturned to current page"); managerSales()
         }
       }

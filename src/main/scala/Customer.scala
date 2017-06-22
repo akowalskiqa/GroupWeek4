@@ -15,6 +15,10 @@ def preOrders(item:Item): Unit = {
   preOrdersMade += item
 }
 
+  def getId(): Int ={
+    customerId
+  }
+
   def updatePointAmount(number:Int): Unit ={
     points = points+number
   }
