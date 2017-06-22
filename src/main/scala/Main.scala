@@ -70,7 +70,7 @@ object Main {
           case "2" => println(shop.listOfItemsToSell.mkString("\n")); floorStaffTransaction()
           case "3" =>
             var saleDetails = shop.sellThis(shop.listOfItemsToSell.toArray, shop.listOfStock)
-            println(saleDetails._1.mkString + saleDetails._2 + saleDetails._3);floorStaffTransaction()
+            println(saleDetails._1.mkString + saleDetails._2 + saleDetails._3);floorStaffCheckout()
           case "4" => println(shop.listOfItems.mkString("\n")); floorStaffTransaction()
           case "5" => println("Clearing basket..."); shop.clearShoppingBasket(); floorStaffTransaction()
           case "6" => println("Enter ID for item you're removing from basket: "); var scanner = scala.io.StdIn.readLine(); shop.removeItemById(scanner.toInt); floorStaffTransaction()
@@ -123,14 +123,14 @@ object Main {
     }
 
     def stockManager(): Unit = {
-      println("Press 1: Add item to stock list\nPress 2: Update item details\nPress 3: Delete item\nPress 4: Update quantity\nPress 0: Back to menu")
+      println("Press 1: Add item to item list\nPress 2: Update item details\nPress 3: Delete item\nPress 4: Update stock quantity\nPress 0: Back to menu")
       var scanner = scala.io.StdIn.readLine()
       try {
         scanner match {
           case "0" => managerMenu()
           case "1" => println("Enter Item Type: ");
             var itemType = scala.io.StdIn.readLine();
-            println("Enter Item Name: ");
+            println("Enter Item Name:1 ");
             var itemName = scala.io.StdIn.readLine();
             stockManager()
             println("Enter Item Price: ");
