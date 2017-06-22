@@ -13,10 +13,15 @@ object Main {
     var currentLoggedInEmployee = new FloorStaff("john", 1)
     currentLoggedInEmployee.openShop(shop)
 
-
     login()
 
+
+    def elliot(): Unit = {
+      println("\n  ______ _ _ _       _              ______    _                _     \n |  ____| | (_)     | |     ___    |  ____|  (_)              | |    \n | |__  | | |_  ___ | |_   ( _ )   | |__ _ __ _  ___ _ __   __| |____\n |  __| | | | |/ _ \\| __|  / _ \\/\\ |  __| '__| |/ _ \\ '_ \\ / _` |_  /\n | |____| | | | (_) | |_  | (_>  < | |  | |  | |  __/ | | | (_| |/ / \n |______|_|_|_|\\___/ \\__|  \\___/\\/ |_|  |_|  |_|\\___|_| |_|\\__,_/___|\n                                                                     \n                                                                     ")
+    }
+
     def login(): Unit = {
+      elliot()
       println("Press 1: Manager\nPress 2: Floor Staff\nPress 0: Exit System")
       var scanner = scala.io.StdIn.readLine()
       try {
