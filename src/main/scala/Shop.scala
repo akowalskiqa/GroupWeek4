@@ -96,11 +96,10 @@ class Shop {
     var pointPrice = 0
     var itemsToBePurchased = ArrayBuffer[Item]()
     var map = getProductQuantityInMap(listOfItemsToSell) // should be used for buying and selling as it is easier and saves more time.. future advancement
-    map.
     if (openStatus) {
       if(!listOfItemsToSell.isEmpty){
         for (i <- 0 to listOfItemsToSell.length - 1) {
-          if (stock.getAmountOfProductsForThisID(listOfItemsToSell(i).getItemID()) > map(listOfItemsToSell(i))) {
+          if (stock.getAmountOfProductsForThisID(listOfItemsToSell(i).getItemID()) >= map(listOfItemsToSell(i))) {
             totalPrice += listOfItemsToSell(i).getItemPrice()
             pointPrice += listOfItemsToSell(i).getItemPointValue()
             itemsToBePurchased += listOfItemsToSell(i)
