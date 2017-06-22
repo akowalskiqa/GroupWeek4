@@ -1,3 +1,5 @@
+import PersonType.PersonType
+
 /**
   * Created by Administrator on 20/06/2017.
   */
@@ -94,25 +96,40 @@ object Main {
 
       scanner match {
         case "0" => managerMenu()
-        case "1" => println("Enter Item Type: ");var itemType =  scala.io.StdIn.readLine(); println("Enter Item Name: ");var itemName =  scala.io.StdIn.readLine();
-          println("Enter Item Price: ");var itemPrice =  scala.io.StdIn.readLine();println("Enter Amount of points for item: ");var itemPoints =  scala.io.StdIn.readLine();
+        case "1" => println("Enter Item Type: ");var itemType =  scala.io.StdIn.readLine(); println("Enter Item Name: ");var itemName =  scala.io.StdIn.readLine(); stockManager()
+          println("Enter Item Price: ");var itemPrice =  scala.io.StdIn.readLine();println("Enter Amount of points for item: ");var itemPoints =  scala.io.StdIn.readLine(); stockManager()
           println("Is item for pre-order [True/False]: ");var itemPreorder =  scala.io.StdIn.readLine();//shop.defineAnItem(itemType = itemType, itemName, itemPrice.toDouble, itemPoints.toInt, itemPreorder.toBoolean)
-        case "2" => println("Update item details")
-        case "3" => println("Enter ID for item you're deleting: "); var scanner = scala.io.StdIn.readLine(); shop.deleteAnItem(scanner.toInt)
-        case "4" => println("Enter ID for item you're updating stock quantity: "); var itemID = scala.io.StdIn.readLine(); println("Enter new stock quantity number: "); var quantity = scala.io.StdIn.readLine(); shop.updateStockForID(itemID.toInt, quantity.toInt)
+        case "2" => println("Update item details"); stockManager()
+        case "3" => println("Enter ID for item you're deleting: "); var scanner = scala.io.StdIn.readLine(); shop.deleteAnItem(scanner.toInt); stockManager()
+        case "4" => println("Enter ID for item you're updating stock quantity: "); var itemID = scala.io.StdIn.readLine(); println("Enter new stock quantity number: "); var quantity = scala.io.StdIn.readLine(); shop.updateStockForID(itemID.toInt, quantity.toInt); stockManager()
         case _ => println("Error - Incorrect key pressed\nReturned to current page"); stockManager()
       }
     }
 
     def employeeManager(): Unit = {
-      println("Press 1: Add Floor staff\nPress 2: Delete floor staff\nPress 3: View Floor staff Employee details\nPress 0: Back to menu")
+      println("Press 1: Add Floor staff\nPress 2: Delete floor staff\nPress 3: View Floor staff Employee details\nPress 4: View Employee listing\nPress 5: Update Employee record\nPress 0: Back to menu")
       var scanner = scala.io.StdIn.readLine()
+      var employeeType:PersonType = PersonType.Manager
 
       scanner match {
         case "0" => managerMenu()
-        case "1" => println("Enter the name of the floor staff you're adding: "); var floorstaffname = scala.io.StdIn.readLine(); println("Enter the floorstaff ID: "); var floorstaffid = scala.io.StdIn.readLine();
-        case "2" => println("Enter the Floor Staff ID that you want to delete: "); var scanner = scala.io.StdIn.readLine(); shop.deleteAnFloorStaff(scanner.toInt)
-        case "3" => println("Enter Floor Staff ID you want to view: "); var scanner = scala.io.StdIn.readLine(); println(" " + shop.readAnFloorStaff(scanner.toInt))
+        case "1" => println("Enter the name of the floor staff you're adding: ");var floorstaffname = scala.io.StdIn.readLine();println("Enter employee type: \nPress 1: Manager\nPress 2: Floor Staff"); var personType = scala.io.StdIn.readLine() ;
+         personType match {
+           case "1" => employeeType = PersonType.Manager
+           case "2" => employeeType = PersonType.FloorStaff
+           case _ => println("Error"); employeeManager()
+         }
+          println("Enter the floorstaff ID: "); var floorstaffid = scala.io.StdIn.readLine()
+          shop.createAnFloorStaff(shop.defineAnPersonType(employeeType,floorstaffname,floorstaffid.toInt)) ; employeeManager()
+        case "2" => println("Enter the Floor Staff ID that you want to delete: "); var scanner = scala.io.StdIn.readLine(); shop.deleteAnFloorStaff(scanner.toInt); employeeManager()
+        case "3" => println("Enter Floor Staff ID you want to view: "); var scanner = scala.io.StdIn.readLine(); println(" " + shop.readAnFloorStaff(scanner.toInt)); employeeManager()
+        case "4" => println(shop.listOfFLoorStaff.mkString("\n")); employeeManager()
+        case "5" => println("Enter the Employee ID you want to update: "); var employeeid = scala.io.StdIn.readLine();println("Enter employee type: \nPress 1: Manager\nPress 2: Floor Staff"); var personType = scala.io.StdIn.readLine() ;
+          personType match {
+            case "1" => employeeType = PersonType.Manager
+            case "2" => employeeType = PersonType.FloorStaff
+            case _ => println("Error"); employeeManager()
+          } ;println("Enter the updated name for the Employee you wish to update record: ");var employeeNewName = scala.io.StdIn.readLine(); shop.updateAnFloorStaff(employeeid.toInt, employeeType, employeeNewName); employeeManager()
         case _ => println("Error - Incorrect key pressed\nReturned to current page"); employeeManager()
       }
     }

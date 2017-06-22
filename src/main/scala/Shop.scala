@@ -160,19 +160,15 @@ class Shop {
 
 
   //Add FloorStaff
-  def defineAnPersonType(personType: PersonType, name: String, employeeID: Int): Person = {
+  def defineAnPersonType(personType: PersonType, name: String, employeeID: Int): FloorStaff = {
 
     personType match {
       case PersonType.Manager => {
         var newPerson = new Manager(name, idGenerator.uniqueEmployeeId)
         newPerson
       }
-      case PersonType.FloorStaff => {
-        var newPerson = new FloorStaff(name, idGenerator.uniqueEmployeeId)
-        newPerson
-      }
       case _ => {
-        var newPerson = new Customer(name, idGenerator.uniqueCustomerId, false, 0)
+        var newPerson = new FloorStaff(name, idGenerator.uniqueEmployeeId)
         newPerson
       }
     }
@@ -192,19 +188,17 @@ class Shop {
     personType match {
       case PersonType.Manager => {
         var newPerson = new Manager(newName,ID)
-        listOfFLoorStaff.insert(listOfFLoorStaff.indexWhere(floorStaff => floorStaff.employeeID == ID),newPerson)
+        listOfFLoorStaff(listOfFLoorStaff.indexWhere(floorStaff => floorStaff.employeeID == ID))=newPerson
       }
       case _ => {
         var newPerson = new FloorStaff(newName, ID)
-        listOfFLoorStaff.insert(listOfFLoorStaff.indexWhere(floorStaff => floorStaff.employeeID == ID),newPerson)
+        listOfFLoorStaff(listOfFLoorStaff.indexWhere(floorStaff => floorStaff.employeeID == ID))=newPerson
       }
     }
   }
 
   def deleteAnFloorStaff(ID: Int): Unit = {
-    listOfFLoorStaff.foreach(item => if (item.employeeID == ID) {
-      listOfFLoorStaff -= item
-    })
+    listOfFLoorStaff.remove(listOfFLoorStaff.indexWhere(item => item.getEmployeeID == ID))
   }
 
   //Stock
