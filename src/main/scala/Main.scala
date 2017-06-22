@@ -50,11 +50,11 @@ object Main {
       scanner match {
         case "0" => floorStaffMenu()
         case "1" => println("Enter ID for item you adding to basket: "); var scanner = scala.io.StdIn.readLine(); shop.addItemToShoppingBasket(scanner.toInt); floorStaffTransaction()
-        case "2" => println(" " + shop.listOfItemsToSell); floorStaffTransaction()
-        case "3" => println("Checkout"); //shop.sellThis()
-        case "4" => println(" " + shop.listOfItems.toString()); floorStaffTransaction()
-        case "5" => println("Clearing basket..."); shop.clearShoppingBasket()
-        case "6" => println("Enter ID for item you're removing from basket: "); var scanner = scala.io.StdIn.readLine(); shop.deleteAnItem(scanner.toInt)
+        case "2" => println(shop.listOfItemsToSell.mkString("\n")); floorStaffTransaction()
+        case "3" => println("Checkout"); floorStaffTransaction() //shop.sellThis()
+        case "4" => println(shop.listOfItems.mkString("\n")); floorStaffTransaction()
+        case "5" => println("Clearing basket..."); shop.clearShoppingBasket(); floorStaffTransaction()
+        case "6" => println("Enter ID for item you're removing from basket: "); var scanner = scala.io.StdIn.readLine(); shop.removeItemById(scanner.toInt); floorStaffTransaction()
         case _ => println("Error - Incorrect key pressed\nReturned to current page"); floorStaffTransaction()
       }
 
