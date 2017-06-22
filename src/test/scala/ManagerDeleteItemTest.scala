@@ -6,8 +6,7 @@ import scala.collection.mutable.ArrayBuffer
   * Created by Administrator on 20/06/2017.
   */
 //Working
-class ManagerDeleteTest extends FlatSpec {
-
+class ManagerDeleteItemTest extends FlatSpec {
 
   "A Manager" should "be able to delete items from the items list" in {
     val shop = new Shop()
