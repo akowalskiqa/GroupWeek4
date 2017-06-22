@@ -12,11 +12,12 @@ class EmployeeProduceReceiptTest extends FlatSpec {
    var shop = new Shop()
 
    var listOfItemsToBuy :Array[Item] =  Array(shop.item1,shop.item2,shop.item3,shop.item2)
-   val customer = new Customer("Dave", 101, false, 0)
+   val customer = new Customer("Dave", 101, false, 50)
    val employee1 = new FloorStaff("Deedee", 102)
    var itemStock: Stock = new Stock()
    itemStock.productQuantity+=(1 -> 5, 2 -> 5, 3 -> 5)
    var summary = new SummarySaleRecord
+   shop.listOfCustomers+=customer
 
    employee1.openShop(shop)
    val sellDetails:(Array[Item], Double, Int) = shop.sellThis(listOfItemsToBuy,itemStock)
