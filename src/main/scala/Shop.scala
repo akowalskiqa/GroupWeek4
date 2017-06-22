@@ -38,7 +38,7 @@ class Shop {
   var listOfStock: Stock = null
   var listOfReceipts = new ArrayBuffer[Int]()
   var listOfItemsToSell: ArrayBuffer[Item] = ArrayBuffer[Item]()
-  var todaysIncomeTally: Double = 0
+  var todaysIncomeTally: Double = 0.0
 
   listOfItems += (item1, item2, item3, item4, item5, item6, item7, item8, item9, item10)
   listOfFLoorStaff += (staff1, staff2, staff3, staff4, staff5, staff6)
