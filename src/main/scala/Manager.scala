@@ -17,7 +17,10 @@ class Manager(name:String,employeeID: Int) extends FloorStaff(name, employeeID){
     summary.getPredictedIncomeForTomorrowBasedOnHistoryProvided()
   }
 
-//  override def closeShop(shopToClose: Shop): Unit = {
+  override def toString: String = s"$employeeID\t$name"
+
+
+  //  override def closeShop(shopToClose: Shop): Unit = {
 //    shopToClose()
 //  }
 }

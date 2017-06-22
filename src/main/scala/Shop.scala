@@ -80,11 +80,11 @@ class Shop {
   }
 
   def sellThis(listOfItemsToSell: Array[Item], stock: Stock): (Array[Item], Double, Int) = {
+    var totalPrice: Double = 0
+    var pointPrice = 0
+    var itemsToBePurchased = ArrayBuffer[Item]()
     if (openStatus) {
-      var totalPrice: Double = 0
-      var pointPrice = 0
-      var itemsToBePurchased = ArrayBuffer[Item]()
-
+      if(!listOfItemsToSell.isEmpty){
       for (i <- 0 to listOfItemsToSell.length - 1) {
         if (stock.getAmountOfProductsForThisID(listOfItemsToSell(i).getItemID()) > 0) {
           totalPrice += listOfItemsToSell(i).getItemPrice()
@@ -94,30 +94,30 @@ class Shop {
           println("Product " + listOfItemsToSell(i).getItemID() + "Is not in stock you did not buy this one")
         }
       }
-      Some(itemsToBePurchased.toArray, totalPrice, pointPrice) //
-
-    } else {
+    }else{"basket is Empty"}
+    }else {
       println("Shop needs to be open before anything can be sold!")
     }
-    (Array[Item](),0,0)
+    (itemsToBePurchased.toArray, totalPrice, pointPrice)
   }
   def acceptPayment(listForPurchaseFinalisation: Array[Item], cost: Double,customerBuyingTheProducts: Customer, whoAmI: FloorStaff, stock: Stock, summary: SummarySaleRecord, paymentWithPoints: Option[Int] = None): Unit = {
     val points = paymentWithPoints getOrElse 0
     var needRandomID = true
     var randomGeneratedNumber = generateRandomNumber()
     var pointsToBeAwardedForPurchase = (cost / 10).toInt
-    if (points > 0) {
+    if (points > 0 && (listOfCustomers.contains(customerBuyingTheProducts))&& listOfCustomers(listOfCustomers.indexOf(customerBuyingTheProducts)).getPointsAmount() >= points) {
       listOfCustomers(listOfCustomers.indexOf(customerBuyingTheProducts)).updatePointAmount(-points)
       pointsToBeAwardedForPurchase = 0
-    } else {
+      listForPurchaseFinalisation.foreach(item => stock.updateStockForID(item.getItemID(), -1))
+    } else if(points == 0){
       todaysIncomeTally += cost
+      listForPurchaseFinalisation.foreach(item => stock.updateStockForID(item.getItemID(), -1))
       if (customerBuyingTheProducts.registered) {
         if (listOfCustomers.contains(customerBuyingTheProducts)) {
           listOfCustomers(listOfCustomers.indexOf(customerBuyingTheProducts)).updatePointAmount(pointsToBeAwardedForPurchase)
         }
       }
-    }
-    listForPurchaseFinalisation.foreach(item => stock.updateStockForID(item.getItemID(), -1))
+    }else{println("error with payment has occurred,make sure customer is registered if paying with points,assuring customer has enough points for the purchase, if paying with cash points entry for purchase must be 0")}
     while (needRandomID) {
       if (!listOfReceipts.contains(randomGeneratedNumber)) {
         needRandomID = false
