@@ -13,7 +13,6 @@ object Main {
 
     login()
 
-
   def login(): Unit = {
     println("Press 1: Manager\nPress 2: Floor Staff\nPress 0: Exit System")
     var scanner = scala.io.StdIn.readLine()

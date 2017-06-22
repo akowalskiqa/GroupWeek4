@@ -22,5 +22,8 @@ def preOrders(item:Item): Unit = {
   def allocateAReceipt(receipt:Int): Unit = {
     receivedReciptsIDs += receipt
   }
+  def getPointsAmount(): Int ={
+    points
+  }
 
 }
