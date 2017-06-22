@@ -138,7 +138,7 @@ object Main {
           case "0" => managerMenu()
           case "1" => println("Enter Item Type: ");
             var itemType = scala.io.StdIn.readLine();
-            println("Enter Item Name:1 ");
+            println("Enter Item Name: ");
             var itemName = scala.io.StdIn.readLine();
             stockManager()
             println("Enter Item Price: ");
