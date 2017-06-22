@@ -117,7 +117,7 @@ class Shop {
           listOfCustomers(listOfCustomers.indexOf(customerBuyingTheProducts)).updatePointAmount(pointsToBeAwardedForPurchase)
         }
       }
-    }else{println("error with payment has occured,make sure customer is registered if paying with points, or points entry for purchase must be 0")}
+    }else{println("error with payment has occurred,make sure customer is registered if paying with points,assuring customer has enough points for the purchase, if paying with cash points entry for purchase must be 0")}
     while (needRandomID) {
       if (!listOfReceipts.contains(randomGeneratedNumber)) {
         needRandomID = false
