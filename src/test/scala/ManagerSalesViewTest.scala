@@ -13,6 +13,7 @@ class ManagerSalesViewTest extends FlatSpec {
     var item1 = shop.defineAnItem(ItemTypes.Misc, "Monsters Inc",2.50, 5)
     var item2 = shop.defineAnItem(ItemTypes.Misc, "Terminator",2.50, 5)
     var item3 = shop.defineAnItem(ItemTypes.Game, "Halo",2.50, 5)
+
     var employee = new Manager("Elliot", shop.idGenerator.uniqueEmployeeId)
     val employee1 = new FloorStaff("John", shop.idGenerator.uniqueEmployeeId)
     val customer = new Customer("Jack", 1234, true, 105)
