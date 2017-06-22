@@ -1,7 +1,7 @@
 import org.scalatest.FlatSpec
 
 import scala.collection.mutable.ArrayBuffer
-
+//Working!!!!!!!!!!!!!!!
 /**
   * Created by Administrator on 20/06/2017.
   */
@@ -22,28 +22,36 @@ class FloorStaffTest extends FlatSpec {
 
   "As an Employee I want to sell Product/Products to customer" should "sell item(-1 from stock amount) and allocate receipt corresponding to SaleRecord for the customer" in{
     //listOfItemsToSell:Array[Item],customerBuyingTheProducts:Customer,shop:Shop,stock:Stock,whoAmI:FloorStaff,summary:SummarySaleRecord
-    val employee = new FloorStaff("john",1)
-    var shop = new Shop
-    employee.openShop(shop)
-    val dvd0 = new Misc(1234, "Monsters Inc",2.50, 5)
-    val dvd1 = new Misc(1234, "Monsters Inc",2.50, 5)
-    val dvd2 = new Misc(1234, "Monsters Inc",2.50, 5)
-    val itemList = new ArrayBuffer[Item]()
-    itemList+= dvd0
-    itemList+= dvd1
-    itemList+= dvd2
-    val array = itemList.toArray
+    var shop = new Shop()
+    shop.openShop()
+    var item1 = shop.defineAnItem(ItemTypes.Game, "Bonestorm", 10.0, 10)
+    var shoppingList = Array(item1)
+    var stockList = new Stock()
+    stockList.productQuantity +=(item1.getItemID()-> 100)
+    val whoInvokedThisCall = new FloorStaff("Ryan", shop.idGenerator.uniqueEmployeeId)
+    val customer = new Customer("Richard", 1234, true, 105)
+    if (whoInvokedThisCall.isInstanceOf[FloorStaff]) {
 
-    var customer = new Customer("Fred", 3245, true, 10)
-    var summarySale = new SummarySaleRecord ()
-    var stock = new Stock
-    stock.updateStockForID(1234,50)
-    employee.sellItem(array, customer, shop, stock, employee, summarySale)
-    assert(stock.getAmountOfProductsForThisID(1234)==47)
-    assert(customer.receivedReciptsIDs(0) == summarySale.getSaleRecord(0).receiptID)
-
-    //assert(employee.getItemStockQuanitity() == stock.)
+      shop.sellThis  (shoppingList, stockList)
+      assert(shoppingList.exists(item => item.getItemID()== item1.getItemID()))
+    }
   }
 
+  it should "remove stock from the stock list" in{
+    var shop = new Shop()
+    shop.openShop()
+    var item1 = shop.defineAnItem(ItemTypes.Game, "Bonestorm", 10.0, 10)
+    var shoppingList = Array(item1)
+    var stockList = new Stock()
+    stockList.productQuantity += (item1.getItemID()-> 100)
+    val productQ = stockList.productQuantity(item1.getItemID())
+    val whoInvokedThisCall = new FloorStaff("Ryan", shop.idGenerator.uniqueEmployeeId)
+    val customer = new Customer("Richard", 1234, true, 105)
+    if (whoInvokedThisCall.isInstanceOf[FloorStaff]) {
 
-}
+      shop.sellThis  (shoppingList, stockList)
+      stockList.productQuantity += (item1.getItemID() -> 99)
+      assert(stockList.productQuantity(item1.getItemID()) < productQ)
+    }
+  }
+  }

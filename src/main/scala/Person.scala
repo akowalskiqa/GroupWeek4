@@ -5,4 +5,6 @@ abstract class Person() {
 
   def getName()
   def setName(newName:String)
+
+  override def toString: String = ""
 }

@@ -27,4 +27,6 @@ class FloorStaff(var name: String, val employeeID: Int) extends Person() {
   def checkAmountInStockForThisID(whichStock:Stock,itemId:Int): Int ={
     whichStock.getAmountOfProductsForThisID(itemId)
   }
+
+  override def toString: String = s"$employeeID\t$name"
 }

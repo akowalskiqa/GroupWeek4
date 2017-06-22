@@ -26,4 +26,6 @@ def preOrders(item:Item): Unit = {
     points
   }
 
+  override def toString: String = s"$customerId\t$name\tRegistered status:$registered\t $points Points Available"
+
 }
