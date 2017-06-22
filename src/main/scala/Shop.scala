@@ -1,3 +1,5 @@
+import java.util.Date
+
 import ItemTypes.ItemTypes
 import PersonType.PersonType
 
@@ -21,6 +23,7 @@ class Shop {
   var item9 = defineAnItem(ItemTypes.Hardware, "Headset", 30.0, 10)
   var item10 = defineAnItem(ItemTypes.Hardware, "Playstation 2", 100.0, 10)
 
+
   //Floor staff
   val staff1 = new FloorStaff("Ryan", idGenerator.uniqueEmployeeId)
   val staff2 = new FloorStaff("Mike", idGenerator.uniqueEmployeeId)
@@ -40,6 +43,14 @@ class Shop {
   var listOfReceipts = new ArrayBuffer[Int]()
   var listOfItemsToSell: ArrayBuffer[Item] = ArrayBuffer[Item]()
   var todaysIncomeTally: Double = 0.0
+  var sale = new SummarySaleRecord()
+
+  sale.datesIncome.put(new Date("Fri Oct 31 15:07:24 2014"), 20.23)
+  sale.datesIncome.put(new Date("Fri Oct 21 15:07:24 2014"), 106.50)
+  sale.datesIncome.put(new Date("Fri Oct 11 15:07:24 2014"), 36.10)
+  sale.datesIncome.put(new Date("Fri Oct 30 15:07:24 2014"), 87.35)
+  sale.datesIncome.put(new Date("Fri Oct 25 15:07:24 2014"), 40.75)
+  sale.datesIncome.put(new Date("Fri Oct 24 15:07:24 2014"), 50.05)
 
   listOfItems += (item1, item2, item3, item4, item5, item6, item7, item8, item9, item10)
   listOfFLoorStaff += (staff1, staff2, staff3, staff4, staff5, staff6)
@@ -96,7 +107,6 @@ class Shop {
     var pointPrice = 0
     var itemsToBePurchased = ArrayBuffer[Item]()
     var map = getProductQuantityInMap(listOfItemsToSell) // should be used for buying and selling as it is easier and saves more time.. future advancement
-    map.
     if (openStatus) {
       if(!listOfItemsToSell.isEmpty){
         for (i <- 0 to listOfItemsToSell.length - 1) {
@@ -149,7 +159,7 @@ class Shop {
   def generateRandomNumber(): Int = {
     val r = scala.util.Random
     r.nextInt(99999999).abs
-  }​
+  }
 
   def createAnItem(newItem: Item): Unit = {
     listOfItems += newItem
