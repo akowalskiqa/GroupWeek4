@@ -13,6 +13,10 @@ class Manager(name:String,employeeID: Int) extends FloorStaff(name, employeeID){
     shopToOpen.openShop()
   }
 
+   def predictTomorrowsIncome(summary:SummarySaleRecord):Double={
+    summary.getPredictedIncomeForTomorrowBasedOnHistoryProvided()
+  }
+
 //  override def closeShop(shopToClose: Shop): Unit = {
 //    shopToClose()
 //  }
