@@ -9,7 +9,7 @@ class ManagerDeleteEmployeeFromSystem extends FlatSpec{
 
   "As a Manager I want to be able to add a new employee to the system" should "Add a new employee" in {
     var shop = new Shop()
-    var employee1 = shop.listOfFLoorStaff(Emp)
+    var employee1 = shop.listOfFLoorStaff(1)
 
 
     var item1 = shop.defineAnItem(ItemTypes.Game, "Mass Effect", 15.0, 10)
