@@ -1,10 +1,5 @@
 import org.scalatest.FlatSpec
-
-import scala.collection.mutable.ArrayBuffer
-
-/**
-  * Created by Profile on 22/06/2017.
-  */
+//done
 class ManagerAddEmployeeToSystemTest extends FlatSpec{
   "As a Manager I want to be able to add an employee to the system" should "Add an employee" in {
     var shop = new Shop()
