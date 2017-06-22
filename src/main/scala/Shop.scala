@@ -1,6 +1,7 @@
 import ItemTypes.ItemTypes
 import PersonType.PersonType
 
+import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
 /**
@@ -79,22 +80,35 @@ class Shop {
     listOfItemsToSell.remove(listOfItemsToSell.indexWhere(item => item.getItemID()== itemId))
   }
 
+  def getProductQuantityInMap(arrayInput:Array[Item]): mutable.Map[Item, Int] ={
+    var map = collection.mutable.Map[Item, Int]()
+    var storeCurrent = 0;
+    arrayInput.foreach(item => if(map.contains(item)){
+      storeCurrent = map(item)
+      map.put(item,storeCurrent+1)
+    }else{map.put(item,1)})
+    map
+  }
+
+  //when using this method: the data type will be an optional so you have to use .get or .getOrElse
   def sellThis(listOfItemsToSell: Array[Item], stock: Stock): (Array[Item], Double, Int) = {
     var totalPrice: Double = 0
     var pointPrice = 0
     var itemsToBePurchased = ArrayBuffer[Item]()
+    var map = getProductQuantityInMap(listOfItemsToSell) // should be used for buying and selling as it is easier and saves more time.. future advancement
+    map.
     if (openStatus) {
       if(!listOfItemsToSell.isEmpty){
-      for (i <- 0 to listOfItemsToSell.length - 1) {
-        if (stock.getAmountOfProductsForThisID(listOfItemsToSell(i).getItemID()) > 0) {
-          totalPrice += listOfItemsToSell(i).getItemPrice()
-          pointPrice += listOfItemsToSell(i).getItemPointValue()
-          itemsToBePurchased += listOfItemsToSell(i)
-        } else {
-          println("Product " + listOfItemsToSell(i).getItemID() + "Is not in stock you did not buy this one")
+        for (i <- 0 to listOfItemsToSell.length - 1) {
+          if (stock.getAmountOfProductsForThisID(listOfItemsToSell(i).getItemID()) > map(listOfItemsToSell(i))) {
+            totalPrice += listOfItemsToSell(i).getItemPrice()
+            pointPrice += listOfItemsToSell(i).getItemPointValue()
+            itemsToBePurchased += listOfItemsToSell(i)
+          } else {
+            println("Product " + listOfItemsToSell(i).getItemID() + "Is not in stock you did not buy this one")
+          }
         }
-      }
-    }else{"basket is Empty"}
+      }else{"basket is Empty"}
     }else {
       println("Shop needs to be open before anything can be sold!")
     }
@@ -105,19 +119,20 @@ class Shop {
     var needRandomID = true
     var randomGeneratedNumber = generateRandomNumber()
     var pointsToBeAwardedForPurchase = (cost / 10).toInt
-    if (points > 0 && (listOfCustomers.contains(customerBuyingTheProducts))&& listOfCustomers(listOfCustomers.indexOf(customerBuyingTheProducts)).getPointsAmount() >= points) {
+    if (points > 0) {
       listOfCustomers(listOfCustomers.indexOf(customerBuyingTheProducts)).updatePointAmount(-points)
       pointsToBeAwardedForPurchase = 0
-      listForPurchaseFinalisation.foreach(item => stock.updateStockForID(item.getItemID(), -1))
-    } else if(points == 0){
+    } else {
       todaysIncomeTally += cost
-      listForPurchaseFinalisation.foreach(item => stock.updateStockForID(item.getItemID(), -1))
       if (customerBuyingTheProducts.registered) {
+
         if (listOfCustomers.contains(customerBuyingTheProducts)) {
           listOfCustomers(listOfCustomers.indexOf(customerBuyingTheProducts)).updatePointAmount(pointsToBeAwardedForPurchase)
         }
       }
-    }else{println("error with payment has occurred,make sure customer is registered if paying with points,assuring customer has enough points for the purchase, if paying with cash points entry for purchase must be 0")}
+    }
+    listForPurchaseFinalisation.foreach(item => stock.updateStockForID(item.getItemID(), -1))
+
     while (needRandomID) {
       if (!listOfReceipts.contains(randomGeneratedNumber)) {
         needRandomID = false
@@ -125,17 +140,16 @@ class Shop {
         randomGeneratedNumber = generateRandomNumber()
       }
     }
-    var saleRecord = new SaleRecord(listForPurchaseFinalisation, cost,new java.util.Date(), whoAmI, customerBuyingTheProducts, pointsToBeAwardedForPurchase, randomGeneratedNumber)
+    var saleRecord = new SaleRecord(listForPurchaseFinalisation, cost, new java.util.Date(), whoAmI, customerBuyingTheProducts, pointsToBeAwardedForPurchase, randomGeneratedNumber)
     customerBuyingTheProducts.allocateAReceipt(randomGeneratedNumber)
     summary.addSaleRecord(saleRecord)
     todaysIncomeTally += cost
   }
 
-  def generateRandomNumber(): Int ={
+  def generateRandomNumber(): Int = {
     val r = scala.util.Random
     r.nextInt(99999999).abs
-
-  }
+  }​
 
   def createAnItem(newItem: Item): Unit = {
     listOfItems += newItem
