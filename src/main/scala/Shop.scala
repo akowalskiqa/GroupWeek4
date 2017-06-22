@@ -79,7 +79,7 @@ class Shop {
     listOfItemsToSell.remove(listOfItemsToSell.indexWhere(item => item.getItemID()== itemId))
   }
 
-  def sellThis(listOfItemsToSell: Array[Item], stock: Stock): Some[(Array[Item], Double, Int)] = {
+  def sellThis(listOfItemsToSell: Array[Item], stock: Stock): (Array[Item], Double, Int) = {
     if (openStatus) {
       var totalPrice: Double = 0
       var pointPrice = 0
@@ -99,7 +99,7 @@ class Shop {
     } else {
       println("Shop needs to be open before anything can be sold!")
     }
-    null
+    (Array[Item](),0,0)
   }
   def acceptPayment(listForPurchaseFinalisation: Array[Item], cost: Double,customerBuyingTheProducts: Customer, whoAmI: FloorStaff, stock: Stock, summary: SummarySaleRecord, paymentWithPoints: Option[Int] = None): Unit = {
     val points = paymentWithPoints getOrElse 0
@@ -112,14 +112,12 @@ class Shop {
     } else {
       todaysIncomeTally += cost
       if (customerBuyingTheProducts.registered) {
-
         if (listOfCustomers.contains(customerBuyingTheProducts)) {
           listOfCustomers(listOfCustomers.indexOf(customerBuyingTheProducts)).updatePointAmount(pointsToBeAwardedForPurchase)
         }
       }
     }
     listForPurchaseFinalisation.foreach(item => stock.updateStockForID(item.getItemID(), -1))
-
     while (needRandomID) {
       if (!listOfReceipts.contains(randomGeneratedNumber)) {
         needRandomID = false
@@ -232,8 +230,6 @@ class Shop {
     whereToKeepTheRecord.updateDatesIncome(new java.util.Date(), todaysIncomeTally)
     openStatus = false
   }
-
-
 
   object idGenerator {
     private val clockticker = new java.util.concurrent.atomic.AtomicInteger
