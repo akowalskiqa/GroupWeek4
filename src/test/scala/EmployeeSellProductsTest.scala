@@ -42,8 +42,8 @@ class EmployeeSellProductsTest extends FlatSpec {
       //assert(shoppingList.contains(item1))
     }
     else{
-      //assert(!shoppingList.contains(item2))
-      assert(!shoppingList.exists(item => item.getItemID()== item1.getItemID()))
+      assert(!shoppingList.contains(item2))  //List doesn't contain above item
+
     }
   }
 }
