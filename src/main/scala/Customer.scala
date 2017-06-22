@@ -22,6 +22,9 @@ def preOrders(item:Item): Unit = {
   def allocateAReceipt(receipt:Int): Unit = {
     receivedReciptsIDs += receipt
   }
+  def getPointsAmount(): Int ={
+    points
+  }
 
   override def toString: String = s"$customerId\t$name\tRegistered status:$registered\t $points Points Available"
 

@@ -1,5 +1,3 @@
-import PersonType.PersonType
-
 /**
   * Created by Administrator on 20/06/2017.
   */
