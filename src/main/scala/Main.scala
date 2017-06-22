@@ -9,6 +9,7 @@ object Main {
 
   def main(args: Array[String]) = {
     var shop = new Shop // should have been "new Shop(stock,summarySaleRecord)" something like that, but discovered it too late
+    var saleSum = new SummarySaleRecord
 
     var currentLoggedInEmployee = new FloorStaff("john", 1)
     currentLoggedInEmployee.openShop(shop)
@@ -40,14 +41,21 @@ object Main {
 
     def floorStaffMenu(): Unit = {
 
-      println("Press 1: Transaction\nPress 2: Open Shop\nPress 3: Close Shop\nPress 4: Daily Figures\nPress 5: Log out")
+      println("Press 1: Transaction\nPress 2: Open \nPress 3: Close Shop\nPress 4: Daily Figures\nPress 5: Log out")
       var scanner = scala.io.StdIn.readLine()
       try {
         scanner match {
           case "1" => println("Transaction Screen"); floorStaffTransaction()
-          case "2" => println("Shop Opened"); shop.openShop(); floorStaffMenu()
-          case "3" => println("Shop Closed"); sys.exit()
-          case "4" => println("Daily Figures: ") //Ad Function
+          case "2" => if(shop.openStatus) {
+            println("Store already opened")
+
+          }
+          else {
+            println("Shop Opened")
+            shop.openShop();
+          }; floorStaffMenu()
+          case "3" => println("Shop Closed"); shop.closeShop(saleSum); login()
+          case "4" => println("Daily Figures: "); println(saleSum.datesIncome.mkString(""))
           case "5" => login()
           case _ => println("Error - Incorrect key pressed\nReturned to current page"); floorStaffMenu()
         }
@@ -130,7 +138,7 @@ object Main {
           case "0" => managerMenu()
           case "1" => println("Enter Item Type: ");
             var itemType = scala.io.StdIn.readLine();
-            println("Enter Item Name:1 ");
+            println("Enter Item Name: ");
             var itemName = scala.io.StdIn.readLine();
             stockManager()
             println("Enter Item Price: ");
@@ -203,9 +211,9 @@ object Main {
       try {
         scanner match {
           case "0" => managerMenu()
-          case "1" => println("Previous figures function")
-          case "2" => println("Current figures function")
-          case "3" => println("Future figures function")
+          case "1" => println("Enter the date you want to view figure for: "); var date = scala.io.StdIn.readLine(); //saleSum.getDatesIncome()
+          case "2" => println("Current figure: " + shop.todaysIncomeTally); managerSales()
+          case "3" => println("Predicted income for tomorrow: " + saleSum.getPredictedIncomeForTomorrowBasedOnHistoryProvided()); managerSales()
           case _ => println("Error - Incorrect key pressed\nReturned to current page"); managerSales()
         }
       }
