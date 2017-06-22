@@ -40,7 +40,7 @@ object Main {
       try {
         scanner match {
           case "1" => println("Transaction Screen"); floorStaffTransaction()
-          case "2" => println("Shop Opened"); shop.openShop(); floorStaffMenu() // Add Function/
+          case "2" => println("Shop Opened"); shop.openShop(); floorStaffMenu()
           case "3" => println("Shop Closed"); sys.exit()
           case "4" => println("Daily Figures: ") //Ad Function
           case "5" => login()
@@ -63,7 +63,9 @@ object Main {
           case "0" => floorStaffMenu()
           case "1" => println("Enter ID for item you adding to basket: "); var scanner = scala.io.StdIn.readLine(); shop.addItemToShoppingBasket(scanner.toInt); floorStaffTransaction()
           case "2" => println(shop.listOfItemsToSell.mkString("\n")); floorStaffTransaction()
-          case "3" => println("Checkout"); floorStaffTransaction() //shop.sellThis()
+          case "3" =>
+            var saleDetails = shop.sellThis(shop.listOfItemsToSell.toArray, shop.listOfStock)
+            println(saleDetails._1.mkString + saleDetails._2 + saleDetails._3);floorStaffTransaction()
           case "4" => println(shop.listOfItems.mkString("\n")); floorStaffTransaction()
           case "5" => println("Clearing basket..."); shop.clearShoppingBasket(); floorStaffTransaction()
           case "6" => println("Enter ID for item you're removing from basket: "); var scanner = scala.io.StdIn.readLine(); shop.removeItemById(scanner.toInt); floorStaffTransaction()
