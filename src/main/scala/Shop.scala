@@ -127,7 +127,7 @@ class Shop {
         randomGeneratedNumber = generateRandomNumber()
       }
     }
-    var saleRecord = new SaleRecord(listForPurchaseFinalisation, cost, new java.util.Date(), whoAmI, customerBuyingTheProducts, pointsToBeAwardedForPurchase, randomGeneratedNumber)
+    var saleRecord = new SaleRecord(listForPurchaseFinalisation, cost,new java.util.Date(), whoAmI, customerBuyingTheProducts, pointsToBeAwardedForPurchase, randomGeneratedNumber)
     customerBuyingTheProducts.allocateAReceipt(randomGeneratedNumber)
     summary.addSaleRecord(saleRecord)
     todaysIncomeTally += cost
