@@ -1,3 +1,4 @@
+import ItemTypes.ItemTypes
 import PersonType.PersonType
 
 /**
@@ -131,26 +132,60 @@ object Main {
     }
 
     def stockManager(): Unit = {
-      println("Press 1: Add item to item list\nPress 2: Update item details\nPress 3: Delete item\nPress 4: Update stock quantity\nPress 0: Back to menu")
+      println("Press 1: Add item to item list\nPress 2: Update item details\nPress 3: Delete item\nPress 4: Update stock quantity\nPress 5: Get quantity for item using item ID\nPress 0: Back to menu")
+      var itemType:ItemTypes = ItemTypes.Game
+      var itemBoolean : Boolean = false
       var scanner = scala.io.StdIn.readLine()
       try {
         scanner match {
           case "0" => managerMenu()
-          case "1" => println("Enter Item Type: ");
-            var itemType = scala.io.StdIn.readLine();
+          case "1" => println("Enter Item Type: \nPress 1: Game\nPress 2: Hardware\nPress 3: Misc ");
+            var itemType2 = scala.io.StdIn.readLine();
+            itemType2 match {
+              case "1" => itemType = ItemTypes.Game
+              case "2" => itemType = ItemTypes.Hardware
+              case "3" => itemType = ItemTypes.Misc
+              case _ => println("Error"); stockManager()
+            }
             println("Enter Item Name:1 ");
             var itemName = scala.io.StdIn.readLine();
-            stockManager()
             println("Enter Item Price: ");
             var itemPrice = scala.io.StdIn.readLine();
             println("Enter Amount of points for item: ");
             var itemPoints = scala.io.StdIn.readLine();
-            stockManager()
-            println("Is item for pre-order [True/False]: ");
-            var itemPreorder = scala.io.StdIn.readLine(); //shop.defineAnItem(itemType = itemType, itemName, itemPrice.toDouble, itemPoints.toInt, itemPreorder.toBoolean)
-          case "2" => println("Update item details"); stockManager()
+            println("Is item for pre-order: \nPress 1: True\nPress 2: False ");
+            var itemBoolean2 = scala.io.StdIn.readLine();
+            itemBoolean2 match {
+              case "1" => itemBoolean = true
+              case "2" => itemBoolean = false
+              case _ => println("Error"); stockManager()
+            }
+            var itemPreorder = scala.io.StdIn.readLine(); shop.createAnItem(shop.defineAnItem(itemType = itemType, itemName, itemPrice.toDouble, itemPoints.toInt, itemBoolean)); stockManager()
+          case "2" => println("Enter ID for item you're updating details: "); var itemID = scala.io.StdIn.readLine(); println("Enter Item Type: \nPress 1: Game\nPress 2: Hardware\nPress 3: Misc ");
+            var itemType2 = scala.io.StdIn.readLine();
+            itemType2 match {
+              case "1" => itemType = ItemTypes.Game
+              case "2" => itemType = ItemTypes.Hardware
+              case "3" => itemType = ItemTypes.Misc
+              case _ => println("Error"); stockManager()
+            }
+            println("Enter Item Name:1 ");
+            var itemName = scala.io.StdIn.readLine();
+            println("Enter Item Price: ");
+            var itemPrice = scala.io.StdIn.readLine();
+            println("Enter Amount of points for item: ");
+            var itemPoints = scala.io.StdIn.readLine();
+            println("Is item for pre-order: \nPress 1: True\nPress 2: False ");
+            var itemBoolean2 = scala.io.StdIn.readLine();
+            itemBoolean2 match {
+              case "1" => itemBoolean = true
+              case "2" => itemBoolean = false
+              case _ => println("Error"); stockManager()
+            }
+            shop.updateAnItem(itemID.toInt, shop.defineAnItem(itemType = itemType, itemName, itemPrice.toDouble, itemPoints.toInt, itemBoolean)); stockManager()
           case "3" => println("Enter ID for item you're deleting: "); var scanner = scala.io.StdIn.readLine(); shop.deleteAnItem(scanner.toInt); stockManager()
           case "4" => println("Enter ID for item you're updating stock quantity: "); var itemID = scala.io.StdIn.readLine(); println("Enter new stock quantity number: "); var quantity = scala.io.StdIn.readLine(); shop.updateStockForID(itemID.toInt, quantity.toInt); stockManager()
+          case "5" => println("Enter ID for item you want to see quantity for: "); var scanner = scala.io.StdIn.readLine(); shop.getAmountForThisID(scanner.toInt)
           case _ => println("Error - Incorrect key pressed\nReturned to current page"); stockManager()
         }
       }

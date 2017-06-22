@@ -79,6 +79,7 @@ class Shop {
 
   }
 
+
   def addItemToShoppingBasket(itemId: Int):ArrayBuffer[Item]={
     listOfItemsToSell += listOfItems(listOfItems.indexWhere(item => item.getItemID() == itemId))
   }
