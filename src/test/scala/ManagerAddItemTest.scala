@@ -5,7 +5,7 @@ import scala.collection.mutable.ArrayBuffer
   * Created by Profile on 20/06/2017.
   */
 //Working
-class ManagerAddItem extends FlatSpec {
+class ManagerAddItemTest extends FlatSpec {
 
   info("As a Manager I want to be able to add a new item to sell")
 
