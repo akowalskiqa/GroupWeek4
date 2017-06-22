@@ -100,6 +100,7 @@ class Shop {
       if(!listOfItemsToSell.isEmpty){
         for (i <- 0 to listOfItemsToSell.length - 1) {
           if (stock.getAmountOfProductsForThisID(listOfItemsToSell(i).getItemID()) >= map(listOfItemsToSell(i))) {
+            //map.put(listOfItemsToSell(i),map(listOfItemsToSell(i)-1))
             totalPrice += listOfItemsToSell(i).getItemPrice()
             pointPrice += listOfItemsToSell(i).getItemPointValue()
             itemsToBePurchased += listOfItemsToSell(i)
@@ -148,7 +149,7 @@ class Shop {
   def generateRandomNumber(): Int = {
     val r = scala.util.Random
     r.nextInt(99999999).abs
-  }​
+  }
 
   def createAnItem(newItem: Item): Unit = {
     listOfItems += newItem

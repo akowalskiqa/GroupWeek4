@@ -29,9 +29,16 @@ callThis()
 
 
 
+var map = collection.mutable.Map[Int, Int]()
 
+map.put(5,5)
+map.put(2,5)
+map.put(1,5)
+map.put(3,5)
 
-
+map.foreach {keyVal => println(keyVal._1 + "=" + keyVal._2)}
+map.put(1,map(1)-1)
+map.foreach {keyVal => println(keyVal._1 + "=" + keyVal._2)}
 
 
 
