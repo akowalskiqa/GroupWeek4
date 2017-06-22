@@ -111,7 +111,7 @@ class Shop {
       if(!listOfItemsToSell.isEmpty){
         for (i <- 0 to listOfItemsToSell.length - 1) {
           if (stock.getAmountOfProductsForThisID(listOfItemsToSell(i).getItemID()) >= map(listOfItemsToSell(i))) {
-            //map.put(listOfItemsToSell(i),map(listOfItemsToSell(i)-1))
+            map.put(listOfItemsToSell(i),map(listOfItemsToSell(i))-1)
             totalPrice += listOfItemsToSell(i).getItemPrice()
             pointPrice += listOfItemsToSell(i).getItemPointValue()
             itemsToBePurchased += listOfItemsToSell(i)
