@@ -28,6 +28,6 @@ class ManagerAddItemTest extends FlatSpec {
     stock.updateStockForID(1, 7)
     stock.updateStockForID(item1.getItemID(), 16)
 
-    assert(stock.getAmountOfProductsForThisID(item1.getItemID()) == 16) //ItemList contains something
+    assert(stock.getAmountOfProductsForThisID(item1.getItemID()) === 16) //ItemList contains something
   }
 }
