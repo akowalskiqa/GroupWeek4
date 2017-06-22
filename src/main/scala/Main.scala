@@ -1,10 +1,16 @@
 /**
-  * Created by Profile on 21/06/2017.
+  * Created by Administrator on 20/06/2017.
   */
+
 object Main {
 
 
-  def main(args: Array[String]): Unit = {
+  def main(args: Array[String]) = {
+    var shop = new Shop // should have been "new Shop(stock,summarySaleRecord)" something like that, but discovered it too late
+
+    var currentLoggedInEmployee = new FloorStaff("john", 1)
+    currentLoggedInEmployee.openShop(shop)
+
     login()
   }
 
@@ -31,7 +37,7 @@ object Main {
       case "3" => println("Shop Closed"); sys.exit()
       case "4" => println("Daily Figures: ") //Ad Function
       case "5" => login()
-      case _ => println("Error - Incorrect key pressed\nReturned to current page") ;floorStaffMenu()
+      case _ => println("Error - Incorrect key pressed\nReturned to current page"); floorStaffMenu()
     }
 
   }
@@ -47,7 +53,7 @@ object Main {
       case "3" => println("Checkout")
       case "4" => println("List stock")
       case "5" => println("Clear basket")
-      case _ => println("Error - Incorrect key pressed\nReturned to current page") ;floorStaffTransaction()
+      case _ => println("Error - Incorrect key pressed\nReturned to current page"); floorStaffTransaction()
     }
 
   }
@@ -60,7 +66,7 @@ object Main {
       case "0" => floorStaffMenu()
       case "1" => println("Pay with cash")
       case "2" => println("Pay with points")
-      case _ => println("Error - Incorrect key pressed\nReturned to current page") ;floorStaffCheckout()
+      case _ => println("Error - Incorrect key pressed\nReturned to current page"); floorStaffCheckout()
     }
 
   }
@@ -76,9 +82,10 @@ object Main {
       case "2" => employeeManager()
       case "3" => managerSales()
       case "4" => login()
-      case _ => println("Error - Incorrect key pressed\nReturned to current page") ;managerMenu()
+      case _ => println("Error - Incorrect key pressed\nReturned to current page"); managerMenu()
     }
   }
+
   def stockManager(): Unit = {
     println("Press 1: Add item to stock list\nPress 2: Update item details\nPress 3: Delete item\nPress 4: Update quantity\nPress 0: Back to menu")
     var scanner = scala.io.StdIn.readLine()
@@ -89,7 +96,7 @@ object Main {
       case "2" => println("Update item details")
       case "3" => println("Delete item")
       case "4" => println("Update quantity")
-      case _ => println("Error - Incorrect key pressed\nReturned to current page") ;scanner
+      case _ => println("Error - Incorrect key pressed\nReturned to current page"); scanner
     }
   }
 
@@ -101,7 +108,7 @@ object Main {
       case "0" => managerMenu()
       case "1" => println("Add floorstaff function")
       case "2" => println("Delete floorstaff function")
-      case _ => println("Error - Incorrect key pressed\nReturned to current page") ;employeeManager()
+      case _ => println("Error - Incorrect key pressed\nReturned to current page"); employeeManager()
     }
   }
 
@@ -117,6 +124,7 @@ object Main {
       case _ => println("Error - Incorrect key pressed\nReturned to current page"); managerSales()
     }
   }
+
 
 
 }
