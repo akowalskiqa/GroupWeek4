@@ -103,7 +103,16 @@ object Main {
       try {
         scanner match {
           case "0" => floorStaffMenu()
-          case "1" => println("Enter amount paid with cash: ");  var scanner = scala.io.StdIn.readLine(); println(scanner.toDouble); shop.acceptPayment(shop.listOfItemsToSell2, shop.totalCostOfSale, shop.listOfCustomers(shop.listOfCustomers.indexWhere(customer => customer.getId() == customerIDInput)),personLoggedIn, shop.listOfStock,shop.sale); saleSum.collectionOfSaleRecords(saleSum.collectionOfSaleRecords.length-2)
+          case "1" => println("Enter amount paid with cash: ");
+          if(scanner.toInt < shop.totalCostOfSale) {
+            println("Insufficient funds")
+            floorStaffTransaction()
+          }
+          else {
+            var scanner = scala.io.StdIn.readLine(); println(scanner.toDouble); shop.acceptPayment(shop.listOfItemsToSell2, shop.totalCostOfSale, shop.listOfCustomers(shop.listOfCustomers.indexWhere(customer => customer.getId() == customerIDInput)),personLoggedIn, shop.listOfStock,shop.sale); saleSum.collectionOfSaleRecords(saleSum.collectionOfSaleRecords.length-2)
+            shop.clearShoppingBasket()
+            floorStaffTransaction()
+          }
           case "2" => println("Enter amount paid with points: "); var scanner = scala.io.StdIn.readLine(); println(scanner.toInt); shop.acceptPayment(shop.listOfItemsToSell2, shop.totalCostOfSale, shop.listOfCustomers(shop.listOfCustomers.indexWhere(customer => customer.getId() == customerIDInput)),personLoggedIn, shop.listOfStock,shop.sale, Some(shop.totalPointsCostOfSale))
           case _ => println("Error - Incorrect key pressed\nReturned to current page"); floorStaffCheckout()
         }
