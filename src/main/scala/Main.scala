@@ -13,6 +13,7 @@ object Main {
     var saleSum = new SummarySaleRecord
     var personLoggedIn:FloorStaff = null
     var stock = new Stock
+    var cashValue: Double = 0
 
     var currentLoggedInEmployee = new FloorStaff("john", 1)
     currentLoggedInEmployee.openShop(shop)
@@ -35,8 +36,8 @@ object Main {
       try {
         scanner match {
           case "0" => sys.exit()
-          case "1" => println("Welcome Manager"); managerMenu()
-          case "2" => println("Welcome Floor Staff"); floorStaffMenu()
+          case "1" => println("Welcome Manager"); shop.floorStaffDealingWith = shop.staff6 ;managerMenu()
+          case "2" => println("Welcome Floor Staff");shop.floorStaffDealingWith = shop.staff2;  floorStaffMenu()
           case _ => println("Error - Incorrect key pressed\nReturned to current page"); login()
         }
       }
@@ -88,7 +89,7 @@ object Main {
           case "4" => println(shop.listOfItems.mkString("\n")); floorStaffTransaction()
           case "5" => println("Clearing basket..."); shop.clearShoppingBasket(); floorStaffTransaction()
           case "6" => println("Enter ID for item you're removing from basket: "); var scanner = scala.io.StdIn.readLine(); shop.removeItemById(scanner.toInt); floorStaffTransaction()
-          case "7" => println("Enter ID for item to pre-order: "); var scanner = scala.io.StdIn.readLine().toInt;  if(shop.listOfItems(shop.listOfItems.indexWhere(item => item == scanner)).getPreOrderAvailability()){
+          case "7" => println("Enter ID for item to pre-order: "); var scanner = scala.io.StdIn.readLine().toInt;  if(shop.listOfItems(shop.listOfItems.indexWhere(item => item.getItemID() == scanner)).getPreOrderAvailability()){
             shop.addPreOrderToThisItem(scanner)
             floorStaffTransaction()
           }
@@ -97,7 +98,7 @@ object Main {
             floorStaffTransaction()
           }
           case "8" => shop.listOfStock.productQuantity.foreach {keyVal => println(keyVal._1 + " = " + keyVal._2)}; floorStaffTransaction()
-          case "9" => println(" " + saleSum.getSaleRecord(saleSum.collectionOfSaleRecords.length - 1)); floorStaffTransaction()
+          case "9" => println(shop.listOfItemsToSell2.mkString("\n") +"\nTotal Cost of sale £"+shop.totalCostOfSale + "\nSold to "+ shop.customerDealingWith.toString + "\nSold by "+ shop.floorStaffDealingWith); floorStaffTransaction()
           case _ => println("Error - Incorrect key pressed\nReturned to current page"); floorStaffTransaction()
         }
       }
@@ -111,12 +112,13 @@ object Main {
     def floorStaffCheckout(): Unit = {
       println("Enter Customer ID: \nPress 0 if customer not registered: ")
       var customerIDInput = scala.io.StdIn.readLine().toInt
+      shop.customerDealingWith = shop.listOfCustomers(shop.listOfCustomers.indexWhere(customer => customer.getId()== customerIDInput))
       println("Press 1: Pay with cash\nPress 2: Pay with points\nPress 0: Go back to menu")
       var scanner = scala.io.StdIn.readLine()
       try {
         scanner match {
           case "0" => floorStaffMenu()
-          case "1" => println("Enter amount paid with cash: "); var cashValue = scala.io.StdIn.readLine().toDouble ;
+          case "1" => println("Enter amount paid with cash: "); cashValue = scala.io.StdIn.readLine().toDouble ;
           if(cashValue >= shop.totalCostOfSale) {
             println("Transaction Complete!... Returned change is: £" + (cashValue - shop.totalCostOfSale))
             shop.acceptPayment(shop.listOfItemsToSell2, shop.totalCostOfSale, shop.listOfCustomers(shop.listOfCustomers.indexWhere(customer => customer.getId() == customerIDInput)), personLoggedIn, shop.listOfStock, shop.sale, Some(shop.totalPointsCostOfSale));
