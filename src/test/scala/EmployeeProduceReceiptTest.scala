@@ -18,15 +18,15 @@ class EmployeeProduceReceiptTest extends FlatSpec {
    itemStock.productQuantity+=(1 -> 5, 2 -> 5, 3 -> 5)
    var summary = new SummarySaleRecord
    shop.listOfCustomers+=customer
-
+   val beforePurchase =  shop.listOfCustomers((shop.listOfCustomers.indexOf(customer))).getPointsAmount()
    employee1.openShop(shop)
    val sellDetails:(Array[Item], Double, Int) = shop.sellThis(listOfItemsToBuy,itemStock)
    employee1.finaliseSale(sellDetails._1,sellDetails._2,customer,employee1,itemStock,summary,shop,Some(sellDetails._3))
    //employee1.finaliseSale(sellDetails._1,sellDetails._2,customer,employee1,itemStock,summary,shop)
    val saleRecord = summary.getSaleRecord(customer.receivedReciptsIDs(0))
+
    assert(saleRecord.getCustomerID.customerId == customer.customerId)
    assert(saleRecord.getReciptId == customer.receivedReciptsIDs(0))
-
-   //assert()
+   assert(shop.listOfCustomers((shop.listOfCustomers.indexOf(customer))).getPointsAmount() ==(beforePurchase-sellDetails._3))
     }
   }
