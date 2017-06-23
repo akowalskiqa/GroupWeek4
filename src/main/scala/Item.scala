@@ -3,6 +3,9 @@
   */
 abstract class Item() {
 
+  def getPreOrderAvailability():Boolean={ false}
+ def setPreOrderAvailability(status:Boolean):Unit = false
+
   def getItemID(): Int
 
   def getItemName(): String
