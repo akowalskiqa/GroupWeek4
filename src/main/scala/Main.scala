@@ -88,7 +88,7 @@ object Main {
           case "4" => println(shop.listOfItems.mkString("\n")); floorStaffTransaction()
           case "5" => println("Clearing basket..."); shop.clearShoppingBasket(); floorStaffTransaction()
           case "6" => println("Enter ID for item you're removing from basket: "); var scanner = scala.io.StdIn.readLine(); shop.removeItemById(scanner.toInt); floorStaffTransaction()
-          case "7" => println("Enter ID for item to pre-order: "); var scanner = scala.io.StdIn.readLine().toInt;  if(shop.listOfItems( shop.listOfItems.indexWhere(item => item == scanner)).getPreOrderAvailability()){
+          case "7" => println("Enter ID for item to pre-order: "); var scanner = scala.io.StdIn.readLine().toInt;  if(shop.listOfItems(shop.listOfItems.indexWhere(item => item == scanner)).getPreOrderAvailability()){
             shop.addPreOrderToThisItem(scanner)
             floorStaffTransaction()
           }
