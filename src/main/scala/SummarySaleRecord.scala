@@ -26,6 +26,9 @@ class SummarySaleRecord {
       val current = datesIncome(when)
       datesIncome.put(when,current+amount)
     }
+    else{
+      datesIncome.put(when,amount)
+    }
   }
   def getDatesIncome(when:Date): Double ={
     datesIncome(when)
