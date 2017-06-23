@@ -51,7 +51,7 @@ class Shop {
   var listOfReceipts = new ArrayBuffer[Int]()
   var listOfItemsToSell: ArrayBuffer[Item] = ArrayBuffer[Item]()
   var listOfItemsToSell2: Array[Item] = Array[Item]()
-  var todaysIncomeTally: Double = 0.0
+  var todaysIncomeTally: Double = 5.0
   var sale = new SummarySaleRecord()
   var totalCostOfSale :Double = 0.0
   var totalPointsCostOfSale :Int = 0
