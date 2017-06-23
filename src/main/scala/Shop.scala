@@ -32,6 +32,13 @@ class Shop {
   val staff5 = new FloorStaff("Aaron", idGenerator.uniqueEmployeeId)
   val staff6 = new Manager("Elliot", idGenerator.uniqueEmployeeId)
 
+  var customer0 = new Customer("Guest", 0,false,0)
+  var customer1 = new Customer("ImRegistered", idGenerator.uniqueCustomerId,true,0)
+  var customer2 = new Customer("ImRegisteredAndGot99Points", idGenerator.uniqueCustomerId,true,99)
+  var customer3 = new Customer("NotRegistered", idGenerator.uniqueCustomerId,false,0)
+  var customer4 = new Customer("Scott", idGenerator.uniqueCustomerId,false,0)
+
+
   var openStatus: Boolean = false
 
   var listOfCustomers: ArrayBuffer[Customer] = ArrayBuffer[Customer]()
@@ -39,12 +46,15 @@ class Shop {
   var listOfItems: ArrayBuffer[Item] = ArrayBuffer[Item]()
   var listOfSaleSummarys: ArrayBuffer[SummarySaleRecord] = ArrayBuffer[SummarySaleRecord]()
   var listOfSales: ArrayBuffer[SaleRecord] = ArrayBuffer[SaleRecord]()
-  var listOfStock: Stock = new Stock()
+  var listOfStock: Stock = new Stock
+  listOfStock.productQuantity =scala.collection.mutable.Map(1->10,2->10,3->10,4->10,5->10,6->10,7->10,8->10,9->10,10->10)
   var listOfReceipts = new ArrayBuffer[Int]()
   var listOfItemsToSell: ArrayBuffer[Item] = ArrayBuffer[Item]()
+  var listOfItemsToSell2: Array[Item] = Array[Item]()
   var todaysIncomeTally: Double = 0.0
   var sale = new SummarySaleRecord()
-
+  var totalCostOfSale :Double = 0.0
+  var totalPointsCostOfSale :Int = 0
   sale.datesIncome.put(new Date("Fri Oct 31 15:07:24 2014"), 20.23)
   sale.datesIncome.put(new Date("Fri Oct 21 15:07:24 2014"), 106.50)
   sale.datesIncome.put(new Date("Fri Oct 11 15:07:24 2014"), 36.10)
@@ -54,6 +64,7 @@ class Shop {
 
   listOfItems += (item1, item2, item3, item4, item5, item6, item7, item8, item9, item10)
   listOfFLoorStaff += (staff1, staff2, staff3, staff4, staff5, staff6)
+  listOfCustomers += (customer0, customer1, customer2, customer3, customer4)
 
   //Create item
   def defineAnItem(itemType: ItemTypes, nameOfItem: String, priceOfItem: Double, pointsOfItem: Int, preOrder: Boolean = false): Item = {
@@ -78,6 +89,7 @@ class Shop {
     }
 
   }
+
 
   def addItemToShoppingBasket(itemId: Int):ArrayBuffer[Item]={
     listOfItemsToSell += listOfItems(listOfItems.indexWhere(item => item.getItemID() == itemId))
@@ -186,6 +198,13 @@ class Shop {
 
 
   //Add FloorStaff
+  def generateCustomer():Customer={
+    val uniqueID = idGenerator.uniqueCustomerId
+    var newCustomer = new Customer( s"name$uniqueID", uniqueID, false, 0)
+    listOfCustomers += newCustomer
+    newCustomer
+  }
+
   def defineAnPersonType(personType: PersonType, name: String, employeeID: Int): FloorStaff = {
 
     personType match {

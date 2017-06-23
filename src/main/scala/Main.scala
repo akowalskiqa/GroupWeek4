@@ -1,3 +1,4 @@
+import ItemTypes.ItemTypes
 import PersonType.PersonType
 
 /**
@@ -10,6 +11,7 @@ object Main {
   def main(args: Array[String]) = {
     var shop = new Shop // should have been "new Shop(stock,summarySaleRecord)" something like that, but discovered it too late
     var saleSum = new SummarySaleRecord
+    var personLoggedIn:FloorStaff = null
 
     var currentLoggedInEmployee = new FloorStaff("john", 1)
     currentLoggedInEmployee.openShop(shop)
@@ -23,8 +25,9 @@ object Main {
 
     def login(): Unit = {
       elliot()
-      println("Press 1: Manager\nPress 2: Floor Staff\nPress 0: Exit System")
+      println("Enter User ID: ")
       var scanner = scala.io.StdIn.readLine()
+
       try {
         scanner match {
           case "0" => sys.exit()
@@ -78,7 +81,7 @@ object Main {
           case "2" => println(shop.listOfItemsToSell.mkString("\n")); floorStaffTransaction()
           case "3" =>
             var saleDetails = shop.sellThis(shop.listOfItemsToSell.toArray, shop.listOfStock)
-            println(saleDetails._1.mkString + saleDetails._2 + saleDetails._3);floorStaffCheckout()
+            println(saleDetails._1.mkString + saleDetails._2 + saleDetails._3); shop.totalCostOfSale= saleDetails._2; shop.listOfItemsToSell2 = saleDetails._1 ;shop.totalPointsCostOfSale = saleDetails._3;floorStaffCheckout()
           case "4" => println(shop.listOfItems.mkString("\n")); floorStaffTransaction()
           case "5" => println("Clearing basket..."); shop.clearShoppingBasket(); floorStaffTransaction()
           case "6" => println("Enter ID for item you're removing from basket: "); var scanner = scala.io.StdIn.readLine(); shop.removeItemById(scanner.toInt); floorStaffTransaction()
@@ -93,13 +96,15 @@ object Main {
     }
 
     def floorStaffCheckout(): Unit = {
+      println("Enter Customer ID: \nPress 0 if customer not registered: ")
+      var customerIDInput = scala.io.StdIn.readLine().toInt
       println("Press 1: Pay with cash\nPress 2: Pay with points\nPress 0: Go back to menu")
       var scanner = scala.io.StdIn.readLine()
       try {
         scanner match {
           case "0" => floorStaffMenu()
-          case "1" => println("Pay with cash")
-          case "2" => println("Pay with points")
+          case "1" => println("Enter amount paid with cash: ");  var scanner = scala.io.StdIn.readLine(); println(scanner.toDouble); shop.acceptPayment(shop.listOfItemsToSell2, shop.totalCostOfSale, shop.listOfCustomers(shop.listOfCustomers.indexWhere(customer => customer.getId() == customerIDInput)),personLoggedIn, shop.listOfStock,shop.sale); saleSum.collectionOfSaleRecords(saleSum.collectionOfSaleRecords.length-2)
+          case "2" => println("Enter amount paid with points: "); var scanner = scala.io.StdIn.readLine(); println(scanner.toInt); shop.acceptPayment(shop.listOfItemsToSell2, shop.totalCostOfSale, shop.listOfCustomers(shop.listOfCustomers.indexWhere(customer => customer.getId() == customerIDInput)),personLoggedIn, shop.listOfStock,shop.sale, Some(shop.totalPointsCostOfSale))
           case _ => println("Error - Incorrect key pressed\nReturned to current page"); floorStaffCheckout()
         }
       }
@@ -131,26 +136,63 @@ object Main {
     }
 
     def stockManager(): Unit = {
-      println("Press 1: Add item to item list\nPress 2: Update item details\nPress 3: Delete item\nPress 4: Update stock quantity\nPress 0: Back to menu")
+      println("Press 1: Add item to item list\nPress 2: Update item details\nPress 3: Delete item\nPress 4: Update stock quantity\nPress 5: Get quantity for item using item ID\nPress 0: Back to menu")
+      var itemType:ItemTypes = ItemTypes.Game
+      var itemBoolean : Boolean = false
       var scanner = scala.io.StdIn.readLine()
       try {
         scanner match {
           case "0" => managerMenu()
-          case "1" => println("Enter Item Type: ");
-            var itemType = scala.io.StdIn.readLine();
-            println("Enter Item Name: ");
+          case "1" => println("Enter Item Type: \nPress 1: Game\nPress 2: Hardware\nPress 3: Misc ");
+            var itemType2 = scala.io.StdIn.readLine();
+            itemType2 match {
+              case "1" => itemType = ItemTypes.Game
+              case "game" => itemType = ItemTypes.Game
+              case "2" => itemType = ItemTypes.Hardware
+              case "hardware" => itemType = ItemTypes.Hardware
+              case "3" => itemType = ItemTypes.Misc
+              case "misc" => itemType = ItemTypes.Misc
+              case _ => println("Error"); stockManager()
+            }
+            println("Enter Item Name:1 ");
             var itemName = scala.io.StdIn.readLine();
-            stockManager()
             println("Enter Item Price: ");
             var itemPrice = scala.io.StdIn.readLine();
             println("Enter Amount of points for item: ");
             var itemPoints = scala.io.StdIn.readLine();
-            stockManager()
-            println("Is item for pre-order [True/False]: ");
-            var itemPreorder = scala.io.StdIn.readLine(); //shop.defineAnItem(itemType = itemType, itemName, itemPrice.toDouble, itemPoints.toInt, itemPreorder.toBoolean)
-          case "2" => println("Update item details"); stockManager()
+            println("Is item for pre-order: \nPress 1: True\nPress 2: False ");
+            var itemBoolean2 = scala.io.StdIn.readLine();
+            itemBoolean2 match {
+              case "1" => itemBoolean = true
+              case "2" => itemBoolean = false
+              case _ => println("Error"); stockManager()
+            }
+            var itemPreorder = scala.io.StdIn.readLine(); shop.createAnItem(shop.defineAnItem(itemType = itemType, itemName, itemPrice.toDouble, itemPoints.toInt, itemBoolean)); stockManager()
+          case "2" => println("Enter ID for item you're updating details: "); var itemID = scala.io.StdIn.readLine(); println("Enter Item Type: \nPress 1: Game\nPress 2: Hardware\nPress 3: Misc ");
+            var itemType2 = scala.io.StdIn.readLine();
+            itemType2 match {
+              case "1" => itemType = ItemTypes.Game
+              case "2" => itemType = ItemTypes.Hardware
+              case "3" => itemType = ItemTypes.Misc
+              case _ => println("Error"); stockManager()
+            }
+            println("Enter Item Name:1 ");
+            var itemName = scala.io.StdIn.readLine();
+            println("Enter Item Price: ");
+            var itemPrice = scala.io.StdIn.readLine();
+            println("Enter Amount of points for item: ");
+            var itemPoints = scala.io.StdIn.readLine();
+            println("Is item for pre-order: \nPress 1: True\nPress 2: False ");
+            var itemBoolean2 = scala.io.StdIn.readLine();
+            itemBoolean2 match {
+              case "1" => itemBoolean = true
+              case "2" => itemBoolean = false
+              case _ => println("Error"); stockManager()
+            }
+            shop.updateAnItem(itemID.toInt, shop.defineAnItem(itemType = itemType, itemName, itemPrice.toDouble, itemPoints.toInt, itemBoolean)); stockManager()
           case "3" => println("Enter ID for item you're deleting: "); var scanner = scala.io.StdIn.readLine(); shop.deleteAnItem(scanner.toInt); stockManager()
           case "4" => println("Enter ID for item you're updating stock quantity: "); var itemID = scala.io.StdIn.readLine(); println("Enter new stock quantity number: "); var quantity = scala.io.StdIn.readLine(); shop.updateStockForID(itemID.toInt, quantity.toInt); stockManager()
+          case "5" => println("Enter ID for item you want to see quantity for: "); var scanner = scala.io.StdIn.readLine(); shop.getAmountForThisID(scanner.toInt)
           case _ => println("Error - Incorrect key pressed\nReturned to current page"); stockManager()
         }
       }
@@ -206,14 +248,14 @@ object Main {
     }
 
     def managerSales(): Unit = {
-      println("Press 1: Previous figures\nPress 2: Current figures\nPress 3: Future figures\nPress 0: Back to menu")
+      println("Press 1: Current figures\nPress 2: Future figures\nPress 0: Back to menu")
       var scanner = scala.io.StdIn.readLine()
       try {
         scanner match {
           case "0" => managerMenu()
-          case "1" => println("Enter the date you want to view figure for: "); var date = scala.io.StdIn.readLine(); //saleSum.getDatesIncome()
-          case "2" => println("Current figure: " + shop.todaysIncomeTally); managerSales()
-          case "3" => println("Predicted income for tomorrow: " + saleSum.getPredictedIncomeForTomorrowBasedOnHistoryProvided()); managerSales()
+//          case "1" => println("Enter the date you want to view figure for: format[Fri Oct 31 15:07:24 2014] "); var date = scala.io.StdIn.readLine(); saleSum.getDatesIncome(date.to)
+          case "1" => println("Current figure: " + shop.todaysIncomeTally); managerSales()
+          case "2" => println("Predicted income for tomorrow: " + saleSum.getPredictedIncomeForTomorrowBasedOnHistoryProvided()); managerSales()
           case _ => println("Error - Incorrect key pressed\nReturned to current page"); managerSales()
         }
       }
