@@ -233,7 +233,7 @@ object Main {
             shop.updateAnItem(itemID.toInt, shop.defineAnItem(itemType = itemType, itemName, itemPrice.toDouble, itemPoints.toInt, itemBoolean)); stockManager()
           case "3" => println("Enter ID for item you're deleting: "); var scanner = scala.io.StdIn.readLine(); shop.deleteAnItem(scanner.toInt); stockManager()
           case "4" => println("Enter ID for item you're updating stock quantity: "); var itemID = scala.io.StdIn.readLine(); println("Enter new stock quantity number: "); var quantity = scala.io.StdIn.readLine(); shop.updateStockForID(itemID.toInt, quantity.toInt); stockManager()
-          case "5" => println("Enter ID for item you want to see quantity for: "); var scanner = scala.io.StdIn.readLine(); shop.getAmountForThisID(scanner.toInt); stockManager()
+          case "5" => println("Enter ID for item you want to see quantity for: "); var scanner = scala.io.StdIn.readLine(); println(shop.getAmountForThisID(scanner.toInt)); stockManager()
           case "6" => println(shop.listOfItems.mkString("\n")); stockManager()
           case _ => println("Error - Incorrect key pressed\nReturned to current page"); stockManager()
         }

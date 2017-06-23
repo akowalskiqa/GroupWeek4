@@ -39,6 +39,6 @@ class SaleRecord(val purchaseList: Array[Item], val totalCost: Double, val dateS
   }
 
   override def toString: String = {
-    purchaseList.mkString +"\n" +"Customer: "+soldToCustomer.getId()+" \n" + receiptID + " \n" +dateSold+"\n" + soldBy.getName()+"\n" +totalCost + " \n" + pointsAwarded+" \n"
+    "Reciept ID: "+receiptID +"\n"+purchaseList.mkString("\n") +"\n" +"Customer: "+soldToCustomer.getId()+" \n" +  " \n" +dateSold+"\n" + soldBy.toString+"\n" +totalCost + " \n" + pointsAwarded+" \n"
   }
 }
