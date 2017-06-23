@@ -57,7 +57,7 @@ object Main {
             println("Shop Opened")
             shop.openShop();
           }; floorStaffMenu()
-          case "3" => println("Shop Closed"); shop.closeShop(saleSum); login()
+          case "3" => println("Shop Closed earning today: "+shop.closeShop(saleSum)); login()
           case "4" => println("Daily Figures: "); println(saleSum.datesIncome.mkString(""))
           case "5" => login()
           case _ => println("Error - Incorrect key pressed\nReturned to current page"); floorStaffMenu()

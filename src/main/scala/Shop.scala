@@ -265,9 +265,10 @@ class Shop {
     todaysIncomeTally = 0
   }
 
-  def closeShop(whereToKeepTheRecord: SummarySaleRecord): Unit = {
+  def closeShop(whereToKeepTheRecord: SummarySaleRecord): Double = {
     whereToKeepTheRecord.updateDatesIncome(new java.util.Date(), todaysIncomeTally)
     openStatus = false
+    todaysIncomeTally
   }
 
   object idGenerator {
