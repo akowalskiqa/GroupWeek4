@@ -85,7 +85,7 @@ object Main {
           case "2" => println(shop.listOfItemsToSell.mkString("\n")); floorStaffTransaction()
           case "3" =>
             var saleDetails = shop.sellThis(shop.listOfItemsToSell.toArray, shop.listOfStock)
-            println(saleDetails._1.mkString + "\tTotal Cost £"+ saleDetails._2 + "\tPoints: " + saleDetails._3); shop.totalCostOfSale= saleDetails._2; shop.listOfItemsToSell2 = saleDetails._1 ;shop.totalPointsCostOfSale = saleDetails._3;floorStaffCheckout()
+            println(saleDetails._1.mkString("\n") + "\n_______________________________" + "\nTotal Cost £"+ saleDetails._2 + "\tPoints: " + saleDetails._3 + "\n"); shop.totalCostOfSale= saleDetails._2; shop.listOfItemsToSell2 = saleDetails._1 ;shop.totalPointsCostOfSale = saleDetails._3;floorStaffCheckout()
           case "4" => println(shop.listOfItems.mkString("\n")); floorStaffTransaction()
           case "5" => println("Clearing basket..."); shop.clearShoppingBasket(); floorStaffTransaction()
           case "6" => println("Enter ID for item you're removing from basket: "); var scanner = scala.io.StdIn.readLine(); shop.removeItemById(scanner.toInt); floorStaffTransaction()
