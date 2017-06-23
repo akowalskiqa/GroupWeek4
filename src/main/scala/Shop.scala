@@ -146,7 +146,6 @@ class Shop {
       listOfCustomers(listOfCustomers.indexOf(customerBuyingTheProducts)).updatePointAmount(-points)
       pointsToBeAwardedForPurchase = 0
     } else {
-      todaysIncomeTally += cost
       if (customerBuyingTheProducts.registered) {
 
         if (listOfCustomers.contains(customerBuyingTheProducts)) {

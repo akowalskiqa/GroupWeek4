@@ -55,7 +55,6 @@ object Main {
           case "1" => println("Transaction Screen"); floorStaffTransaction()
           case "2" => if(shop.openStatus) {
             println("Store already opened")
-
           }
           else {
             println("Shop Opened")
