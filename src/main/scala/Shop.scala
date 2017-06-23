@@ -146,8 +146,7 @@ class Shop {
       listOfCustomers(listOfCustomers.indexOf(customerBuyingTheProducts)).updatePointAmount(-points)
       pointsToBeAwardedForPurchase = 0
     } else {
-      if (customerBuyingTheProducts.registered) {
-
+      if (customerBuyingTheProducts.registered){
         if (listOfCustomers.contains(customerBuyingTheProducts)) {
           listOfCustomers(listOfCustomers.indexOf(customerBuyingTheProducts)).updatePointAmount(pointsToBeAwardedForPurchase)
         }

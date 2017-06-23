@@ -37,4 +37,16 @@ class SaleRecord(val purchaseList: Array[Item], val totalCost: Double, val dateS
   def getPurchasedList:Array[Item]={
     purchaseList
   }
+
+  def printContent(): Unit ={
+    var thisString = ""
+    thisString+= ("Customer: "+soldToCustomer.getId()+" \n")
+    thisString+= (receiptID + " \n")
+    purchaseList.foreach(item => thisString+=(item.getItemName()+" price: "+item.getItemPrice())+"\n")
+    thisString+=(dateSold+"\n")
+    thisString+=(soldBy.getName()+"\n")
+    thisString+=(totalCost + " \n")
+    thisString+=(pointsAwarded+" \n")
+    thisString
+  }
 }
