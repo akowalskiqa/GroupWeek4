@@ -116,22 +116,33 @@ object Main {
         scanner match {
           case "0" => floorStaffMenu()
           case "1" => println("Enter amount paid with cash: "); var cashValue = scala.io.StdIn.readLine().toDouble ;
-          if(cashValue < shop.totalCostOfSale) {
-            println("Insufficient funds")
-            floorStaffTransaction()
-          }
-          else {
-            shop.acceptPayment(shop.listOfItemsToSell2, shop.totalCostOfSale, shop.listOfCustomers(shop.listOfCustomers.indexWhere(customer => customer.getId() == customerIDInput)),personLoggedIn, shop.listOfStock,shop.sale); saleSum.collectionOfSaleRecords(saleSum.collectionOfSaleRecords.length-2)
+          if(cashValue >= shop.totalCostOfSale) {
+            shop.acceptPayment(shop.listOfItemsToSell2, shop.totalCostOfSale, shop.listOfCustomers(shop.listOfCustomers.indexWhere(customer => customer.getId() == customerIDInput)),personLoggedIn, shop.listOfStock,shop.sale);
+            println("Transaction Complete!... Returned change is: £" + (cashValue - shop.totalCostOfSale))
             shop.clearShoppingBasket()
             floorStaffTransaction()
           }
-          case "2" => println("Enter amount paid with points: "); var scanner = scala.io.StdIn.readLine(); if(scanner.toInt >= shop.totalPointsCostOfSale) {
-            shop.acceptPayment(shop.listOfItemsToSell2, shop.totalCostOfSale, shop.listOfCustomers(shop.listOfCustomers.indexWhere(customer => customer.getId() == customerIDInput)),personLoggedIn, shop.listOfStock,shop.sale, Some(shop.totalPointsCostOfSale));shop.clearShoppingBasket() ;floorStaffTransaction()
-          }
           else {
-            println("Insufficient points entered")
+            println("Insufficient funds")
             floorStaffCheckout()
           }
+          case "2" =>
+            if(customerIDInput == 0) {
+              println("Customer not registered")
+              floorStaffCheckout()
+            }
+            else {
+              println("Enter amount paid with points: "); var scanner = scala.io.StdIn.readLine();
+              if (scanner.toInt >= shop.totalPointsCostOfSale) {
+                shop.acceptPayment(shop.listOfItemsToSell2, shop.totalCostOfSale, shop.listOfCustomers(shop.listOfCustomers.indexWhere(customer => customer.getId() == customerIDInput)), personLoggedIn, shop.listOfStock, shop.sale, Some(shop.totalPointsCostOfSale));
+                shop.clearShoppingBasket();
+                floorStaffTransaction()
+              }
+              else {
+                println("Insufficient points entered")
+                floorStaffCheckout()
+              }
+            }
           case _ => println("Error - Incorrect key pressed\nReturned to current page"); floorStaffCheckout()
         }
       }
