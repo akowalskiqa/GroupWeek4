@@ -74,7 +74,7 @@ object Main {
     }
 
     def floorStaffTransaction(): Unit = {
-      println("Press 1: Add item to basket by item ID\nPress 2: Show basket\nPress 3: Checkout\nPress 4: Product listning\nPress 5: Clear basket\n" +
+      println("Press 1: Add item to basket by item ID\nPress 2: Show basket\nPress 3: Checkout\nPress 4: Product listing\nPress 5: Clear basket\n" +
         "Press 6: Remove item from the basket\nPress 7: Pre-order item\nPress 8: List Stock\n 0: Go back to menu")
       var scanner = scala.io.StdIn.readLine()
       try {
@@ -116,22 +116,35 @@ object Main {
         scanner match {
           case "0" => floorStaffMenu()
           case "1" => println("Enter amount paid with cash: "); var cashValue = scala.io.StdIn.readLine().toDouble ;
-          if(cashValue < shop.totalCostOfSale) {
-            println("Insufficient funds")
-            floorStaffTransaction()
-          }
-          else {
-            shop.acceptPayment(shop.listOfItemsToSell2, shop.totalCostOfSale, shop.listOfCustomers(shop.listOfCustomers.indexWhere(customer => customer.getId() == customerIDInput)),personLoggedIn, shop.listOfStock,shop.sale); saleSum.collectionOfSaleRecords(saleSum.collectionOfSaleRecords.length-2)
+          if(cashValue >= shop.totalCostOfSale) {
+            shop.acceptPayment(shop.listOfItemsToSell2, shop.totalCostOfSale, shop.listOfCustomers(shop.listOfCustomers.indexWhere(customer => customer.getId() == customerIDInput)),personLoggedIn, shop.listOfStock,shop.sale);
+            println("Transaction Complete!... Returned change is: £" + (cashValue - shop.totalCostOfSale))
             shop.clearShoppingBasket()
             floorStaffTransaction()
           }
-          case "2" => println("Enter amount paid with points: "); var scanner = scala.io.StdIn.readLine(); if(scanner.toInt >= shop.totalPointsCostOfSale) {
-            shop.acceptPayment(shop.listOfItemsToSell2, shop.totalCostOfSale, shop.listOfCustomers(shop.listOfCustomers.indexWhere(customer => customer.getId() == customerIDInput)),personLoggedIn, shop.listOfStock,shop.sale, Some(shop.totalPointsCostOfSale));shop.clearShoppingBasket() ;floorStaffTransaction()
-          }
           else {
-            println("Insufficient points entered")
-            floorStaffCheckout()
+            println("Insufficient funds")
+            floorStaffTransaction()
           }
+          case "2" =>
+            if(customerIDInput == 0) {
+              println("Customer not registered")
+              floorStaffCheckout()
+            }
+            else {
+            //  println("Enter amount paid with points: ")//; var scanner = scala.io.StdIn.readLine();
+              if (shop.listOfCustomers(shop.listOfCustomers.indexWhere(customer => customer.getId()== customerIDInput)).getPointsAmount() >= shop.totalPointsCostOfSale) {
+                println("Transaction Complete!...\nYou have " + (shop.listOfCustomers(shop.listOfCustomers.indexWhere(customer => customer.getId()== customerIDInput)).getPointsAmount() - shop.totalPointsCostOfSale) + " Points left over.\nHave a nice day!")
+              //  if(shop.listOfCustomers(shop.listOfCustomers.indexWhere(customer => customer.getId()== customerIDInput)).getPointsAmount()  >= scanner.toInt){ }
+                shop.acceptPayment(shop.listOfItemsToSell2, shop.totalCostOfSale, shop.listOfCustomers(shop.listOfCustomers.indexWhere(customer => customer.getId() == customerIDInput)), personLoggedIn, shop.listOfStock, shop.sale, Some(shop.totalPointsCostOfSale));
+                shop.clearShoppingBasket();
+                floorStaffTransaction()
+              }
+              else {
+                println("Insufficient points entered.\nYour point balance is " + shop.listOfCustomers(shop.listOfCustomers.indexWhere(customer => customer.getId()== customerIDInput)).getPointsAmount() + "\n")
+                floorStaffCheckout()
+              }
+            }
           case _ => println("Error - Incorrect key pressed\nReturned to current page"); floorStaffCheckout()
         }
       }
