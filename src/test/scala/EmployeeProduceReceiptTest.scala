@@ -24,6 +24,7 @@ class EmployeeProduceReceiptTest extends FlatSpec {
    employee1.finaliseSale(sellDetails._1,sellDetails._2,customer,employee1,itemStock,summary,shop,Some(sellDetails._3))
    //employee1.finaliseSale(sellDetails._1,sellDetails._2,customer,employee1,itemStock,summary,shop)
    val saleRecord = summary.getSaleRecord(customer.receivedReciptsIDs(0))
+   println(saleRecord.printContent())
 
    assert(saleRecord.getCustomerID.customerId == customer.customerId)
    assert(saleRecord.getReciptId == customer.receivedReciptsIDs(0))
