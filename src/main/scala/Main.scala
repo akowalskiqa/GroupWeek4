@@ -132,8 +132,10 @@ object Main {
               floorStaffCheckout()
             }
             else {
-              println("Enter amount paid with points: "); var scanner = scala.io.StdIn.readLine();
-              if (scanner.toInt >= shop.totalPointsCostOfSale) {
+            //  println("Enter amount paid with points: ")//; var scanner = scala.io.StdIn.readLine();
+              if (shop.listOfCustomers(shop.listOfCustomers.indexWhere(customer => customer.getId()== customerIDInput)).getPointsAmount() >= shop.totalPointsCostOfSale) {
+                println("Transaction Complete!... You have " + (shop.listOfCustomers(shop.listOfCustomers.indexWhere(customer => customer.getId()== customerIDInput)).getPointsAmount() - shop.totalPointsCostOfSale) + "Points left over. Have a nice day!")
+              //  if(shop.listOfCustomers(shop.listOfCustomers.indexWhere(customer => customer.getId()== customerIDInput)).getPointsAmount()  >= scanner.toInt){ }
                 shop.acceptPayment(shop.listOfItemsToSell2, shop.totalCostOfSale, shop.listOfCustomers(shop.listOfCustomers.indexWhere(customer => customer.getId() == customerIDInput)), personLoggedIn, shop.listOfStock, shop.sale, Some(shop.totalPointsCostOfSale));
                 shop.clearShoppingBasket();
                 floorStaffTransaction()
