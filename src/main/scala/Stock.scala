@@ -19,6 +19,15 @@ class Stock() {
   }
 
   def addPreOrderToThisItem(preOrderId:Int):Unit={
+    if(productPreOrderRequestAmount.exists(_._1==preOrderId)){
+      val current = productPreOrderRequestAmount(preOrderId)
+      productPreOrderRequestAmount.put(preOrderId,current+1)
+    }else{
+      productPreOrderRequestAmount.put(preOrderId,1)
+    }
+  }
+
+  def addPreOrderToThisItem2(preOrderId:Int):Unit={
     if(productPreOrderRequestAmount.contains(preOrderId)){
       val current = productPreOrderRequestAmount(preOrderId)
       productPreOrderRequestAmount.put(preOrderId,current+1)
