@@ -125,7 +125,7 @@ class Shop {
     }
     (itemsToBePurchased.toArray, totalPrice, pointPrice)
   }
-  def acceptPayment(listForPurchaseFinalisation: Array[Item], cost: Double,customerBuyingTheProducts: Customer, whoAmI: FloorStaff, stock: Stock, summary: SummarySaleRecord, paymentWithPoints: Option[Int] = None): Unit = {
+  def acceptPayment(listForPurchaseFinalisation: Array[Item], cost: Double,customerBuyingTheProducts: Customer, whoAmI: FloorStaff, stock: Stock, summary: SummarySaleRecord, paymentWithPoints: Option[Int] = None): SaleRecord = {
     val points = paymentWithPoints getOrElse 0
     var needRandomID = true
     var randomGeneratedNumber = generateRandomNumber()
@@ -155,6 +155,7 @@ class Shop {
     customerBuyingTheProducts.allocateAReceipt(randomGeneratedNumber)
     summary.addSaleRecord(saleRecord)
     todaysIncomeTally += cost
+    saleRecord
   }
 
   def generateRandomNumber(): Int = {
