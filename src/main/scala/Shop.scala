@@ -1,6 +1,9 @@
+import java.util.Date
+
 import ItemTypes.ItemTypes
 import PersonType.PersonType
 
+import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
 /**
@@ -20,6 +23,7 @@ class Shop {
   var item9 = defineAnItem(ItemTypes.Hardware, "Headset", 30.0, 10)
   var item10 = defineAnItem(ItemTypes.Hardware, "Playstation 2", 100.0, 10)
 
+
   //Floor staff
   val staff1 = new FloorStaff("Ryan", idGenerator.uniqueEmployeeId)
   val staff2 = new FloorStaff("Mike", idGenerator.uniqueEmployeeId)
@@ -28,6 +32,13 @@ class Shop {
   val staff5 = new FloorStaff("Aaron", idGenerator.uniqueEmployeeId)
   val staff6 = new Manager("Elliot", idGenerator.uniqueEmployeeId)
 
+  var customer0 = new Customer("Guest", 0,false,0)
+  var customer1 = new Customer("ImRegistered", idGenerator.uniqueCustomerId,true,0)
+  var customer2 = new Customer("ImRegisteredAndGot99Points", idGenerator.uniqueCustomerId,true,99)
+  var customer3 = new Customer("NotRegistered", idGenerator.uniqueCustomerId,false,0)
+  var customer4 = new Customer("Scott", idGenerator.uniqueCustomerId,false,0)
+
+
   var openStatus: Boolean = false
 
   var listOfCustomers: ArrayBuffer[Customer] = ArrayBuffer[Customer]()
@@ -35,13 +46,27 @@ class Shop {
   var listOfItems: ArrayBuffer[Item] = ArrayBuffer[Item]()
   var listOfSaleSummarys: ArrayBuffer[SummarySaleRecord] = ArrayBuffer[SummarySaleRecord]()
   var listOfSales: ArrayBuffer[SaleRecord] = ArrayBuffer[SaleRecord]()
-  var listOfStock: Stock = null
+  var listOfStock: Stock = new Stock
+  listOfStock.productQuantity =scala.collection.mutable.Map(1->10,2->10,3->10,4->10,5->10,6->10,7->10,8->10,9->10,10->10)
   var listOfReceipts = new ArrayBuffer[Int]()
   var listOfItemsToSell: ArrayBuffer[Item] = ArrayBuffer[Item]()
-  var todaysIncomeTally: Double = 0
+  var listOfItemsToSell2: Array[Item] = Array[Item]()
+  var todaysIncomeTally: Double = 5.0
+  var customerDealingWith: Customer= customer0
+  var floorStaffDealingWith: FloorStaff= staff6
+  var sale = new SummarySaleRecord()
+  var totalCostOfSale :Double = 0.0
+  var totalPointsCostOfSale :Int = 0
+  sale.datesIncome.put(new Date("Fri Oct 31 15:07:24 2014"), 20.23)
+  sale.datesIncome.put(new Date("Fri Oct 21 15:07:24 2014"), 106.50)
+  sale.datesIncome.put(new Date("Fri Oct 11 15:07:24 2014"), 36.10)
+  sale.datesIncome.put(new Date("Fri Oct 30 15:07:24 2014"), 87.35)
+  sale.datesIncome.put(new Date("Fri Oct 25 15:07:24 2014"), 40.75)
+  sale.datesIncome.put(new Date("Fri Oct 24 15:07:24 2014"), 50.05)
 
   listOfItems += (item1, item2, item3, item4, item5, item6, item7, item8, item9, item10)
   listOfFLoorStaff += (staff1, staff2, staff3, staff4, staff5, staff6)
+  listOfCustomers += (customer0, customer1, customer2, customer3, customer4)
 
   //Create item
   def defineAnItem(itemType: ItemTypes, nameOfItem: String, priceOfItem: Double, pointsOfItem: Int, preOrder: Boolean = false): Item = {
@@ -67,6 +92,7 @@ class Shop {
 
   }
 
+
   def addItemToShoppingBasket(itemId: Int):ArrayBuffer[Item]={
     listOfItemsToSell += listOfItems(listOfItems.indexWhere(item => item.getItemID() == itemId))
   }
@@ -79,27 +105,39 @@ class Shop {
     listOfItemsToSell.remove(listOfItemsToSell.indexWhere(item => item.getItemID()== itemId))
   }
 
-  def sellThis(listOfItemsToSell: Array[Item], stock: Stock): Some[(Array[Item], Double, Int)] = {
+  def getProductQuantityInMap(arrayInput:Array[Item]): mutable.Map[Item, Int] ={
+    var map = collection.mutable.Map[Item, Int]()
+    var storeCurrent = 0;
+    arrayInput.foreach(item => if(map.contains(item)){
+      storeCurrent = map(item)
+      map.put(item,storeCurrent+1)
+    }else{map.put(item,1)})
+    map
+  }
+
+  //when using this method: the data type will be an optional so you have to use .get or .getOrElse
+  def sellThis(listOfItemsToSell: Array[Item], stock: Stock): (Array[Item], Double, Int) = {
+    var totalPrice: Double = 0
+    var pointPrice = 0
+    var itemsToBePurchased = ArrayBuffer[Item]()
+    var map = getProductQuantityInMap(listOfItemsToSell) // should be used for buying and selling as it is easier and saves more time.. future advancement
     if (openStatus) {
-      var totalPrice: Double = 0
-      var pointPrice = 0
-      var itemsToBePurchased = ArrayBuffer[Item]()
-
-      for (i <- 0 to listOfItemsToSell.length - 1) {
-        if (stock.getAmountOfProductsForThisID(listOfItemsToSell(i).getItemID()) > 0) {
-          totalPrice += listOfItemsToSell(i).getItemPrice()
-          pointPrice += listOfItemsToSell(i).getItemPointValue()
-          itemsToBePurchased += listOfItemsToSell(i)
-        } else {
-          println("Product " + listOfItemsToSell(i).getItemID() + "Is not in stock you did not buy this one")
+      if(!listOfItemsToSell.isEmpty){
+        for (i <- 0 to listOfItemsToSell.length - 1) {
+          if (stock.getAmountOfProductsForThisID(listOfItemsToSell(i).getItemID()) >= map(listOfItemsToSell(i))) {
+            map.put(listOfItemsToSell(i),map(listOfItemsToSell(i))-1)
+            totalPrice += listOfItemsToSell(i).getItemPrice()
+            pointPrice += listOfItemsToSell(i).getItemPointValue()
+            itemsToBePurchased += listOfItemsToSell(i)
+          } else {
+            println("Product " + listOfItemsToSell(i).getItemID() + "Is not in stock you did not buy this one")
+          }
         }
-      }
-      Some(itemsToBePurchased.toArray, totalPrice, pointPrice) //
-
-    } else {
-      println("Show needs to be open before anything can be sold!")
+      }else{"basket is Empty"}
+    }else {
+      println("Shop needs to be open before anything can be sold!")
     }
-    null
+    (itemsToBePurchased.toArray, totalPrice, pointPrice)
   }
   def acceptPayment(listForPurchaseFinalisation: Array[Item], cost: Double,customerBuyingTheProducts: Customer, whoAmI: FloorStaff, stock: Stock, summary: SummarySaleRecord, paymentWithPoints: Option[Int] = None): Unit = {
     val points = paymentWithPoints getOrElse 0
@@ -110,9 +148,7 @@ class Shop {
       listOfCustomers(listOfCustomers.indexOf(customerBuyingTheProducts)).updatePointAmount(-points)
       pointsToBeAwardedForPurchase = 0
     } else {
-      todaysIncomeTally += cost
-      if (customerBuyingTheProducts.registered) {
-
+      if (customerBuyingTheProducts.registered){
         if (listOfCustomers.contains(customerBuyingTheProducts)) {
           listOfCustomers(listOfCustomers.indexOf(customerBuyingTheProducts)).updatePointAmount(pointsToBeAwardedForPurchase)
         }
@@ -133,10 +169,9 @@ class Shop {
     todaysIncomeTally += cost
   }
 
-  def generateRandomNumber(): Int ={
+  def generateRandomNumber(): Int = {
     val r = scala.util.Random
     r.nextInt(99999999).abs
-
   }
 
   def createAnItem(newItem: Item): Unit = {
@@ -162,19 +197,22 @@ class Shop {
 
 
   //Add FloorStaff
-  def defineAnPersonType(personType: PersonType, name: String, employeeID: Int): Person = {
+  def generateCustomer():Customer={
+    val uniqueID = idGenerator.uniqueCustomerId
+    var newCustomer = new Customer( s"name$uniqueID", uniqueID, false, 0)
+    listOfCustomers += newCustomer
+    newCustomer
+  }
+
+  def defineAnPersonType(personType: PersonType, name: String, employeeID: Int): FloorStaff = {
 
     personType match {
       case PersonType.Manager => {
         var newPerson = new Manager(name, idGenerator.uniqueEmployeeId)
         newPerson
       }
-      case PersonType.FloorStaff => {
-        var newPerson = new FloorStaff(name, idGenerator.uniqueEmployeeId)
-        newPerson
-      }
       case _ => {
-        var newPerson = new Customer(name, idGenerator.uniqueCustomerId, false, 0)
+        var newPerson = new FloorStaff(name, idGenerator.uniqueEmployeeId)
         newPerson
       }
     }
@@ -194,19 +232,17 @@ class Shop {
     personType match {
       case PersonType.Manager => {
         var newPerson = new Manager(newName,ID)
-        listOfFLoorStaff.insert(listOfFLoorStaff.indexWhere(floorStaff => floorStaff.employeeID == ID),newPerson)
+        listOfFLoorStaff(listOfFLoorStaff.indexWhere(floorStaff => floorStaff.employeeID == ID))=newPerson
       }
       case _ => {
         var newPerson = new FloorStaff(newName, ID)
-        listOfFLoorStaff.insert(listOfFLoorStaff.indexWhere(floorStaff => floorStaff.employeeID == ID),newPerson)
+        listOfFLoorStaff(listOfFLoorStaff.indexWhere(floorStaff => floorStaff.employeeID == ID))=newPerson
       }
     }
   }
 
   def deleteAnFloorStaff(ID: Int): Unit = {
-    listOfFLoorStaff.foreach(item => if (item.employeeID == ID) {
-      listOfFLoorStaff -= item
-    })
+    listOfFLoorStaff.remove(listOfFLoorStaff.indexWhere(item => item.getEmployeeID == ID))
   }
 
   //Stock
@@ -228,12 +264,11 @@ class Shop {
     todaysIncomeTally = 0
   }
 
-  def closeShop(whereToKeepTheRecord: SummarySaleRecord): Unit = {
+  def closeShop(whereToKeepTheRecord: SummarySaleRecord): Double = {
     whereToKeepTheRecord.updateDatesIncome(new java.util.Date(), todaysIncomeTally)
     openStatus = false
+    todaysIncomeTally
   }
-
-
 
   object idGenerator {
     private val clockticker = new java.util.concurrent.atomic.AtomicInteger

@@ -17,7 +17,7 @@ class FloorStaff(var name: String, val employeeID: Int) extends Person() {
   shopToClose.closeShop(whereToUpdateTheTally)
   }
   def sellItem(listOfItemsToSell:Array[Item],customerBuyingTheProducts:Customer,shop:Shop,stock:Stock,whoAmI:FloorStaff,summary:SummarySaleRecord): (Array[Item], Double, Int) ={
-    shop.sellThis(listOfItemsToSell,stock) getOrElse  (Array[Item](), 0, 0)
+    shop.sellThis(listOfItemsToSell,stock) //getOrElse  (Array[Item](), 0, 0)
   }
 //listForPurchaseFinalisation: Array[Item], cost: Double,customerBuyingTheProducts: Customer, whoAmI: FloorStaff, stock: Stock, summary: SummarySaleRecord, paymentWithPoints: Option[Int] = None
   def finaliseSale(listForPurchaseFinalisation: Array[Item], cost: Double,customerBuyingTheProducts: Customer, whoAmI: FloorStaff, stock: Stock, summary: SummarySaleRecord,shop:Shop, paymentWithPoints: Option[Int] = None): Unit ={
@@ -27,4 +27,6 @@ class FloorStaff(var name: String, val employeeID: Int) extends Person() {
   def checkAmountInStockForThisID(whichStock:Stock,itemId:Int): Int ={
     whichStock.getAmountOfProductsForThisID(itemId)
   }
+
+  override def toString: String = s"$employeeID\t$name"
 }

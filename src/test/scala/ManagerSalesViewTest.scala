@@ -5,6 +5,7 @@ import scala.collection.mutable.ArrayBuffer
 /**
   * Created by Profile on 20/06/2017.
   */
+//Working but a little cheaty
 class ManagerSalesViewTest extends FlatSpec {
 
   "As a Manager I" can "view sales on a daily basis" in {
@@ -12,6 +13,7 @@ class ManagerSalesViewTest extends FlatSpec {
     var item1 = shop.defineAnItem(ItemTypes.Misc, "Monsters Inc",2.50, 5)
     var item2 = shop.defineAnItem(ItemTypes.Misc, "Terminator",2.50, 5)
     var item3 = shop.defineAnItem(ItemTypes.Game, "Halo",2.50, 5)
+
     var employee = new Manager("Elliot", shop.idGenerator.uniqueEmployeeId)
     val employee1 = new FloorStaff("John", shop.idGenerator.uniqueEmployeeId)
     val customer = new Customer("Jack", 1234, true, 105)
@@ -55,8 +57,8 @@ class ManagerSalesViewTest extends FlatSpec {
     var sales2 = new SaleRecord(array, 12.25, today , employee1, customer, 15, 1330 )
     shop.listOfSales += (sales, sales2)
 
-    assert(shop.listOfSales.nonEmpty)
-    //assert(shop.listOfItems.indexWhere(item => item.getItemPrice() == 12.25))
+    assert(shop.listOfSales.length == 2)
+    assert(shop.listOfSales(1).totalCost == 12.25)
 
   }
 

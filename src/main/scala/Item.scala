@@ -3,6 +3,9 @@
   */
 abstract class Item() {
 
+  def getPreOrderAvailability():Boolean={ false}
+ def setPreOrderAvailability(status:Boolean):Unit = false
+
   def getItemID(): Int
 
   def getItemName(): String
@@ -16,4 +19,6 @@ abstract class Item() {
   def setItemPrice(newPrice: Double): Unit = newPrice
 
   def setItemPointValue(newPointValue: Int): Unit = newPointValue
+
+  override def toString: String = ""
 }
