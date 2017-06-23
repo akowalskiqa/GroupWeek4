@@ -12,6 +12,7 @@ object Main {
     var shop = new Shop // should have been "new Shop(stock,summarySaleRecord)" something like that, but discovered it too late
     var saleSum = new SummarySaleRecord
     var personLoggedIn:FloorStaff = null
+    var stock = new Stock
 
     var currentLoggedInEmployee = new FloorStaff("john", 1)
     currentLoggedInEmployee.openShop(shop)
@@ -74,8 +75,8 @@ object Main {
     }
 
     def floorStaffTransaction(): Unit = {
-      println("Press 1: Add item to basket by item ID\nPress 2: Show basket\nPress 3: Checkout\nPress 4: List stock\nPress 5: Clear basket\n" +
-        "Press 6: Remove item from the basket\nPress 7: Pre-order item\nPress 0: Go back to menu")
+      println("Press 1: Add item to basket by item ID\nPress 2: Show basket\nPress 3: Checkout\nPress 4: Product listning\nPress 5: Clear basket\n" +
+        "Press 6: Remove item from the basket\nPress 7: Pre-order item\nPress 8: List Stock\n 0: Go back to menu")
       var scanner = scala.io.StdIn.readLine()
       try {
         scanner match {
@@ -84,7 +85,7 @@ object Main {
           case "2" => println(shop.listOfItemsToSell.mkString("\n")); floorStaffTransaction()
           case "3" =>
             var saleDetails = shop.sellThis(shop.listOfItemsToSell.toArray, shop.listOfStock)
-            println(saleDetails._1.mkString + "\tTotal Cost £"+ saleDetails._2 + "\tPoints: " + saleDetails._3); shop.totalCostOfSale= saleDetails._2; shop.listOfItemsToSell2 = saleDetails._1 ;shop.totalPointsCostOfSale = saleDetails._3;floorStaffCheckout()
+            println(saleDetails._1.mkString("\n") + "\n_______________________________" + "\nTotal Cost £"+ saleDetails._2 + "\tPoints: " + saleDetails._3 + "\n"); shop.totalCostOfSale= saleDetails._2; shop.listOfItemsToSell2 = saleDetails._1 ;shop.totalPointsCostOfSale = saleDetails._3;floorStaffCheckout()
           case "4" => println(shop.listOfItems.mkString("\n")); floorStaffTransaction()
           case "5" => println("Clearing basket..."); shop.clearShoppingBasket(); floorStaffTransaction()
           case "6" => println("Enter ID for item you're removing from basket: "); var scanner = scala.io.StdIn.readLine(); shop.removeItemById(scanner.toInt); floorStaffTransaction()
@@ -96,6 +97,7 @@ object Main {
             println("Item not available for pre-order")
             floorStaffTransaction()
           }
+          case "8" => shop.listOfStock.productQuantity.foreach {keyVal => println(keyVal._1 + " = " + keyVal._2)}; floorStaffTransaction()
           case _ => println("Error - Incorrect key pressed\nReturned to current page"); floorStaffTransaction()
         }
       }
@@ -114,7 +116,7 @@ object Main {
       try {
         scanner match {
           case "0" => floorStaffMenu()
-          case "1" => println("Enter amount paid with cash: "); var cashValue = scala.io.StdIn.readLine().toInt ;
+          case "1" => println("Enter amount paid with cash: "); var cashValue = scala.io.StdIn.readLine().toDouble ;
           if(cashValue < shop.totalCostOfSale) {
             println("Insufficient funds")
             floorStaffTransaction()
@@ -125,10 +127,11 @@ object Main {
             floorStaffTransaction()
           }
           case "2" => println("Enter amount paid with points: "); var scanner = scala.io.StdIn.readLine(); if(scanner.toInt >= shop.totalPointsCostOfSale) {
-            shop.acceptPayment(shop.listOfItemsToSell2, shop.totalCostOfSale, shop.listOfCustomers(shop.listOfCustomers.indexWhere(customer => customer.getId() == customerIDInput)),personLoggedIn, shop.listOfStock,shop.sale, Some(shop.totalPointsCostOfSale)); floorStaffTransaction()
+            shop.acceptPayment(shop.listOfItemsToSell2, shop.totalCostOfSale, shop.listOfCustomers(shop.listOfCustomers.indexWhere(customer => customer.getId() == customerIDInput)),personLoggedIn, shop.listOfStock,shop.sale, Some(shop.totalPointsCostOfSale));shop.clearShoppingBasket() ;floorStaffTransaction()
           }
           else {
             println("Insufficient points entered")
+            floorStaffCheckout()
           }
           case _ => println("Error - Incorrect key pressed\nReturned to current page"); floorStaffCheckout()
         }
