@@ -15,6 +15,10 @@ object Main {
 
     var currentLoggedInEmployee = new FloorStaff("john", 1)
     currentLoggedInEmployee.openShop(shop)
+    //initialise some dummy data
+    saleSum.updateDatesIncome(new java.util.Date("Fri Jan 20 15:07:24 2017"),123.23)
+    saleSum.updateDatesIncome(new java.util.Date("Fri Feb 21 15:07:24 2016"),123.23)
+
 
     login()
 

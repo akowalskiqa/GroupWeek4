@@ -34,4 +34,7 @@ class SaleRecord(val purchaseList: Array[Item], val totalCost: Double, val dateS
   def getReciptId: Int = {
     receiptID
   }
+  def getPurchasedList:Array[Item]={
+    purchaseList
+  }
 }
