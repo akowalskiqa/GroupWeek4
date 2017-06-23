@@ -121,7 +121,12 @@ object Main {
             shop.clearShoppingBasket()
             floorStaffTransaction()
           }
-          case "2" => println("Enter amount paid with points: "); var scanner = scala.io.StdIn.readLine(); println(scanner.toInt); shop.acceptPayment(shop.listOfItemsToSell2, shop.totalCostOfSale, shop.listOfCustomers(shop.listOfCustomers.indexWhere(customer => customer.getId() == customerIDInput)),personLoggedIn, shop.listOfStock,shop.sale, Some(shop.totalPointsCostOfSale))
+          case "2" => println("Enter amount paid with points: "); var scanner = scala.io.StdIn.readLine(); if(scanner.toInt >= shop.totalPointsCostOfSale) {
+            shop.acceptPayment(shop.listOfItemsToSell2, shop.totalCostOfSale, shop.listOfCustomers(shop.listOfCustomers.indexWhere(customer => customer.getId() == customerIDInput)),personLoggedIn, shop.listOfStock,shop.sale, Some(shop.totalPointsCostOfSale)); floorStaffTransaction()
+          }
+          else {
+            println("Insufficient points entered")
+          }
           case _ => println("Error - Incorrect key pressed\nReturned to current page"); floorStaffCheckout()
         }
       }
