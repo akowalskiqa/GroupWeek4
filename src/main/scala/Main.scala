@@ -74,7 +74,7 @@ object Main {
     }
 
     def floorStaffTransaction(): Unit = {
-      println("Press 1: Add item to basket by item ID\nPress 2: Show basket\nPress 3: Checkout\nPress 4: Product listning\nPress 5: Clear basket\n" +
+      println("Press 1: Add item to basket by item ID\nPress 2: Show basket\nPress 3: Checkout\nPress 4: Product listing\nPress 5: Clear basket\n" +
         "Press 6: Remove item from the basket\nPress 7: Pre-order item\nPress 8: List Stock\n 0: Go back to menu")
       var scanner = scala.io.StdIn.readLine()
       try {
@@ -124,7 +124,7 @@ object Main {
           }
           else {
             println("Insufficient funds")
-            floorStaffCheckout()
+            floorStaffTransaction()
           }
           case "2" =>
             if(customerIDInput == 0) {
