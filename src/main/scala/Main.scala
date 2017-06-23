@@ -58,7 +58,7 @@ object Main {
             shop.openShop();
           }; floorStaffMenu()
           case "3" => println("Shop Closed earning today: "+shop.closeShop(saleSum)); login()
-          case "4" => println("Daily Figures: "); println(saleSum.datesIncome.mkString("")); floorStaffMenu()
+          case "4" => println("Daily Figures: "); println(shop.todaysIncomeTally); floorStaffMenu()
           case "5" => login()
           case _ => println("Error - Incorrect key pressed\nReturned to current page"); floorStaffMenu()
         }
@@ -158,7 +158,7 @@ object Main {
     }
 
     def stockManager(): Unit = {
-      println("Press 1: Add item to item list\nPress 2: Update item details\nPress 3: Delete item\nPress 4: Update stock quantity\nPress 5: Get quantity for item using item ID\nPress 0: Back to menu")
+      println("Press 1: Add item to item list\nPress 2: Update item details\nPress 3: Delete item\nPress 4: Update stock quantity\nPress 5: Get quantity for item using item ID\nPress 6: View Stock list\nPress 0: Back to menu")
       var itemType:ItemTypes = ItemTypes.Game
       var itemBoolean : Boolean = false
       var scanner = scala.io.StdIn.readLine()
@@ -214,7 +214,8 @@ object Main {
             shop.updateAnItem(itemID.toInt, shop.defineAnItem(itemType = itemType, itemName, itemPrice.toDouble, itemPoints.toInt, itemBoolean)); stockManager()
           case "3" => println("Enter ID for item you're deleting: "); var scanner = scala.io.StdIn.readLine(); shop.deleteAnItem(scanner.toInt); stockManager()
           case "4" => println("Enter ID for item you're updating stock quantity: "); var itemID = scala.io.StdIn.readLine(); println("Enter new stock quantity number: "); var quantity = scala.io.StdIn.readLine(); shop.updateStockForID(itemID.toInt, quantity.toInt); stockManager()
-          case "5" => println("Enter ID for item you want to see quantity for: "); var scanner = scala.io.StdIn.readLine(); shop.getAmountForThisID(scanner.toInt)
+          case "5" => println("Enter ID for item you want to see quantity for: "); var scanner = scala.io.StdIn.readLine(); shop.getAmountForThisID(scanner.toInt); stockManager()
+          case "6" => println(shop.listOfItems.mkString("\n")); stockManager()
           case _ => println("Error - Incorrect key pressed\nReturned to current page"); stockManager()
         }
       }
